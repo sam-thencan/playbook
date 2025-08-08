@@ -1,34 +1,62 @@
 'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
+import { useMemo, useState } from 'react';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 
 export default function LoginPage() {
   const router = useRouter();
+  const search = useSearchParams();
+  const redirect = useMemo(() => search.get('redirect') || '/dashboard', [search]);
+
+  const [mode, setMode] = useState<'login' | 'signup'>('login');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [password2, setPassword2] = useState('');
+  const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
     setLoading(true);
+    setMessage(null);
     setError(null);
-    const { error } = await supabase.auth.signInWithPassword({ email, password });
-    setLoading(false);
-    if (error) {
-      setError(error.message);
+    if (mode === 'login') {
+      const { error } = await supabase.auth.signInWithPassword({ email, password });
+      setLoading(false);
+      if (error) return setError(error.message);
+      router.push(redirect);
       return;
     }
-    router.push('/dashboard');
+    // signup
+    if (password !== password2) {
+      setLoading(false);
+      return setError('Passwords do not match');
+    }
+    const { data, error } = await supabase.auth.signUp({ email, password });
+    setLoading(false);
+    if (error) return setError(error.message);
+    if (data.session) {
+      router.push(redirect);
+    } else {
+      setMessage('Check your email to confirm your account.');
+    }
   }
 
   return (
     <main className="mx-auto max-w-md px-4 py-16">
-      <h1 className="mb-6 text-3xl font-semibold">Log in</h1>
+      <div className="mb-6 flex items-center gap-4">
+        <h1 className="text-3xl font-semibold">{mode === 'login' ? 'Log in' : 'Create account'}</h1>
+        <button
+          className="text-sm underline"
+          onClick={() => setMode((m) => (m === 'login' ? 'signup' : 'login'))}
+        >
+          {mode === 'login' ? 'Need an account? Sign up' : 'Have an account? Log in'}
+        </button>
+      </div>
       <Card>
         <form onSubmit={onSubmit} className="grid gap-4 p-6">
           <label className="grid gap-1">
@@ -49,10 +77,27 @@ export default function LoginPage() {
               className="rounded-[10px] border px-3 py-2"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+              minLength={6}
             />
           </label>
+          {mode === 'signup' && (
+            <label className="grid gap-1">
+              <span className="text-sm text-neutral-600">Confirm Password</span>
+              <input
+                type="password"
+                required
+                className="rounded-[10px] border px-3 py-2"
+                value={password2}
+                onChange={(e) => setPassword2(e.target.value)}
+                minLength={6}
+              />
+            </label>
+          )}
           {error && <p className="text-sm text-red-600">{error}</p>}
-          <Button type="submit" disabled={loading}>{loading ? 'Signing in…' : 'Sign In'}</Button>
+          {message && <p className="text-sm text-green-700">{message}</p>}
+          <Button type="submit" disabled={loading}>
+            {loading ? (mode === 'login' ? 'Signing in…' : 'Creating…') : mode === 'login' ? 'Sign In' : 'Sign Up'}
+          </Button>
         </form>
       </Card>
     </main>
