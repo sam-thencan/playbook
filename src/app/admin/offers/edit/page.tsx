@@ -4,11 +4,13 @@ import { useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
+import { useToast } from '@/components/Toast';
 
 export default function AdminOffersEditPage() {
     const router = useRouter();
     const search = useSearchParams();
-    const id = search.get('id');
+  const id = search.get('id');
+  const { notify } = useToast();
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState<Record<string, any>>({ active: true, type: 'call' });
 
@@ -27,7 +29,7 @@ export default function AdminOffersEditPage() {
         setForm((f) => ({ ...f, [key]: value }));
     }
 
-  async function onSubmit(e: React.FormEvent) {
+    async function onSubmit(e: React.FormEvent) {
         e.preventDefault();
         setLoading(true);
         const payload = {
@@ -40,17 +42,17 @@ export default function AdminOffersEditPage() {
             cta: form.cta_label || form.cta_url ? { label: form.cta_label, url: form.cta_url } : null,
             active: !!form.active,
         };
-    const res = await fetch(id ? `/api/admin/offers/${id}` : '/api/admin/offers', {
+        const res = await fetch(id ? `/api/admin/offers/${id}` : '/api/admin/offers', {
             method: id ? 'PATCH' : 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(payload),
         });
         setLoading(false);
-        if (!res.ok) {
-            alert('Save failed');
-            return;
-        }
-    alert('Saved');
+    if (!res.ok) {
+      notify('Save failed');
+      return;
+    }
+    notify('Saved');
         router.push('/admin/offers');
     }
 

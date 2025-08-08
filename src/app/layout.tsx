@@ -3,6 +3,7 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { getServerSupabase } from '@/lib/supabaseServer';
 import { LogoutButton } from '@/components/LogoutButton';
+import { ToastProvider } from '@/components/Toast';
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -65,7 +66,9 @@ export default async function RootLayout({
             </nav>
           </div>
         </header>
-        <div className="min-h-[calc(100svh-56px)]">{children}</div>
+        <ToastProvider>
+          <div className="min-h-[calc(100svh-56px)]">{children}</div>
+        </ToastProvider>
       </body>
     </html>
   );

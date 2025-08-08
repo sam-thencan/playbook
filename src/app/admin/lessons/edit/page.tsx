@@ -5,6 +5,7 @@ import { useRouter, useSearchParams } from 'next/navigation';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { Renderer, type LessonBlock } from '@/components/blocks/Renderer';
+import { useToast } from '@/components/Toast';
 
 export default function AdminLessonsEditPage() {
     const router = useRouter();
@@ -14,6 +15,7 @@ export default function AdminLessonsEditPage() {
     const [form, setForm] = useState<Record<string, any>>({ published: true, body: [] });
     const [blocks, setBlocks] = useState<LessonBlock[]>([]);
     const { addBlock, removeBlock, moveBlock, updateBlock } = useBlockOps(blocks, setBlocks);
+  const { notify } = useToast();
 
     useEffect(() => {
         if (!id) return;
@@ -46,17 +48,17 @@ export default function AdminLessonsEditPage() {
             published: !!form.published,
             sort_order: form.sort_order ? Number(form.sort_order) : 0,
         };
-    const res = await fetch(id ? `/api/admin/lessons/${id}` : '/api/admin/lessons', {
+        const res = await fetch(id ? `/api/admin/lessons/${id}` : '/api/admin/lessons', {
             method: id ? 'PATCH' : 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(payload),
         });
         setLoading(false);
-        if (!res.ok) {
-      alert('Save failed');
-            return;
-        }
-    alert('Saved');
+    if (!res.ok) {
+      notify('Save failed');
+      return;
+    }
+    notify('Saved');
         router.push('/admin/lessons');
     }
 
