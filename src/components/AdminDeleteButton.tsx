@@ -23,7 +23,11 @@ export function AdminDeleteButton({ resource, id, label = 'Delete' }: Props) {
             alert('Delete failed');
             return;
         }
-        router.refresh();
+    router.refresh();
+    // Fallback: reload if Next cache didn’t reflect
+    setTimeout(() => {
+      if (typeof window !== 'undefined') window.location.reload();
+    }, 250);
     }
 
     return (

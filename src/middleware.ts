@@ -4,7 +4,8 @@ import { createServerClient, type CookieOptions } from '@supabase/ssr';
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const isAdminPath = url.pathname.startsWith('/admin');
-  if (!isAdminPath) return NextResponse.next();
+  const needsAuth = isAdminPath || url.pathname === '/dashboard' || url.pathname.startsWith('/lesson/');
+  if (!needsAuth) return NextResponse.next();
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
   const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY as string;
@@ -25,32 +26,30 @@ export async function middleware(req: NextRequest) {
     },
   });
 
-  const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+  const { data: { user } } = await supabase.auth.getUser();
   if (!user) {
     const redirect = new URL('/login', req.url);
     redirect.searchParams.set('redirect', url.pathname);
     return NextResponse.redirect(redirect);
   }
 
-  const { data: profile } = await supabase
-    .from('profiles')
-    .select('role')
-    .eq('id', user.id)
-    .maybeSingle();
-
-  if (profile?.role !== 'admin') {
-    const redirect = new URL('/dashboard', req.url);
-    return NextResponse.redirect(redirect);
+  if (isAdminPath) {
+    const { data: profile } = await supabase
+      .from('profiles')
+      .select('role')
+      .eq('id', user.id)
+      .maybeSingle();
+    if (profile?.role !== 'admin') {
+      const redirect = new URL('/dashboard', req.url);
+      return NextResponse.redirect(redirect);
+    }
   }
 
   return res;
 }
 
 export const config = {
-  matcher: ['/admin/:path*'],
+  matcher: ['/admin/:path*', '/dashboard', '/lesson/:path*'],
 };
 
 

@@ -47,3 +47,4 @@ table * {
   color: #111827;
   /* neutral-900 */
 }
+input, textarea, select { color: #111827; }
