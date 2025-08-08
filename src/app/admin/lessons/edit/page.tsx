@@ -46,16 +46,17 @@ export default function AdminLessonsEditPage() {
             published: !!form.published,
             sort_order: form.sort_order ? Number(form.sort_order) : 0,
         };
-        const res = await fetch(id ? `/api/admin/lessons/${id}` : '/api/admin/lessons', {
+    const res = await fetch(id ? `/api/admin/lessons/${id}` : '/api/admin/lessons', {
             method: id ? 'PATCH' : 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(payload),
         });
         setLoading(false);
         if (!res.ok) {
-            alert('Save failed');
+      alert('Save failed');
             return;
         }
+    alert('Saved');
         router.push('/admin/lessons');
     }
 

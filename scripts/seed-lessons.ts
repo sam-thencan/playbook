@@ -1,11 +1,22 @@
 import fs from 'node:fs/promises';
+import fss from 'node:fs';
 import path from 'node:path';
 import { createClient } from '@supabase/supabase-js';
 import dotenv from 'dotenv';
 
-// Load env from .env.local at project root
-const rootForEnv = path.resolve(__dirname, '..');
-dotenv.config({ path: path.join(rootForEnv, '.env.local') });
+// Load env from .env.local (or .env) at project root; try multiple fallbacks
+const candidates = [
+  path.join(process.cwd(), '.env.local'),
+  path.join(process.cwd(), '.env'),
+  path.join(path.resolve(__dirname, '..'), '.env.local'),
+  path.join(path.resolve(__dirname, '..'), '.env'),
+];
+for (const p of candidates) {
+  if (fss.existsSync(p)) {
+    dotenv.config({ path: p });
+    break;
+  }
+}
 
 type LessonSeed = {
   slug: string;
@@ -16,6 +27,7 @@ type LessonSeed = {
   estimated_minutes: number | null;
   resources: Array<{ label: string; url: string }>;
   body: Array<{ type: string; content: string }>;
+  featured_video?: { provider: 'youtube' | 'vimeo' | 'file'; url: string } | null;
   sort_order: number;
   published: boolean;
 };
@@ -43,6 +55,10 @@ async function main() {
         estimated_minutes: l.estimated_minutes,
         resources: l.resources,
         body: l.body,
+        // Store featured video as the first video block if present
+        ...(l.featured_video
+          ? { body: [{ type: 'video', provider: l.featured_video.provider, url: l.featured_video.url }, ...(l.body || [])] }
+          : {}),
         sort_order: l.sort_order,
         published: l.published,
       },

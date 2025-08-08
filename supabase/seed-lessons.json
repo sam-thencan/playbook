@@ -26,16 +26,13 @@
           "content": "BUUUT I can tell you three things:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Local SEO results come faster than National SEO or Ecommerce SEO or SaaS SEO"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. You can estimate how long it will take, but it’s just an estimation"
-        },
-        {
-          "type": "paragraph",
-          "content": "3. It’s better to just get to work instead of worrying about when the results will hit"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Local SEO results come faster than National SEO or Ecommerce SEO or SaaS SEO",
+            "You can estimate how long it will take, but it’s just an estimation",
+            "It’s better to just get to work instead of worrying about when the results will hit"
+          ]
         },
         {
           "type": "paragraph",
@@ -58,6 +55,7 @@
           "content": "Link to Advanced Tactic"
         }
       ],
+      "featured_video": null,
       "sort_order": 0,
       "published": true
     },
@@ -79,16 +77,13 @@
           "content": "Generally speaking:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Google Business Profile (+ getting better reviews for it)"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Telling Google exactly what you do and where you do it on your website"
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Building authority through locally- and industry-relevant links (a lot more on this later)"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Google Business Profile (+ getting better reviews for it)",
+            "Telling Google exactly what you do and where you do it on your website",
+            "Building authority through locally- and industry-relevant links (a lot more on this later)"
+          ]
         },
         {
           "type": "paragraph",
@@ -131,8 +126,11 @@
           "content": "want to do it through local SEO, then you need to:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Find the right phrases people are using to find you on Google (these are called"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Find the right phrases people are using to find you on Google (these are called"
+          ]
         },
         {
           "type": "paragraph",
@@ -143,16 +141,22 @@
           "content": "keywords)"
         },
         {
-          "type": "paragraph",
-          "content": "2. Get your website showing up on the search results page for each one of these keywords"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Get your website showing up on the search results page for each one of these keywords"
+          ]
         },
         {
           "type": "paragraph",
           "content": "(these are called SERPs, or search engine results pages)."
         },
         {
-          "type": "paragraph",
-          "content": "3. Get your website ranking higher on the SERPs. This is the ultimate goal of local SEO:"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Get your website ranking higher on the SERPs. This is the ultimate goal of local SEO:"
+          ]
         },
         {
           "type": "paragraph",
@@ -167,6 +171,7 @@
           "content": "That’s it. So let’s figure out your primary keyword."
         }
       ],
+      "featured_video": null,
       "sort_order": 1,
       "published": true
     },
@@ -240,24 +245,33 @@
           "content": "If you don’t know your keyword at all"
         },
         {
-          "type": "paragraph",
-          "content": "1. Use common sense (if you’re a plumber, it’s probably “plumber” or “plumbing”; if you’re a"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Use common sense (if you’re a plumber, it’s probably “plumber” or “plumbing”; if you’re a"
+          ]
         },
         {
           "type": "paragraph",
           "content": "naturopath, it’s probably “naturopath” or “naturopathic doctor”)"
         },
         {
-          "type": "paragraph",
-          "content": "2. Go to Google and try your best guess. If you see a Map Pack (see below) and local"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Go to Google and try your best guess. If you see a Map Pack (see below) and local"
+          ]
         },
         {
           "type": "paragraph",
           "content": "competitors, you’re probably at least close enough to continue."
         },
         {
-          "type": "paragraph",
-          "content": "3. If you’re still stuck, use this free tool by Ahrefs. Once you have something, move on."
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "If you’re still stuck, use this free tool by Ahrefs. Once you have something, move on."
+          ]
         },
         {
           "type": "paragraph",
@@ -288,12 +302,12 @@
           "content": " If your search traffic is 0. Then:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Click on the Related tab and sort by Volume. See if one of the top results makes sense."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. If you still can’t find anything, skip ahead to the Google Keyword Planner step below."
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Click on the Related tab and sort by Volume. See if one of the top results makes sense.",
+            "If you still can’t find anything, skip ahead to the Google Keyword Planner step below."
+          ]
         },
         {
           "type": "paragraph",
@@ -308,20 +322,23 @@
           "content": "We want to look at several things:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Volume: this is the monthly search volume (generally, higher is better)"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Keyword Difficult (KD): this is an estimate by the SEO tool of how hard it will be to rank"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Volume: this is the monthly search volume (generally, higher is better)",
+            "Keyword Difficult (KD): this is an estimate by the SEO tool of how hard it will be to rank"
+          ]
         },
         {
           "type": "paragraph",
           "content": "for this keyword (generally, lower is better)"
         },
         {
-          "type": "paragraph",
-          "content": "3. CPC: this is the estimated cost per click for Google Ads campaigns - I use it as an"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "CPC: this is the estimated cost per click for Google Ads campaigns - I use it as an"
+          ]
         },
         {
           "type": "paragraph",
@@ -332,8 +349,11 @@
           "content": "it, which is a red flag. If it’s REALLY high, then it might be TOO competitive."
         },
         {
-          "type": "paragraph",
-          "content": "4. Keyword Ideas: Look at this section and see if there are any Keyword Variations with"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Keyword Ideas: Look at this section and see if there are any Keyword Variations with"
+          ]
         },
         {
           "type": "paragraph",
@@ -480,12 +500,12 @@
           "content": "But make sure:"
         },
         {
-          "type": "paragraph",
-          "content": "1. This is a commercial intent keyword (it should be a service you provide, not a question)"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. It has local intent (sometimes just searching your service provides poor results, so it can"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "This is a commercial intent keyword (it should be a service you provide, not a question)",
+            "It has local intent (sometimes just searching your service provides poor results, so it can"
+          ]
         },
         {
           "type": "paragraph",
@@ -500,26 +520,30 @@
           "content": "a better keyword)"
         },
         {
-          "type": "paragraph",
-          "content": "3. The volume is 10-100 for Google Keyword Planner (which is averaged to 50 in Sheets),"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "The volume is 10-100 for Google Keyword Planner (which is averaged to 50 in Sheets),"
+          ]
         },
         {
           "type": "paragraph",
           "content": "and is at least 10 in Semrush"
         },
         {
-          "type": "paragraph",
-          "content": "4. The KD is not something crazy like 50+"
-        },
-        {
-          "type": "paragraph",
-          "content": "5. The CPC isn’t $0 and you should be skeptical if it’s $50+ (unless you’re a lawyer or"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "The KD is not something crazy like 50+",
+            "The CPC isn’t $0 and you should be skeptical if it’s $50+ (unless you’re a lawyer or"
+          ]
         },
         {
           "type": "paragraph",
           "content": "doctor)"
         }
       ],
+      "featured_video": null,
       "sort_order": 2,
       "published": true
     },
@@ -577,24 +601,24 @@
           "content": "NOTE: Edit > Delete > Selected Rows is a better way to delete non-contiguous rows"
         },
         {
-          "type": "paragraph",
-          "content": "1. Remove keywords that are “asking a question”, these are not the right intent for local"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Sometimes you’ll have to take “multiple laps” pruning keywords"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Remove keywords that are “asking a question”, these are not the right intent for local",
+            "Sometimes you’ll have to take “multiple laps” pruning keywords"
+          ]
         },
         {
           "type": "paragraph",
           "content": "Duplicate the sheet"
         },
         {
-          "type": "paragraph",
-          "content": "1. One sheet will be kept for later as our “related keywords” list: SERVICE-RELATED"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. The other sheet will be our main sheet for this keyword: SERVICE-PRIMARY"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "One sheet will be kept for later as our “related keywords” list: SERVICE-RELATED",
+            "The other sheet will be our main sheet for this keyword: SERVICE-PRIMARY"
+          ]
         },
         {
           "type": "paragraph",
@@ -613,6 +637,7 @@
           "content": "Write down your primary keyword - we’ll be using it for the next couple of days!!"
         }
       ],
+      "featured_video": null,
       "sort_order": 3,
       "published": true
     },
@@ -634,60 +659,24 @@
           "content": "Here are the steps for doing a Google Business Profile audit (* denotes backend access req’d):"
         },
         {
-          "type": "paragraph",
-          "content": "1. Check the primary business category"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Check the business name"
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Check the secondary categories"
-        },
-        {
-          "type": "paragraph",
-          "content": "4. Check the review amount compared to competition"
-        },
-        {
-          "type": "paragraph",
-          "content": "5. Check if responding to reviews"
-        },
-        {
-          "type": "paragraph",
-          "content": "6. Check for photos"
-        },
-        {
-          "type": "paragraph",
-          "content": "7. Check for general ranking"
-        },
-        {
-          "type": "paragraph",
-          "content": "8. Check Q&A"
-        },
-        {
-          "type": "paragraph",
-          "content": "9. Check for GBP Updates"
-        },
-        {
-          "type": "paragraph",
-          "content": "10. Check business description"
-        },
-        {
-          "type": "paragraph",
-          "content": "11. Check Services*"
-        },
-        {
-          "type": "paragraph",
-          "content": "12. Check Products*"
-        },
-        {
-          "type": "paragraph",
-          "content": "13. Check Booking*"
-        },
-        {
-          "type": "paragraph",
-          "content": "14. Check Profile Details*"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Check the primary business category",
+            "Check the business name",
+            "Check the secondary categories",
+            "Check the review amount compared to competition",
+            "Check if responding to reviews",
+            "Check for photos",
+            "Check for general ranking",
+            "Check Q&A",
+            "Check for GBP Updates",
+            "Check business description",
+            "Check Services*",
+            "Check Products*",
+            "Check Booking*",
+            "Check Profile Details*"
+          ]
         },
         {
           "type": "paragraph",
@@ -766,20 +755,14 @@
           "content": "離PRO TIP: If you need to search in a different area, you have two options:"
         },
         {
-          "type": "paragraph",
-          "content": "1. If you’re on your computer, you can use gs location changer - a free Chrome extension"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. If you’re on mobile, or want to use incognito, check out Whitespark’s Local Results Tool"
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Choose an option above, and search your primary keyword there"
-        },
-        {
-          "type": "paragraph",
-          "content": "1. Check the primary business category"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "If you’re on your computer, you can use gs location changer - a free Chrome extension",
+            "If you’re on mobile, or want to use incognito, check out Whitespark’s Local Results Tool",
+            "Choose an option above, and search your primary keyword there",
+            "Check the primary business category"
+          ]
         },
         {
           "type": "paragraph",
@@ -830,8 +813,11 @@
           "content": "worth peeking at."
         },
         {
-          "type": "paragraph",
-          "content": "2. Check the business name"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Check the business name"
+          ]
         },
         {
           "type": "paragraph",
@@ -846,32 +832,26 @@
           "content": "Generally, we need to look out for a few things:"
         },
         {
-          "type": "paragraph",
-          "content": "1. You don’t need to include LLC or Inc. or any of that"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. You CANNOT stuff your city"
-        },
-        {
-          "type": "paragraph",
-          "content": "3. You CANNOT stuff your keyword"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "You don’t need to include LLC or Inc. or any of that",
+            "You CANNOT stuff your city",
+            "You CANNOT stuff your keyword"
+          ]
         },
         {
           "type": "paragraph",
           "content": "When can you stuff your keyword in your GBP business name?"
         },
         {
-          "type": "paragraph",
-          "content": "1. It’s included in your legal name"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. You have a DBA that includes the keyword"
-        },
-        {
-          "type": "paragraph",
-          "content": "3. You use it in all of your marketing materials (but that’s not enough - get a DBA)"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "It’s included in your legal name",
+            "You have a DBA that includes the keyword",
+            "You use it in all of your marketing materials (but that’s not enough - get a DBA)"
+          ]
         },
         {
           "type": "paragraph",
@@ -902,8 +882,11 @@
           "content": "you get a DBA."
         },
         {
-          "type": "paragraph",
-          "content": "3. Check the secondary categories"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Check the secondary categories"
+          ]
         },
         {
           "type": "paragraph",
@@ -918,32 +901,26 @@
           "content": "business categories? Do this by clicking on those GBPs."
         },
         {
-          "type": "paragraph",
-          "content": "4. Check the review amount compared to competition"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Check the review amount compared to competition"
+          ]
         },
         {
           "type": "paragraph",
           "content": "Reviews are directly correlated with your GBP ranking. But it’s not just amount, it’s:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Amount (sheer number of reviews)"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Amount of high-star (4-5)"
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Quality (at least two sentences, pics are nice)"
-        },
-        {
-          "type": "paragraph",
-          "content": "4. Frequency (not bursts, a steady stream)"
-        },
-        {
-          "type": "paragraph",
-          "content": "5. Recency (not all from a year ago)"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Amount (sheer number of reviews)",
+            "Amount of high-star (4-5)",
+            "Quality (at least two sentences, pics are nice)",
+            "Frequency (not bursts, a steady stream)",
+            "Recency (not all from a year ago)"
+          ]
         },
         {
           "type": "paragraph",
@@ -982,8 +959,11 @@
           "content": "can expect that getting more reviews will help."
         },
         {
-          "type": "paragraph",
-          "content": "5. Check for review responses"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Check for review responses"
+          ]
         },
         {
           "type": "paragraph",
@@ -998,8 +978,11 @@
           "content": "address how to handle the dreaded 1-star review "
         },
         {
-          "type": "paragraph",
-          "content": "6. Check for photos"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Check for photos"
+          ]
         },
         {
           "type": "paragraph",
@@ -1018,8 +1001,11 @@
           "content": "tell this from the GBP, but you might know)"
         },
         {
-          "type": "paragraph",
-          "content": "7. Check for general ranking"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Check for general ranking"
+          ]
         },
         {
           "type": "paragraph",
@@ -1042,8 +1028,11 @@
           "content": "not in the top 3 - aka the Map Pack - then you have room for improvement!"
         },
         {
-          "type": "paragraph",
-          "content": "8. Check Q&A"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Check Q&A"
+          ]
         },
         {
           "type": "paragraph",
@@ -1058,8 +1047,11 @@
           "content": "your own questions?!"
         },
         {
-          "type": "paragraph",
-          "content": "9. Check for GBP Updates"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Check for GBP Updates"
+          ]
         },
         {
           "type": "paragraph",
@@ -1070,8 +1062,11 @@
           "content": "If you can’t find any Updates, note that, as these have a small effect on ranking."
         },
         {
-          "type": "paragraph",
-          "content": "10. Check business description"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Check business description"
+          ]
         },
         {
           "type": "paragraph",
@@ -1094,32 +1089,35 @@
           "content": "You should try to take away the following:"
         },
         {
-          "type": "paragraph",
-          "content": "1. How far behind are we on reviews?"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Does it look like there are things we need to change?"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "How far behind are we on reviews?",
+            "Does it look like there are things we need to change?"
+          ]
         },
         {
           "type": "paragraph",
           "content": "a. Business categories, name, description"
         },
         {
-          "type": "paragraph",
-          "content": "3. Are they already doing SEO-y things?"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Are they already doing SEO-y things?"
+          ]
         },
         {
           "type": "paragraph",
           "content": "a. GBP Updates, Q&As"
         },
         {
-          "type": "paragraph",
-          "content": "4. How many photos are there compared to the competition"
-        },
-        {
-          "type": "paragraph",
-          "content": "5. Most Important: Roughly, where are they ranking for their primary keyword?"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "How many photos are there compared to the competition",
+            "Most Important: Roughly, where are they ranking for their primary keyword?"
+          ]
         },
         {
           "type": "paragraph",
@@ -1134,6 +1132,7 @@
           "content": "And before that, we need all of our keywords."
         }
       ],
+      "featured_video": null,
       "sort_order": 4,
       "published": true
     },
@@ -1171,8 +1170,11 @@
           "content": "We will be revisiting this in a few days, so it’s CRUCIAL that you get this set up right now."
         },
         {
-          "type": "paragraph",
-          "content": "1. Track Your Keywords"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Track Your Keywords"
+          ]
         },
         {
           "type": "paragraph",
@@ -1199,28 +1201,34 @@
           "content": "Steps to Set Up SERPFox:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Sign Up: Visit SERPFox and create a free account."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Add Keywords: Enter up to 10 keywords you want to track. These should be the"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Sign Up: Visit SERPFox and create a free account.",
+            "Add Keywords: Enter up to 10 keywords you want to track. These should be the"
+          ]
         },
         {
           "type": "paragraph",
           "content": "primary keywords identified in Day 3."
         },
         {
-          "type": "paragraph",
-          "content": "3. Set Location: Specify the geographic location relevant to your business to ensure"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Set Location: Specify the geographic location relevant to your business to ensure"
+          ]
         },
         {
           "type": "paragraph",
           "content": "accurate local tracking."
         },
         {
-          "type": "paragraph",
-          "content": "4. Monitor Rankings: Check the SERP results regularly to see where your keywords are"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Monitor Rankings: Check the SERP results regularly to see where your keywords are"
+          ]
         },
         {
           "type": "paragraph",
@@ -1243,40 +1251,37 @@
           "content": "Steps to Set Up Semrush Free Project:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Sign Up/Login: Go to Semrush and log in or create a free account."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Create a New Project: Navigate to the dashboard and select “Create Project.”"
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Add Your Domain: Enter your website URL and name your project."
-        },
-        {
-          "type": "paragraph",
-          "content": "4. Set Up Position Tracking: Within the project, choose “Position Tracking” and add the"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Sign Up/Login: Go to Semrush and log in or create a free account.",
+            "Create a New Project: Navigate to the dashboard and select “Create Project.”",
+            "Add Your Domain: Enter your website URL and name your project.",
+            "Set Up Position Tracking: Within the project, choose “Position Tracking” and add the"
+          ]
         },
         {
           "type": "paragraph",
           "content": "keywords you want to monitor."
         },
         {
-          "type": "paragraph",
-          "content": "5. Configure Settings: Specify your target location and device preferences."
-        },
-        {
-          "type": "paragraph",
-          "content": "6. Start Tracking: Semrush will begin tracking your keyword rankings and provide regular"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Configure Settings: Specify your target location and device preferences.",
+            "Start Tracking: Semrush will begin tracking your keyword rankings and provide regular"
+          ]
         },
         {
           "type": "paragraph",
           "content": "updates."
         },
         {
-          "type": "paragraph",
-          "content": "2. Track Impressions with Google Search Console"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Track Impressions with Google Search Console"
+          ]
         },
         {
           "type": "paragraph",
@@ -1291,16 +1296,13 @@
           "content": "Steps to Set Up Google Search Console:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Sign In: Go to Google Search Console and sign in with your Google account."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Add Property: Click on “Add Property” in the top-left and enter your website URL."
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Verify Ownership: Follow the verification steps (HTML file upload, DNS verification, or"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Sign In: Go to Google Search Console and sign in with your Google account.",
+            "Add Property: Click on “Add Property” in the top-left and enter your website URL.",
+            "Verify Ownership: Follow the verification steps (HTML file upload, DNS verification, or"
+          ]
         },
         {
           "type": "paragraph",
@@ -1315,8 +1317,11 @@
           "content": "dang easy once you’ve done it a few times."
         },
         {
-          "type": "paragraph",
-          "content": "4. Access Performance Report:"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Access Performance Report:"
+          ]
         },
         {
           "type": "paragraph",
@@ -1335,16 +1340,22 @@
           "content": "i. I typically only look at impressions (aka “views on Google”) and clicks."
         },
         {
-          "type": "paragraph",
-          "content": "5. Monitor Impressions: Regularly check the performance report to see how often your"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Monitor Impressions: Regularly check the performance report to see how often your"
+          ]
         },
         {
           "type": "paragraph",
           "content": "site appears in search results (impressions) for your target keywords."
         },
         {
-          "type": "paragraph",
-          "content": "3. Track Traffic with Google Analytics"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Track Traffic with Google Analytics"
+          ]
         },
         {
           "type": "paragraph",
@@ -1355,20 +1366,23 @@
           "content": "Steps to Set Up Google Analytics:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Sign Up/Login: Visit Google Analytics and sign in with your Google account."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Create a Property: Click on “Admin” and then “Create Property.” Enter your website"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Sign Up/Login: Visit Google Analytics and sign in with your Google account.",
+            "Create a Property: Click on “Admin” and then “Create Property.” Enter your website"
+          ]
         },
         {
           "type": "paragraph",
           "content": "details."
         },
         {
-          "type": "paragraph",
-          "content": "3. Set Up Tracking Code"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Set Up Tracking Code"
+          ]
         },
         {
           "type": "paragraph",
@@ -1395,16 +1409,22 @@
           "content": "more help."
         },
         {
-          "type": "paragraph",
-          "content": "4. Verify Installation: Use the “Realtime” report in Google Analytics to ensure data is"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Verify Installation: Use the “Realtime” report in Google Analytics to ensure data is"
+          ]
         },
         {
           "type": "paragraph",
           "content": "being collected."
         },
         {
-          "type": "paragraph",
-          "content": "5. Monitor Traffic: Use Google Analytics to track metrics such as:"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Monitor Traffic: Use Google Analytics to track metrics such as:"
+          ]
         },
         {
           "type": "paragraph",
@@ -1439,8 +1459,11 @@
           "content": "the site through) to check the performance of our SEO work."
         },
         {
-          "type": "paragraph",
-          "content": "4. Monitor Website Health with Ahrefs' Site Audit Tool"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Monitor Website Health with Ahrefs' Site Audit Tool"
+          ]
         },
         {
           "type": "paragraph",
@@ -1467,20 +1490,14 @@
           "content": "Steps to Set Up Ahrefs Site Audit"
         },
         {
-          "type": "paragraph",
-          "content": "1. Sign Up/Login: Go to Ahrefs and create a free account."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Access Site Audit Tool: From the dashboard, navigate to “Site Audit.”"
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Create a New Project: Enter your website URL and configure the crawl settings."
-        },
-        {
-          "type": "paragraph",
-          "content": "4. Run the Audit: Initiate the site audit. Ahrefs will crawl your site and identify issues"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Sign Up/Login: Go to Ahrefs and create a free account.",
+            "Access Site Audit Tool: From the dashboard, navigate to “Site Audit.”",
+            "Create a New Project: Enter your website URL and configure the crawl settings.",
+            "Run the Audit: Initiate the site audit. Ahrefs will crawl your site and identify issues"
+          ]
         },
         {
           "type": "paragraph",
@@ -1495,8 +1512,11 @@
           "content": "Otherwise, we were just getting a baseline report, and we’ll circle back on Day 8."
         },
         {
-          "type": "paragraph",
-          "content": "5. Monitor Conversion Rate Optimization (CRO)"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Monitor Conversion Rate Optimization (CRO)"
+          ]
         },
         {
           "type": "paragraph",
@@ -1531,20 +1551,23 @@
           "content": "Steps to Set Up Google Tag Manager:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Sign Up/Login: Visit Google Tag Manager and sign in with your Google account."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Create an Account: Enter your account name and container details (usually your"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Sign Up/Login: Visit Google Tag Manager and sign in with your Google account.",
+            "Create an Account: Enter your account name and container details (usually your"
+          ]
         },
         {
           "type": "paragraph",
           "content": "website URL)."
         },
         {
-          "type": "paragraph",
-          "content": "3. Install Container Code: Add the provided GTM code snippets to your website’s"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Install Container Code: Add the provided GTM code snippets to your website’s"
+          ]
         },
         {
           "type": "paragraph",
@@ -1587,16 +1610,13 @@
           "content": "Steps to Set Up Microsoft Clarity:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Sign Up/Login: Go to Microsoft Clarity and sign in with your Microsoft account."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Create a Project: Enter your website details to create a new project."
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Activate Clarity on Your Site: If you add Google Analytics and Google Tag Manager to"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Sign Up/Login: Go to Microsoft Clarity and sign in with your Microsoft account.",
+            "Create a Project: Enter your website details to create a new project.",
+            "Activate Clarity on Your Site: If you add Google Analytics and Google Tag Manager to"
+          ]
         },
         {
           "type": "paragraph",
@@ -1607,8 +1627,11 @@
           "content": "anything else to your site."
         },
         {
-          "type": "paragraph",
-          "content": "4. Monitor User Behavior: Use Clarity to analyze heatmaps, session recordings, and"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Monitor User Behavior: Use Clarity to analyze heatmaps, session recordings, and"
+          ]
         },
         {
           "type": "paragraph",
@@ -1711,6 +1734,7 @@
           "content": "distant future during Day 21."
         }
       ],
+      "featured_video": null,
       "sort_order": 5,
       "published": true
     },
@@ -1760,8 +1784,11 @@
           "content": "make your strategy even stronger."
         },
         {
-          "type": "paragraph",
-          "content": "1. Why Competitor Keyword Research Matters"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Why Competitor Keyword Research Matters"
+          ]
         },
         {
           "type": "paragraph",
@@ -1780,8 +1807,11 @@
           "content": "invaluable. This is where the Semrush Keyword Gap Tool comes into play."
         },
         {
-          "type": "paragraph",
-          "content": "2. Tools for the Job"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Tools for the Job"
+          ]
         },
         {
           "type": "paragraph",
@@ -1804,8 +1834,11 @@
           "content": "you feel comfortable using it now, go for it."
         },
         {
-          "type": "paragraph",
-          "content": "3. Step-by-Step: How to Use the Keyword Gap Tool"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Step-by-Step: How to Use the Keyword Gap Tool"
+          ]
         },
         {
           "type": "paragraph",
@@ -1840,8 +1873,11 @@
           "content": "Yelp—we want to focus on direct competition."
         },
         {
-          "type": "paragraph",
-          "content": "4. Refining the Keyword List"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Refining the Keyword List"
+          ]
         },
         {
           "type": "paragraph",
@@ -1896,8 +1932,11 @@
           "content": "certain keywords like competitors’ brands or irrelevant keywords."
         },
         {
-          "type": "paragraph",
-          "content": "5. Cross-Checking Competitor Keywords with Google"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Cross-Checking Competitor Keywords with Google"
+          ]
         },
         {
           "type": "paragraph",
@@ -1952,8 +1991,11 @@
           "content": "someone else is paying to show up on that SERP, we want to show up for free!"
         },
         {
-          "type": "paragraph",
-          "content": "6. Analog Markets for Expanded Insights"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Analog Markets for Expanded Insights"
+          ]
         },
         {
           "type": "paragraph",
@@ -1976,8 +2018,11 @@
           "content": "your strategy."
         },
         {
-          "type": "paragraph",
-          "content": "7. Final Steps: Organizing and Tracking Keywords"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Final Steps: Organizing and Tracking Keywords"
+          ]
         },
         {
           "type": "paragraph",
@@ -2060,6 +2105,7 @@
           "content": "We’ll revisit them on Day 9."
         }
       ],
+      "featured_video": null,
       "sort_order": 6,
       "published": true
     },
@@ -2105,8 +2151,11 @@
           "content": "followed by optimization tips to ensure you stand out in your service area."
         },
         {
-          "type": "paragraph",
-          "content": "1. Why Google Business Profiles Matter for Local SEO"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Why Google Business Profiles Matter for Local SEO"
+          ]
         },
         {
           "type": "paragraph",
@@ -2125,8 +2174,11 @@
           "content": "improving their rankings."
         },
         {
-          "type": "paragraph",
-          "content": "2. Setting Up Your Google Business Profile"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Setting Up Your Google Business Profile"
+          ]
         },
         {
           "type": "paragraph",
@@ -2249,8 +2301,11 @@
           "content": "social media page."
         },
         {
-          "type": "paragraph",
-          "content": "3. Verifying Your Business Profile"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Verifying Your Business Profile"
+          ]
         },
         {
           "type": "paragraph",
@@ -2297,8 +2352,11 @@
           "content": "this with dozens of people at this point."
         },
         {
-          "type": "paragraph",
-          "content": "4. Optimizing Your Google Business Profile"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Optimizing Your Google Business Profile"
+          ]
         },
         {
           "type": "paragraph",
@@ -2433,8 +2491,11 @@
           "content": "lol"
         },
         {
-          "type": "paragraph",
-          "content": "5. Monitoring and Managing Your Google Business"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Monitoring and Managing Your Google Business"
+          ]
         },
         {
           "type": "paragraph",
@@ -2481,6 +2542,7 @@
           "content": "Week 1 Summary: Foundation for Local SEO"
         }
       ],
+      "featured_video": null,
       "sort_order": 7,
       "published": true
     },
@@ -2522,8 +2584,11 @@
           "content": "audit, how to use free tools like Ahrefs Site Audit, and what to do to fix those pesky issues."
         },
         {
-          "type": "paragraph",
-          "content": "1. Tools for the Job"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Tools for the Job"
+          ]
         },
         {
           "type": "paragraph",
@@ -2554,8 +2619,11 @@
           "content": "provides weekly crawls of your site and a detailed report of the issues detected."
         },
         {
-          "type": "paragraph",
-          "content": "2. Common Technical SEO Issues and How to Fix Them"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Common Technical SEO Issues and How to Fix Them"
+          ]
         },
         {
           "type": "paragraph",
@@ -2754,8 +2822,11 @@
           "content": "● File Size: Ensure image file sizes aren't excessively large, as this can impact site speed."
         },
         {
-          "type": "paragraph",
-          "content": "3. Weekly Site Audits"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Weekly Site Audits"
+          ]
         },
         {
           "type": "paragraph",
@@ -2782,8 +2853,11 @@
           "content": "they become serious."
         },
         {
-          "type": "paragraph",
-          "content": "4. Don't Be Afraid to Ask for Help"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Don't Be Afraid to Ask for Help"
+          ]
         },
         {
           "type": "paragraph",
@@ -2834,6 +2908,7 @@
           "content": "Let's keep pushing forward!"
         }
       ],
+      "featured_video": null,
       "sort_order": 15,
       "published": true
     },
@@ -2883,8 +2958,11 @@
           "content": "offers or around specific locations."
         },
         {
-          "type": "paragraph",
-          "content": "1. Organize Your Keywords into Clusters"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Organize Your Keywords into Clusters"
+          ]
         },
         {
           "type": "paragraph",
@@ -2991,8 +3069,11 @@
           "content": "targeting the more localized \"custom cabinets [city] [state]\" on your service page."
         },
         {
-          "type": "paragraph",
-          "content": "2. How to Create Effective Keyword Clusters"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "How to Create Effective Keyword Clusters"
+          ]
         },
         {
           "type": "paragraph",
@@ -3031,8 +3112,11 @@
           "content": "should contain keywords like \"kitchen renovation [city]\" and \"kitchen contractors [city].\""
         },
         {
-          "type": "paragraph",
-          "content": "3. Assign Clusters to Pages"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Assign Clusters to Pages"
+          ]
         },
         {
           "type": "paragraph",
@@ -3099,6 +3183,7 @@
           "content": "one individually in the days to come!"
         }
       ],
+      "featured_video": null,
       "sort_order": 16,
       "published": true
     },
@@ -3140,8 +3225,11 @@
           "content": "you’ll have, and how they’ll be linked."
         },
         {
-          "type": "paragraph",
-          "content": "1. Focus on Your Money Pages"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Focus on Your Money Pages"
+          ]
         },
         {
           "type": "paragraph",
@@ -3220,8 +3308,11 @@
           "content": "there are different ways to organize these pages."
         },
         {
-          "type": "paragraph",
-          "content": "2. Recommended Permalink Structures"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Recommended Permalink Structures"
+          ]
         },
         {
           "type": "paragraph",
@@ -3300,8 +3391,11 @@
           "content": "/location2-name/service1"
         },
         {
-          "type": "paragraph",
-          "content": "3. Don’t Forget the Connective Tissue Pages"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Don’t Forget the Connective Tissue Pages"
+          ]
         },
         {
           "type": "paragraph",
@@ -3332,8 +3426,11 @@
           "content": "about your business. However, you can skip things like legal pages for this assignment."
         },
         {
-          "type": "paragraph",
-          "content": "4. The Final Goal: A Visual Map"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "The Final Goal: A Visual Map"
+          ]
         },
         {
           "type": "paragraph",
@@ -3400,6 +3497,7 @@
           "content": "started on building that ideal structure for your website!"
         }
       ],
+      "featured_video": null,
       "sort_order": 17,
       "published": true
     },
@@ -3625,24 +3723,24 @@
           "content": "To create your high-level strategy:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Assess your current phase: Identify where your website stands within the five phases."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Set your next goal: Determine which phase you want to reach next."
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Create an action plan: List the pages you need to build, update, or improve to reach the"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Assess your current phase: Identify where your website stands within the five phases.",
+            "Set your next goal: Determine which phase you want to reach next.",
+            "Create an action plan: List the pages you need to build, update, or improve to reach the"
+          ]
         },
         {
           "type": "paragraph",
           "content": "next phase."
         },
         {
-          "type": "paragraph",
-          "content": "4. Focus on progression: Keep the focus on moving from one phase to the next,"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Focus on progression: Keep the focus on moving from one phase to the next,"
+          ]
         },
         {
           "type": "paragraph",
@@ -3689,6 +3787,7 @@
           "content": "you work through the rest of the 30-Day Local SEO Playbook."
         }
       ],
+      "featured_video": null,
       "sort_order": 18,
       "published": true
     },
@@ -3754,16 +3853,22 @@
           "content": "Start by creating a series of introductory posts to establish a foundation for your profile:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Business Introduction Post: Introduce the business and link back to your homepage."
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Business Introduction Post: Introduce the business and link back to your homepage."
+          ]
         },
         {
           "type": "paragraph",
           "content": "This sets the stage for customers to understand who you are and what you offer."
         },
         {
-          "type": "paragraph",
-          "content": "2. Team or Founder Introduction: If the business has a team or a solopreneur owner,"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Team or Founder Introduction: If the business has a team or a solopreneur owner,"
+          ]
         },
         {
           "type": "paragraph",
@@ -3774,8 +3879,11 @@
           "content": "About page or Team page to create a stronger connection."
         },
         {
-          "type": "paragraph",
-          "content": "3. Service Introduction Posts: Create an individual post for each service offered by the"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Service Introduction Posts: Create an individual post for each service offered by the"
+          ]
         },
         {
           "type": "paragraph",
@@ -3786,8 +3894,11 @@
           "content": "corresponding service page on your website."
         },
         {
-          "type": "paragraph",
-          "content": "4. New Page Announcements: If you add any new pages to your website, make a post to"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "New Page Announcements: If you add any new pages to your website, make a post to"
+          ]
         },
         {
           "type": "paragraph",
@@ -3798,8 +3909,11 @@
           "content": "to drive initial traffic."
         },
         {
-          "type": "paragraph",
-          "content": "5. Call to Action Post: End this introductory sequence with a clear call to action that"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Call to Action Post: End this introductory sequence with a clear call to action that"
+          ]
         },
         {
           "type": "paragraph",
@@ -3922,6 +4036,7 @@
           "content": "your business visible to potential customers."
         }
       ],
+      "featured_video": null,
       "sort_order": 19,
       "published": true
     },
@@ -3971,8 +4086,11 @@
           "content": "and improves its chances of ranking higher for relevant searches."
         },
         {
-          "type": "paragraph",
-          "content": "1. SEO Title (Title Tag)"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "SEO Title (Title Tag)"
+          ]
         },
         {
           "type": "paragraph",
@@ -3999,8 +4117,11 @@
           "content": "within 50-60 characters to avoid truncation on the SERP."
         },
         {
-          "type": "paragraph",
-          "content": "2. URL (Permalink)"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "URL (Permalink)"
+          ]
         },
         {
           "type": "paragraph",
@@ -4019,8 +4140,11 @@
           "content": "long strings of numbers or irrelevant words."
         },
         {
-          "type": "paragraph",
-          "content": "3. Meta Description"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Meta Description"
+          ]
         },
         {
           "type": "paragraph",
@@ -4047,8 +4171,11 @@
           "content": "within 150-160 characters."
         },
         {
-          "type": "paragraph",
-          "content": "4. Header Tag (H1)"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Header Tag (H1)"
+          ]
         },
         {
           "type": "paragraph",
@@ -4071,8 +4198,11 @@
           "content": "conversational or engaging."
         },
         {
-          "type": "paragraph",
-          "content": "5. Content and Keyword Placement"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Content and Keyword Placement"
+          ]
         },
         {
           "type": "paragraph",
@@ -4135,6 +4265,7 @@
           "content": "strong foundation for the content we'll develop in upcoming lessons."
         }
       ],
+      "featured_video": null,
       "sort_order": 20,
       "published": true
     },
@@ -4308,6 +4439,7 @@
           "content": "Foundations"
         }
       ],
+      "featured_video": null,
       "sort_order": 21,
       "published": true
     },
@@ -4373,8 +4505,11 @@
           "content": "Here’s a quick overview of each section of the StoryBrand landing page and why it matters:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Header (Above the Fold)"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Header (Above the Fold)"
+          ]
         },
         {
           "type": "paragraph",
@@ -4389,8 +4524,11 @@
           "content": "\"Schedule a Call\")."
         },
         {
-          "type": "paragraph",
-          "content": "2. The Problem"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "The Problem"
+          ]
         },
         {
           "type": "paragraph",
@@ -4413,8 +4551,11 @@
           "content": "○ Philosophical problem: why it shouldn’t be that way"
         },
         {
-          "type": "paragraph",
-          "content": "3. The Guide (You)"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "The Guide (You)"
+          ]
         },
         {
           "type": "paragraph",
@@ -4429,8 +4570,11 @@
           "content": "testimonials."
         },
         {
-          "type": "paragraph",
-          "content": "4. The Path (How it Works)"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "The Path (How it Works)"
+          ]
         },
         {
           "type": "paragraph",
@@ -4445,8 +4589,11 @@
           "content": "Business)"
         },
         {
-          "type": "paragraph",
-          "content": "5. The Value Proposition"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "The Value Proposition"
+          ]
         },
         {
           "type": "paragraph",
@@ -4457,8 +4604,11 @@
           "content": "● Includes: Benefits in bullet points, optional outcomes or comparisons."
         },
         {
-          "type": "paragraph",
-          "content": "6. Call to Action (Repeated)"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Call to Action (Repeated)"
+          ]
         },
         {
           "type": "paragraph",
@@ -4469,8 +4619,11 @@
           "content": "● Includes: Another CTA button, styled to stand out."
         },
         {
-          "type": "paragraph",
-          "content": "7. Success/Failure Stakes"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Success/Failure Stakes"
+          ]
         },
         {
           "type": "paragraph",
@@ -4481,8 +4634,11 @@
           "content": "● Includes: A vision of success and the cost of doing nothing."
         },
         {
-          "type": "paragraph",
-          "content": "8. Testimonials / Social Proof"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Testimonials / Social Proof"
+          ]
         },
         {
           "type": "paragraph",
@@ -4493,8 +4649,11 @@
           "content": "● Includes: Quotes, ratings, logos, case studies."
         },
         {
-          "type": "paragraph",
-          "content": "9. FAQ (Optional)"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "FAQ (Optional)"
+          ]
         },
         {
           "type": "paragraph",
@@ -4505,8 +4664,11 @@
           "content": "● Includes: Common questions about cost, time, process, etc."
         },
         {
-          "type": "paragraph",
-          "content": "10. Footer with Imagine Section and Final CTA"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Footer with Imagine Section and Final CTA"
+          ]
         },
         {
           "type": "paragraph",
@@ -4545,8 +4707,11 @@
           "content": "How to Use the Tool"
         },
         {
-          "type": "paragraph",
-          "content": "1. Tell It What You Need"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Tell It What You Need"
+          ]
         },
         {
           "type": "paragraph",
@@ -4557,8 +4722,11 @@
           "content": "acupuncture practice in Bend, Oregon\")."
         },
         {
-          "type": "paragraph",
-          "content": "2. Provide Your BrandScript"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Provide Your BrandScript"
+          ]
         },
         {
           "type": "paragraph",
@@ -4569,8 +4737,11 @@
           "content": "○ Optionally, add other relevant info like customer reviews or unique offers."
         },
         {
-          "type": "paragraph",
-          "content": "3. Let It Generate Your Draft"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Let It Generate Your Draft"
+          ]
         },
         {
           "type": "paragraph",
@@ -4637,6 +4808,7 @@
           "content": "high-quality reviews! Hey, maybe you can use those reviews in your copy."
         }
       ],
+      "featured_video": null,
       "sort_order": 29,
       "published": true
     },
@@ -4722,24 +4894,15 @@
           "content": "Step 1: Grab Your Google Review Link"
         },
         {
-          "type": "paragraph",
-          "content": "1. Go to Google and type “my business” or visit https://business.google.com/"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Click “View profile”"
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Look for the “Ask for reviews” tile"
-        },
-        {
-          "type": "paragraph",
-          "content": "4. Click “Copy link”"
-        },
-        {
-          "type": "paragraph",
-          "content": "5. There’s also a new way to just get a QR code, which is nice!"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Go to Google and type “my business” or visit https://business.google.com/",
+            "Click “View profile”",
+            "Look for the “Ask for reviews” tile",
+            "Click “Copy link”",
+            "There’s also a new way to just get a QR code, which is nice!"
+          ]
         },
         {
           "type": "paragraph",
@@ -4918,24 +5081,24 @@
           "content": "Canva make this easy:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Design a simple card with your logo and message (e.g., \"Loved your experience? Leave"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Design a simple card with your logo and message (e.g., \"Loved your experience? Leave"
+          ]
         },
         {
           "type": "paragraph",
           "content": "us a review!\")"
         },
         {
-          "type": "paragraph",
-          "content": "2. Add a QR code using Canva’s QR Code “app”"
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Link it to your Google Review URL"
-        },
-        {
-          "type": "paragraph",
-          "content": "4. Print 50–100 cards for about $20"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Add a QR code using Canva’s QR Code “app”",
+            "Link it to your Google Review URL",
+            "Print 50–100 cards for about $20"
+          ]
         },
         {
           "type": "paragraph",
@@ -4950,24 +5113,15 @@
           "content": "Recap & Action Steps for Today"
         },
         {
-          "type": "paragraph",
-          "content": "1. Get your Google review link and save it for easy use"
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Send the review script to past happy clients"
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Coach clients on what to include in their reviews"
-        },
-        {
-          "type": "paragraph",
-          "content": "4. Respond to any 1-star reviews with accountability and empathy"
-        },
-        {
-          "type": "paragraph",
-          "content": "5. Consider printing review QR cards to passively collect more feedback"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Get your Google review link and save it for easy use",
+            "Send the review script to past happy clients",
+            "Coach clients on what to include in their reviews",
+            "Respond to any 1-star reviews with accountability and empathy",
+            "Consider printing review QR cards to passively collect more feedback"
+          ]
         },
         {
           "type": "paragraph",
@@ -4982,6 +5136,7 @@
           "content": "Let’s go get those reviews! After that, we’ll keep spying on our competitors!!"
         }
       ],
+      "featured_video": null,
       "sort_order": 30,
       "published": true
     },
@@ -5191,6 +5346,7 @@
           "content": "climbing. Tomorrow: we shift from competition back to the GBP."
         }
       ],
+      "featured_video": null,
       "sort_order": 31,
       "published": true
     },
@@ -5320,20 +5476,14 @@
           "content": "● How to Upload:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Go to your Google Business Profile."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Click \"Photos.\""
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Click \"Add Photos.\""
-        },
-        {
-          "type": "paragraph",
-          "content": "4. Drag and drop your cropped 1200 x 900 images."
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Go to your Google Business Profile.",
+            "Click \"Photos.\"",
+            "Click \"Add Photos.\"",
+            "Drag and drop your cropped 1200 x 900 images."
+          ]
         },
         {
           "type": "paragraph",
@@ -5412,24 +5562,24 @@
           "content": "Today’s Action Items"
         },
         {
-          "type": "paragraph",
-          "content": "1. Double-check your GBP photos: Are your logo and cover photo the right dimensions?"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Double-check your GBP photos: Are your logo and cover photo the right dimensions?"
+          ]
         },
         {
           "type": "paragraph",
           "content": "Is your branding clear?"
         },
         {
-          "type": "paragraph",
-          "content": "2. Upload at least 3 recent photos: Bonus if they’re from this week."
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Write and answer 1–3 Q&As: Focus on common client concerns."
-        },
-        {
-          "type": "paragraph",
-          "content": "4. Set a reminder to repeat this monthly."
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Upload at least 3 recent photos: Bonus if they’re from this week.",
+            "Write and answer 1–3 Q&As: Focus on common client concerns.",
+            "Set a reminder to repeat this monthly."
+          ]
         },
         {
           "type": "paragraph",
@@ -5444,6 +5594,7 @@
           "content": "Let’s keep that profile looking sharp and relevant! But now it’s time to learn how to rank higher!"
         }
       ],
+      "featured_video": null,
       "sort_order": 32,
       "published": true
     },
@@ -5473,8 +5624,11 @@
           "content": "ranking higher in local searches and driving more business to your website."
         },
         {
-          "type": "paragraph",
-          "content": "1. What is Authority?"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "What is Authority?"
+          ]
         },
         {
           "type": "paragraph",
@@ -5517,8 +5671,11 @@
           "content": "strategically build them to enhance your local SEO."
         },
         {
-          "type": "paragraph",
-          "content": "2. Why Does Authority Matter?"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Why Does Authority Matter?"
+          ]
         },
         {
           "type": "paragraph",
@@ -5553,8 +5710,11 @@
           "content": "In other words, improving your authority can have a direct impact on your business success."
         },
         {
-          "type": "paragraph",
-          "content": "3. How Much Authority You Need Depends on the Competition"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "How Much Authority You Need Depends on the Competition"
+          ]
         },
         {
           "type": "paragraph",
@@ -5585,8 +5745,11 @@
           "content": "Action Steps for Today:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Understand Your Current Authority"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Understand Your Current Authority"
+          ]
         },
         {
           "type": "paragraph",
@@ -5597,8 +5760,11 @@
           "content": "Score is."
         },
         {
-          "type": "paragraph",
-          "content": "2. Identify Your Competition"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Identify Your Competition"
+          ]
         },
         {
           "type": "paragraph",
@@ -5613,8 +5779,11 @@
           "content": "Now, check day 31 and see how far off you are from your competitors!"
         },
         {
-          "type": "paragraph",
-          "content": "3. Prepare for Week 4"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Prepare for Week 4"
+          ]
         },
         {
           "type": "paragraph",
@@ -5645,6 +5814,7 @@
           "content": "Get ready to build your authority and watch your local rankings soar!"
         }
       ],
+      "featured_video": null,
       "sort_order": 33,
       "published": true
     },
@@ -5870,6 +6040,7 @@
           "content": "service page as a template. See you tomorrow for Day 21."
         }
       ],
+      "featured_video": null,
       "sort_order": 34,
       "published": true
     },
@@ -5891,6 +6062,7 @@
           "content": "Welcome to Day 20 of your 30-Day Local SEO Playbook! We set up all of our tracking back on"
         }
       ],
+      "featured_video": null,
       "sort_order": 35,
       "published": true
     },
@@ -5932,8 +6104,11 @@
           "content": "ensure that your link-building efforts look natural and contribute to long-term ranking growth."
         },
         {
-          "type": "paragraph",
-          "content": "1. Why Do Backlinks Even Matter?"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Why Do Backlinks Even Matter?"
+          ]
         },
         {
           "type": "paragraph",
@@ -5984,8 +6159,11 @@
           "content": "your small business’ website and start ranking higher in no time!!"
         },
         {
-          "type": "paragraph",
-          "content": "2. Understanding the Backlink Tiers"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Understanding the Backlink Tiers"
+          ]
         },
         {
           "type": "paragraph",
@@ -5996,40 +6174,55 @@
           "content": "authority, relevance, and volume. Here’s a breakdown of the five backlink tiers:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Premier-Grade Backlinks – These are the highest-quality backlinks from trusted,"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Premier-Grade Backlinks – These are the highest-quality backlinks from trusted,"
+          ]
         },
         {
           "type": "paragraph",
           "content": "high-authority sources. There are usually only a few of these that you can get."
         },
         {
-          "type": "paragraph",
-          "content": "2. Top-Grade Backlinks – High-quality links that are showing up in the SERPs. Generally,"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Top-Grade Backlinks – High-quality links that are showing up in the SERPs. Generally,"
+          ]
         },
         {
           "type": "paragraph",
           "content": "there are about 10 or so of these."
         },
         {
-          "type": "paragraph",
-          "content": "3. Mid-Grade Backlinks – These are the higher quality links from a citation building"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Mid-Grade Backlinks – These are the higher quality links from a citation building"
+          ]
         },
         {
           "type": "paragraph",
           "content": "service, like BrightLocal. These can also be competitor backlinks that carry authority."
         },
         {
-          "type": "paragraph",
-          "content": "4. Low-Grade Backlinks – These are the lower quality links from a citation building"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Low-Grade Backlinks – These are the lower quality links from a citation building"
+          ]
         },
         {
           "type": "paragraph",
           "content": "service, like BrightLocal."
         },
         {
-          "type": "paragraph",
-          "content": "5. Trash-Grade Backlinks – These are competitor backlinks that don’t carry much"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Trash-Grade Backlinks – These are competitor backlinks that don’t carry much"
+          ]
         },
         {
           "type": "paragraph",
@@ -6044,8 +6237,11 @@
           "content": "create a natural-looking link profile."
         },
         {
-          "type": "paragraph",
-          "content": "3. Building a Balanced Backlink Strategy"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Building a Balanced Backlink Strategy"
+          ]
         },
         {
           "type": "paragraph",
@@ -6100,8 +6296,11 @@
           "content": "are just going to be directories. It’s gross, but it’s true. Just get used to it!"
         },
         {
-          "type": "paragraph",
-          "content": "3. Conclusion"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Conclusion"
+          ]
         },
         {
           "type": "paragraph",
@@ -6144,6 +6343,7 @@
           "content": "out in local search results."
         }
       ],
+      "featured_video": null,
       "sort_order": 44,
       "published": true
     },
@@ -6189,8 +6389,11 @@
           "content": "persistence to secure."
         },
         {
-          "type": "paragraph",
-          "content": "1. What Are Premier-Grade Backlinks?"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "What Are Premier-Grade Backlinks?"
+          ]
         },
         {
           "type": "paragraph",
@@ -6229,8 +6432,11 @@
           "content": "domain authority and relevance."
         },
         {
-          "type": "paragraph",
-          "content": "2. Prioritizing Premier-Grade Links Early"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Prioritizing Premier-Grade Links Early"
+          ]
         },
         {
           "type": "paragraph",
@@ -6249,32 +6455,44 @@
           "content": "How to Approach Premier-Grade Link Building"
         },
         {
-          "type": "paragraph",
-          "content": "1. Start with Easy Wins – If your business is already a member of a Chamber of"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Start with Easy Wins – If your business is already a member of a Chamber of"
+          ]
         },
         {
           "type": "paragraph",
           "content": "Commerce or an industry directory, claim and optimize those listings immediately."
         },
         {
-          "type": "paragraph",
-          "content": "2. Build Relationships – Securing links from local publicationsoften requires"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Build Relationships – Securing links from local publicationsoften requires"
+          ]
         },
         {
           "type": "paragraph",
           "content": "relationship-building, networking, or PR efforts."
         },
         {
-          "type": "paragraph",
-          "content": "3. Save Some for Later – If you have multiple opportunities, stagger them over time to"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Save Some for Later – If you have multiple opportunities, stagger them over time to"
+          ]
         },
         {
           "type": "paragraph",
           "content": "maintain a natural link-building pattern."
         },
         {
-          "type": "paragraph",
-          "content": "3. How to Get Premier-Grade Backlinks"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "How to Get Premier-Grade Backlinks"
+          ]
         },
         {
           "type": "paragraph",
@@ -6425,8 +6643,11 @@
           "content": "($30-$50). If competitors are listed, it’s often worth it."
         },
         {
-          "type": "paragraph",
-          "content": "4. Rolling Out Premier-Grade Links Over Time"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Rolling Out Premier-Grade Links Over Time"
+          ]
         },
         {
           "type": "paragraph",
@@ -6449,8 +6670,11 @@
           "content": "growth."
         },
         {
-          "type": "paragraph",
-          "content": "5. Next Steps"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Next Steps"
+          ]
         },
         {
           "type": "paragraph",
@@ -6465,8 +6689,11 @@
           "content": "Action Items:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Make a list of Premier-Grade backlink opportunities."
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Make a list of Premier-Grade backlink opportunities."
+          ]
         },
         {
           "type": "paragraph",
@@ -6477,16 +6704,13 @@
           "content": "directories."
         },
         {
-          "type": "paragraph",
-          "content": "2. Claim and optimize at least one existing listing."
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Begin outreach for a local publication or industry directory placement."
-        },
-        {
-          "type": "paragraph",
-          "content": "4. Look into local sponsorships or partnerships that could result in a backlink."
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Claim and optimize at least one existing listing.",
+            "Begin outreach for a local publication or industry directory placement.",
+            "Look into local sponsorships or partnerships that could result in a backlink."
+          ]
         },
         {
           "type": "paragraph",
@@ -6505,6 +6729,7 @@
           "content": "grow."
         }
       ],
+      "featured_video": null,
       "sort_order": 45,
       "published": true
     },
@@ -6550,8 +6775,11 @@
           "content": "time."
         },
         {
-          "type": "paragraph",
-          "content": "1. What Are Top-Grade Backlinks?"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "What Are Top-Grade Backlinks?"
+          ]
         },
         {
           "type": "paragraph",
@@ -6606,8 +6834,11 @@
           "content": "build credibility."
         },
         {
-          "type": "paragraph",
-          "content": "2. Finding Top-Grade Backlinks in Search Results"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Finding Top-Grade Backlinks in Search Results"
+          ]
         },
         {
           "type": "paragraph",
@@ -6658,8 +6889,11 @@
           "content": "Each of these Top-Grade directories and listicles becomes a backlink opportunity."
         },
         {
-          "type": "paragraph",
-          "content": "3. How to Get Top-Grade Backlinks"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "How to Get Top-Grade Backlinks"
+          ]
         },
         {
           "type": "paragraph",
@@ -6770,8 +7004,11 @@
           "content": "their listing."
         },
         {
-          "type": "paragraph",
-          "content": "4. Evaluating Paid Top-Grade Backlinks"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Evaluating Paid Top-Grade Backlinks"
+          ]
         },
         {
           "type": "paragraph",
@@ -6806,8 +7043,11 @@
           "content": "a site has low traffic and charges a fee, it’s better to focus on free opportunities first."
         },
         {
-          "type": "paragraph",
-          "content": "5. Rolling Out Top-Grade Links Over Time"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Rolling Out Top-Grade Links Over Time"
+          ]
         },
         {
           "type": "paragraph",
@@ -6830,8 +7070,11 @@
           "content": "spikes."
         },
         {
-          "type": "paragraph",
-          "content": "6. Next Steps"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Next Steps"
+          ]
         },
         {
           "type": "paragraph",
@@ -6842,24 +7085,24 @@
           "content": "Action Items:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Search Google for “best [service] in [city]” and note high-ranking directories and"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Search Google for “best [service] in [city]” and note high-ranking directories and"
+          ]
         },
         {
           "type": "paragraph",
           "content": "listicles."
         },
         {
-          "type": "paragraph",
-          "content": "2. Check for “Get Listed” or “Submit Your Business” options on each site."
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Claim free listings immediately and create a prioritized list of paid opportunities."
-        },
-        {
-          "type": "paragraph",
-          "content": "4. Evaluate paid directory options based on authority score and potential ROI."
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Check for “Get Listed” or “Submit Your Business” options on each site.",
+            "Claim free listings immediately and create a prioritized list of paid opportunities.",
+            "Evaluate paid directory options based on authority score and potential ROI."
+          ]
         },
         {
           "type": "paragraph",
@@ -6882,6 +7125,7 @@
           "content": "time."
         }
       ],
+      "featured_video": null,
       "sort_order": 46,
       "published": true
     },
@@ -6939,8 +7183,11 @@
           "content": "more competitive in Google’s eyes."
         },
         {
-          "type": "paragraph",
-          "content": "1. Add a Featured Project or Condition Section"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Add a Featured Project or Condition Section"
+          ]
         },
         {
           "type": "paragraph",
@@ -6983,8 +7230,11 @@
           "content": "framework. You're still the guide solving the hero’s (client’s) problem — you’re just doing it there."
         },
         {
-          "type": "paragraph",
-          "content": "2. Add Location-Specific Testimonials"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Add Location-Specific Testimonials"
+          ]
         },
         {
           "type": "paragraph",
@@ -7019,8 +7269,11 @@
           "content": "a general service page won’t have."
         },
         {
-          "type": "paragraph",
-          "content": "3. Add a Custom FAQ Section"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Add a Custom FAQ Section"
+          ]
         },
         {
           "type": "paragraph",
@@ -7119,6 +7372,7 @@
           "content": "We’ll continue strengthening your authority tomorrow—see you on Day 26."
         }
       ],
+      "featured_video": null,
       "sort_order": 47,
       "published": true
     },
@@ -7164,8 +7418,11 @@
           "content": "Here are the 4 Local SEO “Scams” or Dead Strategies that are still making the rounds:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Blog-Heavy Strategies That Ignore Local Intent"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Blog-Heavy Strategies That Ignore Local Intent"
+          ]
         },
         {
           "type": "paragraph",
@@ -7208,8 +7465,11 @@
           "content": "location pages targeting “[service] in [city].” Get those ranking before you think about blogging."
         },
         {
-          "type": "paragraph",
-          "content": "2. Overemphasis on Citations and NAP Matching"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Overemphasis on Citations and NAP Matching"
+          ]
         },
         {
           "type": "paragraph",
@@ -7252,8 +7512,11 @@
           "content": "industry-relevant backlinks."
         },
         {
-          "type": "paragraph",
-          "content": "3. Guaranteed SEO Results"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Guaranteed SEO Results"
+          ]
         },
         {
           "type": "paragraph",
@@ -7292,8 +7555,11 @@
           "content": "conversions). Transparency > empty promises."
         },
         {
-          "type": "paragraph",
-          "content": "4. CTR Manipulation (Click-Through Rate “Boosting”)"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "CTR Manipulation (Click-Through Rate “Boosting”)"
+          ]
         },
         {
           "type": "paragraph",
@@ -7376,6 +7642,7 @@
           "content": "local SEO that does still move the needle. See you then."
         }
       ],
+      "featured_video": null,
       "sort_order": 48,
       "published": true
     },
@@ -7425,8 +7692,11 @@
           "content": "mixes high and low-authority directories and a second round that fills in the remaining gaps."
         },
         {
-          "type": "paragraph",
-          "content": "1. Why Citation Backlinks Still Matter"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Why Citation Backlinks Still Matter"
+          ]
         },
         {
           "type": "paragraph",
@@ -7485,8 +7755,11 @@
           "content": "than dumping them all at once."
         },
         {
-          "type": "paragraph",
-          "content": "2. The Two-Wave Citation Strategy"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "The Two-Wave Citation Strategy"
+          ]
         },
         {
           "type": "paragraph",
@@ -7553,24 +7826,33 @@
           "content": "citations at once, which can look unnatural."
         },
         {
-          "type": "paragraph",
-          "content": "3. How to Get Citation Backlinks"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "How to Get Citation Backlinks"
+          ]
         },
         {
           "type": "paragraph",
           "content": "There are two ways to build citation links:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Manual Submissions (DIY Approach) – You go to each directory and submit your"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Manual Submissions (DIY Approach) – You go to each directory and submit your"
+          ]
         },
         {
           "type": "paragraph",
           "content": "business manually. This is time-consuming but cost-effective."
         },
         {
-          "type": "paragraph",
-          "content": "2. Automated Submission Services – Platforms like BrightLocal and Whitespark"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Automated Submission Services – Platforms like BrightLocal and Whitespark"
+          ]
         },
         {
           "type": "paragraph",
@@ -7585,8 +7867,11 @@
           "content": "service saves effort."
         },
         {
-          "type": "paragraph",
-          "content": "4. Should You Use a Citation Service?"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Should You Use a Citation Service?"
+          ]
         },
         {
           "type": "paragraph",
@@ -7629,8 +7914,11 @@
           "content": "focus for higher-impact SEO efforts."
         },
         {
-          "type": "paragraph",
-          "content": "5. Next Steps"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Next Steps"
+          ]
         },
         {
           "type": "paragraph",
@@ -7641,20 +7929,14 @@
           "content": "Action Items:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Identify citation sites for Wave 1."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Decide if you will use a manual or service-based approach."
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Kickoff your first Wave of citation building."
-        },
-        {
-          "type": "paragraph",
-          "content": "4. Schedule Wave 2 submissions for ~6 weeks from now."
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Identify citation sites for Wave 1.",
+            "Decide if you will use a manual or service-based approach.",
+            "Kickoff your first Wave of citation building.",
+            "Schedule Wave 2 submissions for ~6 weeks from now."
+          ]
         },
         {
           "type": "paragraph",
@@ -7677,6 +7959,7 @@
           "content": "your overall backlink strategy, ensuring steady ranking improvements over time."
         }
       ],
+      "featured_video": null,
       "sort_order": 49,
       "published": true
     },
@@ -7722,8 +8005,11 @@
           "content": "efforts."
         },
         {
-          "type": "paragraph",
-          "content": "1. What Are Competitor Backlinks?"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "What Are Competitor Backlinks?"
+          ]
         },
         {
           "type": "paragraph",
@@ -7754,8 +8040,11 @@
           "content": "junk links that aren’t worth pursuing. Knowing how to sort and prioritize these is key."
         },
         {
-          "type": "paragraph",
-          "content": "2. How to Find Competitor Backlinks"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "How to Find Competitor Backlinks"
+          ]
         },
         {
           "type": "paragraph",
@@ -7774,28 +8063,34 @@
           "content": "Steps to Perform a Backlink Gap Analysis"
         },
         {
-          "type": "paragraph",
-          "content": "1. Use Semrush – This tool allows you to input multiple competitor URLs and compare"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Use Semrush – This tool allows you to input multiple competitor URLs and compare"
+          ]
         },
         {
           "type": "paragraph",
           "content": "backlink profiles - if you’ve been saving your 7-day free trial, use it now (link)"
         },
         {
-          "type": "paragraph",
-          "content": "2. Enter 4 direct competitors – The more you analyze, the better the results."
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Sort by Matches & Authority Score – Prioritize sites that link to multiple competitors"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Enter 4 direct competitors – The more you analyze, the better the results.",
+            "Sort by Matches & Authority Score – Prioritize sites that link to multiple competitors"
+          ]
         },
         {
           "type": "paragraph",
           "content": "(high match count)."
         },
         {
-          "type": "paragraph",
-          "content": "4. Export the List – Review and organize the backlinks by priority."
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Export the List – Review and organize the backlinks by priority."
+          ]
         },
         {
           "type": "paragraph",
@@ -7814,20 +8109,23 @@
           "content": "To find even more opportunities, expand your search beyond direct competitors:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Local Competitors – Businesses in your city that offer the same services."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Industry Competitors in Larger Markets – Look at businesses in bigger cities that"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Local Competitors – Businesses in your city that offer the same services.",
+            "Industry Competitors in Larger Markets – Look at businesses in bigger cities that"
+          ]
         },
         {
           "type": "paragraph",
           "content": "likely invest more in SEO and may have links local competitors missed."
         },
         {
-          "type": "paragraph",
-          "content": "3. Similar Businesses in Your Area – Even if they aren’t direct competitors, they may"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Similar Businesses in Your Area – Even if they aren’t direct competitors, they may"
+          ]
         },
         {
           "type": "paragraph",
@@ -7842,8 +8140,11 @@
           "content": "that local competitors haven’t discovered yet."
         },
         {
-          "type": "paragraph",
-          "content": "3. Sorting Competitor Backlinks by Quality"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Sorting Competitor Backlinks by Quality"
+          ]
         },
         {
           "type": "paragraph",
@@ -7934,8 +8235,11 @@
           "content": "profile, but they shouldn’t be a priority."
         },
         {
-          "type": "paragraph",
-          "content": "4. When to Use Competitor Backlinks in Your"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "When to Use Competitor Backlinks in Your"
+          ]
         },
         {
           "type": "paragraph",
@@ -8002,8 +8306,11 @@
           "content": "link-building efforts as manipulative."
         },
         {
-          "type": "paragraph",
-          "content": "5. Next Steps"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Next Steps"
+          ]
         },
         {
           "type": "paragraph",
@@ -8018,16 +8325,13 @@
           "content": "Action Items:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Run a Backlink Gap Analysis using Semrush."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Sort by Matches & Authority Score to prioritize the best opportunities."
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Export a list of competitor backlinks and categorize them into:"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Run a Backlink Gap Analysis using Semrush.",
+            "Sort by Matches & Authority Score to prioritize the best opportunities.",
+            "Export a list of competitor backlinks and categorize them into:"
+          ]
         },
         {
           "type": "paragraph",
@@ -8042,16 +8346,13 @@
           "content": "○ Low-Value (Spammy, Authority <10, one-off competitor links)"
         },
         {
-          "type": "paragraph",
-          "content": "4. Identify 3-5 High-Priority competitor backlinks to secure this week."
-        },
-        {
-          "type": "paragraph",
-          "content": "5. Plan how to sprinkle these links into your broader link-building campaign."
-        },
-        {
-          "type": "paragraph",
-          "content": "6. Conclusion"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Identify 3-5 High-Priority competitor backlinks to secure this week.",
+            "Plan how to sprinkle these links into your broader link-building campaign.",
+            "Conclusion"
+          ]
         },
         {
           "type": "paragraph",
@@ -8158,6 +8459,7 @@
           "content": "sustainably."
         }
       ],
+      "featured_video": null,
       "sort_order": 50,
       "published": true
     },
@@ -8479,20 +8781,14 @@
           "content": "Today, your task is to create your monthly SEO review checklist:"
         },
         {
-          "type": "paragraph",
-          "content": "1. GBP performance (rankings, reviews, calls)."
-        },
-        {
-          "type": "paragraph",
-          "content": "2. Website traffic and ranking changes (Search Console)."
-        },
-        {
-          "type": "paragraph",
-          "content": "3. Backlink updates (Semrush or Ahrefs)."
-        },
-        {
-          "type": "paragraph",
-          "content": "4. Actual leads and revenue generated from SEO."
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "GBP performance (rankings, reviews, calls).",
+            "Website traffic and ranking changes (Search Console).",
+            "Backlink updates (Semrush or Ahrefs).",
+            "Actual leads and revenue generated from SEO."
+          ]
         },
         {
           "type": "paragraph",
@@ -8515,6 +8811,7 @@
           "content": "sometimes necessary) \"B-word\" in local SEO. You’ve come a long way—keep going!"
         }
       ],
+      "featured_video": null,
       "sort_order": 58,
       "published": true
     },
@@ -8756,16 +9053,22 @@
           "content": "As your initial SEO strategy matures, start implementing this long-term play:"
         },
         {
-          "type": "paragraph",
-          "content": "1. Keyword Research Sprint:"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Keyword Research Sprint:"
+          ]
         },
         {
           "type": "paragraph",
           "content": "Identify informational keywords relevant to your business and location."
         },
         {
-          "type": "paragraph",
-          "content": "2. Create & Cluster Content:"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Create & Cluster Content:"
+          ]
         },
         {
           "type": "paragraph",
@@ -8780,8 +9083,11 @@
           "content": "remodeling or custom carpentry tips."
         },
         {
-          "type": "paragraph",
-          "content": "3. Build Linkable Assets:"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Build Linkable Assets:"
+          ]
         },
         {
           "type": "paragraph",
@@ -8792,8 +9098,11 @@
           "content": "naturally attract backlinks over time."
         },
         {
-          "type": "paragraph",
-          "content": "4. Regular Content Audits & \"V2\" Updates:"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Regular Content Audits & \"V2\" Updates:"
+          ]
         },
         {
           "type": "paragraph",
@@ -8808,8 +9117,11 @@
           "content": "content rather than always creating new pages."
         },
         {
-          "type": "paragraph",
-          "content": "5. Monitor Performance & Adjust:"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "Monitor Performance & Adjust:"
+          ]
         },
         {
           "type": "paragraph",
@@ -8976,8 +9288,11 @@
           "content": "Now, look at this (I’m assuming you’re not ranking below and these are estimates):"
         },
         {
-          "type": "paragraph",
-          "content": "1. My website’s AS is higher than the top result by 5+ points"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "My website’s AS is higher than the top result by 5+ points"
+          ]
         },
         {
           "type": "paragraph",
@@ -8988,8 +9303,11 @@
           "content": "exactly what you do and where you do it"
         },
         {
-          "type": "paragraph",
-          "content": "2. My website’s AS is around the average AS for the top results"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "My website’s AS is around the average AS for the top results"
+          ]
         },
         {
           "type": "paragraph",
@@ -9000,24 +9318,33 @@
           "content": "relevancy (more on what that means later)"
         },
         {
-          "type": "paragraph",
-          "content": "3. My website’s AS is 5+, but it’s around 5 points lower than the average AS"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "My website’s AS is 5+, but it’s around 5 points lower than the average AS"
+          ]
         },
         {
           "type": "paragraph",
           "content": "a. Should start seeing good progress in first 3 months"
         },
         {
-          "type": "paragraph",
-          "content": "4. My website’s AS is 5+, and it’s 10+ points lower than the average AS"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "My website’s AS is 5+, and it’s 10+ points lower than the average AS"
+          ]
         },
         {
           "type": "paragraph",
           "content": "a. Should start seeing good progress around 3-6 months"
         },
         {
-          "type": "paragraph",
-          "content": "5. My website’s AS is 0-2, and it’s 10+ points lower than the average AS"
+          "type": "list",
+          "ordered": false,
+          "items": [
+            "My website’s AS is 0-2, and it’s 10+ points lower than the average AS"
+          ]
         },
         {
           "type": "paragraph",
@@ -9076,6 +9403,7 @@
           "content": "Here's what you covered in the final days:"
         }
       ],
+      "featured_video": null,
       "sort_order": 59,
       "published": true
     }

@@ -27,7 +27,7 @@ export default function AdminOffersEditPage() {
         setForm((f) => ({ ...f, [key]: value }));
     }
 
-    async function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: React.FormEvent) {
         e.preventDefault();
         setLoading(true);
         const payload = {
@@ -40,7 +40,7 @@ export default function AdminOffersEditPage() {
             cta: form.cta_label || form.cta_url ? { label: form.cta_label, url: form.cta_url } : null,
             active: !!form.active,
         };
-        const res = await fetch(id ? `/api/admin/offers/${id}` : '/api/admin/offers', {
+    const res = await fetch(id ? `/api/admin/offers/${id}` : '/api/admin/offers', {
             method: id ? 'PATCH' : 'POST',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify(payload),
@@ -50,6 +50,7 @@ export default function AdminOffersEditPage() {
             alert('Save failed');
             return;
         }
+    alert('Saved');
         router.push('/admin/offers');
     }
 

@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { Pill } from '@/components/Pill';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
@@ -13,7 +14,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
     const supabase = getServerSupabase();
     const { data: lesson } = await supabase
         .from('lessons')
-        .select('id, title, estimated_minutes, resources, body')
+    .select('id, title, day, estimated_minutes, resources, body')
         .eq('slug', slug)
         .maybeSingle();
 
@@ -35,6 +36,39 @@ export default async function LessonPage({ params }: LessonPageProps) {
             metadata: { slug },
         });
     }
+
+  // Compute prev/next and offer unlock
+  let prevSlug: string | null = null;
+  let nextSlug: string | null = null;
+  let offerUnlocked = false;
+  if (user) {
+    const { data: lessons } = await supabase
+      .from('lessons')
+      .select('id, slug, day, is_intro, is_bonus, published, sort_order')
+      .eq('published', true)
+      .order('is_intro', { ascending: false })
+      .order('day', { ascending: true, nullsFirst: true })
+      .order('sort_order', { ascending: true });
+    const idx = lessons?.findIndex((l) => l.slug === slug) ?? -1;
+    if (idx > 0) prevSlug = lessons![idx - 1].slug;
+    if (idx >= 0 && lessons && idx < lessons.length - 1) nextSlug = lessons[idx + 1].slug;
+    // offers
+    const { data: completion } = await supabase
+      .from('user_completion')
+      .select('percent_complete')
+      .eq('user_id', user.id)
+      .maybeSingle();
+    const percent = completion?.percent_complete ?? 0;
+    const { data: offers } = await supabase
+      .from('offers')
+      .select('id, unlock_day, unlock_percent, active')
+      .eq('active', true)
+      .order('sort_order', { ascending: true })
+      .limit(1);
+    const unlockDayOk = offers && offers[0]?.unlock_day != null && lesson?.day != null ? lesson.day >= (offers[0]!.unlock_day as number) : false;
+    const unlockPctOk = offers && offers[0]?.unlock_percent != null ? percent >= (offers[0]!.unlock_percent as number) : false;
+    offerUnlocked = Boolean(offers && offers[0] && (unlockDayOk || unlockPctOk));
+  }
 
     return (
         <main className="mx-auto max-w-3xl px-4 py-8">
@@ -77,18 +111,33 @@ export default async function LessonPage({ params }: LessonPageProps) {
                     <Button variant="secondary" type="button">Previous</Button>
                 </div>
 
-                <section aria-labelledby="offer" className="mt-8">
-                    <h2 id="offer" className="mb-2 text-xl font-semibold">Offer</h2>
-                    <Card>
-                        <div className="flex items-center justify-between p-6">
-                            <div>
-                                <p className="text-lg font-medium">Free SEO Strategy Video</p>
-                                <p className="text-sm text-neutral-500">Unlocked after Day 7 or 25% completion.</p>
-                            </div>
-                            <Button>Claim</Button>
-                        </div>
-                    </Card>
-                </section>
+        {offerUnlocked && (
+          <section aria-labelledby="offer" className="mt-8">
+            <h2 id="offer" className="mb-2 text-xl font-semibold">Offer</h2>
+            <Card>
+              <div className="flex items-center justify-between p-6">
+                <div>
+                  <p className="text-lg font-medium">Free SEO Strategy Video</p>
+                  <p className="text-sm text-neutral-500">Unlocked</p>
+                </div>
+                <Button>Claim</Button>
+              </div>
+            </Card>
+          </section>
+        )}
+
+        <div className="mt-8 flex items-center justify-between">
+          <div>
+            {prevSlug && (
+              <Link href={`/lesson/${prevSlug}`} className="text-sm underline">← Previous</Link>
+            )}
+          </div>
+          <div>
+            {nextSlug && (
+              <Link href={`/lesson/${nextSlug}`} className="text-sm underline">Next →</Link>
+            )}
+          </div>
+        </div>
             </article>
         </main>
     );
