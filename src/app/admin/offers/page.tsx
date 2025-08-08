@@ -6,11 +6,11 @@ import { getServerSupabase } from '@/lib/supabaseServer';
 type Row = { id: string; title: string; type: string; active: boolean; unlock_day: number | null; unlock_percent: number | null };
 
 export default async function AdminOffersListPage() {
-  const supabase = getServerSupabase();
-  const { data: rows } = await supabase
-    .from('offers')
-    .select('id, title, type, active, unlock_day, unlock_percent')
-    .order('sort_order', { ascending: true });
+    const supabase = getServerSupabase();
+    const { data: rows } = await supabase
+        .from('offers')
+        .select('id, title, type, active, unlock_day, unlock_percent')
+        .order('sort_order', { ascending: true });
 
     return (
         <main className="mx-auto max-w-5xl px-4 py-8">
@@ -35,7 +35,7 @@ export default async function AdminOffersListPage() {
                             </tr>
                         </thead>
                         <tbody>
-              {(rows as Row[] | null)?.map((r) => (
+                            {(rows as Row[] | null)?.map((r) => (
                                 <tr key={r.id} className="border-b last:border-0">
                                     <td className="px-4 py-3">{r.title}</td>
                                     <td className="px-4 py-3">{r.type}</td>
@@ -43,7 +43,7 @@ export default async function AdminOffersListPage() {
                                     <td className="px-4 py-3">{r.unlock_percent ?? '-'}</td>
                                     <td className="px-4 py-3">{r.active ? 'Yes' : 'No'}</td>
                                     <td className="px-4 py-3 text-right">
-                    <Link href={`/admin/offers/edit?id=${r.id}`}>
+                                        <Link href={`/admin/offers/edit?id=${r.id}`}>
                                             <Button variant="secondary">Edit</Button>
                                         </Link>
                                     </td>
