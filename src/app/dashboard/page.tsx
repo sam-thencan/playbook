@@ -56,9 +56,9 @@ export default async function DashboardPage() {
                         <div className="flex items-center gap-6">
                             <ProgressRing value={progressPercent} size={96} />
                             <div>
-                <p className="text-sm text-neutral-700">Overall Progress</p>
-                <p className="text-2xl font-semibold text-neutral-900">{progressPercent}%</p>
-                <p className="mt-1 text-sm text-neutral-700">Keep going—consistency wins.</p>
+                                <p className="text-sm text-neutral-700">Overall Progress</p>
+                                <p className="text-2xl font-semibold text-neutral-900">{progressPercent}%</p>
+                                <p className="mt-1 text-sm text-neutral-700">Keep going—consistency wins.</p>
                             </div>
                         </div>
                         <Link href={`/lesson/${nextLessonSlug}`} className="shrink-0">
@@ -69,15 +69,15 @@ export default async function DashboardPage() {
 
                 <Card>
                     <div className="p-6">
-            <p className="text-sm text-neutral-700">Current Streak</p>
-            <p className="text-2xl font-semibold text-neutral-900">{currentStreakDays} day{currentStreakDays === 1 ? '' : 's'}</p>
-            <p className="mt-1 text-sm text-neutral-700">Earn rewards as your streak grows.</p>
+                        <p className="text-sm text-neutral-700">Current Streak</p>
+                        <p className="text-2xl font-semibold text-neutral-900">{currentStreakDays} day{currentStreakDays === 1 ? '' : 's'}</p>
+                        <p className="mt-1 text-sm text-neutral-700">Earn rewards as your streak grows.</p>
                     </div>
                 </Card>
             </div>
 
             <section aria-labelledby="next-steps" className="mt-8">
-        <h2 id="next-steps" className="mb-3 text-xl font-semibold text-neutral-100">Next up</h2>
+                <h2 id="next-steps" className="mb-3 text-xl font-semibold text-neutral-100">Next up</h2>
                 <Card>
                     <div className="flex items-center justify-between p-6">
                         <div>

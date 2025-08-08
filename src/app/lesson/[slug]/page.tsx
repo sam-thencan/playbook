@@ -46,13 +46,13 @@ export default async function LessonPage({ params }: LessonPageProps) {
                 </div>
             </header>
 
-      <article className="prose prose-neutral max-w-none">
-        <Card>
-          <div className="p-6">
-            <h2 className="mb-2 text-xl font-semibold">Lesson</h2>
-            <Renderer blocks={(lesson?.body as any) ?? []} />
-          </div>
-        </Card>
+            <article className="prose prose-neutral max-w-none">
+                <Card>
+                    <div className="p-6">
+                        <h2 className="mb-2 text-xl font-semibold">Lesson</h2>
+                        <Renderer blocks={(lesson?.body as any) ?? []} />
+                    </div>
+                </Card>
 
                 <section aria-labelledby="resources" className="mt-6">
                     <h2 id="resources" className="mb-2 text-xl font-semibold">Resources</h2>
