@@ -38,13 +38,12 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
     return (
         <main className="mx-auto max-w-3xl px-4 py-8">
-      <header className="mb-6">
-        <h1 className="text-3xl font-semibold">{title}</h1>
+            <header className="mb-6">
+                <h1 className="text-3xl font-semibold">{title}</h1>
         <div className="mt-3 flex items-center gap-3">
-          <Pill>Estimated: {estimatedMinutes} min</Pill>
-          <span className="text-sm text-neutral-500">Slug: {slug}</span>
+          <Pill variant="soft">Estimated: {estimatedMinutes} min</Pill>
         </div>
-      </header>
+            </header>
 
             <article className="prose prose-neutral max-w-none">
                 <Card>
