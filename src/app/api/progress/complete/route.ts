@@ -12,16 +12,16 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
         }
 
-    // Accept both JSON and form submissions
-    let lessonSlug: string | undefined;
-    const contentType = request.headers.get('content-type') || '';
-    if (contentType.includes('application/json')) {
-      const body = await request.json().catch(() => ({}));
-      lessonSlug = body?.lessonSlug;
-    } else {
-      const form = await request.formData();
-      lessonSlug = form.get('lessonSlug')?.toString();
-    }
+        // Accept both JSON and form submissions
+        let lessonSlug: string | undefined;
+        const contentType = request.headers.get('content-type') || '';
+        if (contentType.includes('application/json')) {
+            const body = await request.json().catch(() => ({}));
+            lessonSlug = body?.lessonSlug;
+        } else {
+            const form = await request.formData();
+            lessonSlug = form.get('lessonSlug')?.toString();
+        }
         if (!lessonSlug) {
             return NextResponse.json({ error: 'lessonSlug is required' }, { status: 400 });
         }

@@ -70,10 +70,10 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
                 <div className="mt-6 flex items-center justify-between gap-4">
                     {/* Client action via form to avoid mixing client hooks here */}
-          <form action="/api/progress/complete" method="post">
-            <input type="hidden" name="lessonSlug" value={slug} />
-            <Button type="submit">Mark Complete</Button>
-          </form>
+                    <form action="/api/progress/complete" method="post">
+                        <input type="hidden" name="lessonSlug" value={slug} />
+                        <Button type="submit">Mark Complete</Button>
+                    </form>
                     <Button variant="secondary" type="button">Previous</Button>
                 </div>
 
