@@ -27,6 +27,7 @@ Priority order per request:
   - [ ] Increase heading weights (h1/h2 → `font-semibold`/`font-bold`); ensure readable contrast
   - [ ] Tune `leading`/`tracking` for display headings
 - [ ] Components
+  - [ ] Table text contrast on white cards (current text too light)
   - [ ] Card spacing/padding defaults; consistent shadow and radius (10–12px)
   - [ ] Button variants: primary/secondary/ghost sizing + states; accessible focus rings
   - [ ] ProgressRing stroke width/contrast; label placement
