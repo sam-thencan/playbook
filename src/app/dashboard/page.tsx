@@ -2,11 +2,49 @@ import Link from 'next/link';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { ProgressRing } from '@/components/ProgressRing';
+import { getServerSupabase } from '@/lib/supabaseServer';
 
-export default function DashboardPage() {
-    const progressPercent = 0;
-    const currentStreakDays = 0;
-    const nextLessonSlug = 'day-1';
+type NextLesson = { slug: string; title: string } | null;
+
+export default async function DashboardPage() {
+  const supabase = getServerSupabase();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+
+  let progressPercent = 0;
+  let nextLesson: NextLesson = null;
+  const currentStreakDays = 0; // TODO: compute from events
+
+  if (user) {
+    const { data: completion } = await supabase
+      .from('user_completion')
+      .select('percent_complete')
+      .eq('user_id', user.id)
+      .maybeSingle();
+    progressPercent = completion?.percent_complete ?? 0;
+
+    // Find next lesson: first published lesson not completed
+    const { data: lessons } = await supabase
+      .from('lessons')
+      .select('id, slug, title')
+      .eq('published', true)
+      .order('is_intro', { ascending: false })
+      .order('day', { ascending: true, nullsFirst: true })
+      .order('sort_order', { ascending: true })
+      .limit(100);
+
+    if (lessons?.length) {
+      const { data: progress } = await supabase
+        .from('progress')
+        .select('lesson_id, completed_at')
+        .eq('user_id', user.id);
+      const completedIds = new Set((progress ?? []).filter(p => p.completed_at).map(p => p.lesson_id));
+      const next = lessons.find(l => !completedIds.has(l.id));
+      nextLesson = next ? { slug: next.slug, title: next.title } : null;
+    }
+  }
+  const nextLessonSlug = nextLesson?.slug ?? 'intro';
 
     return (
         <main className="mx-auto max-w-5xl px-4 py-8">

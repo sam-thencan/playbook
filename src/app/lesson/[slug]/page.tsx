@@ -1,18 +1,39 @@
 import { Pill } from '@/components/Pill';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
+import { getServerSupabase } from '@/lib/supabaseServer';
 
 type LessonPageProps = {
     params: { slug: string };
 };
 
 export default async function LessonPage({ params }: LessonPageProps) {
-    const { slug } = params;
-    const estimatedMinutes = 20;
-    const title = 'Lesson Title from playbook.pdf';
-    const resources: Array<{ label: string; url: string }> = [
-        { label: 'Helpful Resource', url: 'https://example.com' },
-    ];
+  const { slug } = params;
+  const supabase = getServerSupabase();
+  const { data: lesson } = await supabase
+    .from('lessons')
+    .select('id, title, estimated_minutes, resources, body')
+    .eq('slug', slug)
+    .maybeSingle();
+
+  const estimatedMinutes = lesson?.estimated_minutes ?? 20;
+  const title = lesson?.title ?? 'Lesson Title';
+  const resources: Array<{ label: string; url: string }> = Array.isArray(lesson?.resources)
+    ? lesson?.resources
+    : [];
+
+  // Log view event if authenticated
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (user && lesson?.id) {
+    await supabase.from('events').insert({
+      user_id: user.id,
+      event_type: 'lesson_viewed',
+      lesson_id: lesson.id,
+      metadata: { slug },
+    });
+  }
 
     return (
         <main className="mx-auto max-w-3xl px-4 py-8">
@@ -28,7 +49,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
                 <Card>
                     <div className="p-6">
                         <h2 className="mb-2 text-xl font-semibold">Lesson</h2>
-                        <p className="text-neutral-700">Lesson body will be populated from 30-day-local-seo-playbook.pdf.</p>
+            <p className="text-neutral-700">Lesson body will be populated from 30-day-local-seo-playbook.pdf.</p>
                     </div>
                 </Card>
 

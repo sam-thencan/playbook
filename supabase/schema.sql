@@ -159,6 +159,7 @@ create table if not exists public.lessons (
   body jsonb not null default '[]'::jsonb, -- rich body blocks
   resources jsonb not null default '[]'::jsonb, -- array of {label, url}
   estimated_minutes integer, -- estimated time to complete
+  sort_order integer not null default 0,
   cta jsonb, -- optional {label, url}
   published boolean not null default true,
   created_at timestamptz not null default timezone('utc'::text, now()),
@@ -262,6 +263,7 @@ create table if not exists public.offers (
   type public.offer_type not null,
   unlock_day smallint, -- unlock when reaching this lesson day (Intro = 0 if desired)
   unlock_percent integer, -- unlock when reaching this % overall completion
+  sort_order integer not null default 0,
   cta jsonb, -- optional {label, url}
   active boolean not null default true,
   created_at timestamptz not null default timezone('utc'::text, now()),
