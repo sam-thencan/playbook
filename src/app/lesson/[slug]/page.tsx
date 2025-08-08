@@ -68,10 +68,14 @@ export default async function LessonPage({ params }: LessonPageProps) {
                     </Card>
                 </section>
 
-                <div className="mt-6 flex items-center justify-between gap-4">
-                    <Button>Mark Complete</Button>
-                    <Button variant="secondary">Previous</Button>
-                </div>
+        <div className="mt-6 flex items-center justify-between gap-4">
+          {/* Client action via form to avoid mixing client hooks here */}
+          <form action={`/api/progress/complete`} method="post">
+            <input type="hidden" name="lessonSlug" value={slug} />
+            <Button type="submit">Mark Complete</Button>
+          </form>
+          <Button variant="secondary" type="button">Previous</Button>
+        </div>
 
                 <section aria-labelledby="offer" className="mt-8">
                     <h2 id="offer" className="mb-2 text-xl font-semibold">Offer</h2>
