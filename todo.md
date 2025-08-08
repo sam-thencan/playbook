@@ -19,7 +19,7 @@ Priority order per request:
   - [x] Create/Edit fields: title, description, type, unlock_day, unlock_percent, sort_order, cta{label,url}, active
   - [x] Publish toggle, delete
 - [x] RLS sanity checks for admin write (already in schema)
-- [ ] Basic toasts/feedback and empty states
+- [x] Basic toasts/feedback (non-blocking) and empty states
 - [ ] Optional: event log view for admin (audit of create/update/delete)
 
 ## 2) Tighten UI (P1)
@@ -35,6 +35,7 @@ Priority order per request:
   - [x] Pill contrast variants (estimate pill)
 - [ ] Layout
   - [x] Container widths (`max-w-3xl/5xl`), responsive gaps
+  - [x] Lesson sidebar with search, completion ticks, responsive (mobile slide-in)
   - [ ] Dark mode surfaces/tokens; accent `#FF6A00` audit
 - [ ] Accessibility
   - [x] Semantic headings order, focus outlines
@@ -61,8 +62,10 @@ Priority order per request:
 
 ## 5) Lesson page rendering (P2)
 - [x] Render block types with responsive, accessible markup
-- [ ] Previous/Next lesson navigation
-- [ ] Show contextual Offer card when eligible
+- [x] Previous/Next lesson navigation
+- [ ] Show contextual Offer card when eligible (polish display)
+- [x] Lesson navigator (sidebar) with grouping and search (desktop + mobile)
+- [ ] Dashboard Table of Contents for quick jump
 
 ## 6) Streaks (P3)
 - [ ] Compute daily streak from `events`
@@ -79,3 +82,11 @@ Priority order per request:
 ---
 Meta
 - Commit after each completed step as a small, reviewable change.
+
+## Next Big 3 (for tomorrow)
+1) Dashboard ToC + progress polish
+   - Build a clickable ToC of all lessons on `/dashboard` with resume state; improve `ProgressRing` contrast/labels.
+2) Media pipeline
+   - Supabase Storage bucket `lessons` (public read), admin-only uploads, drag & drop, and use Next `<Image>` in Renderer.
+3) Go-live readiness
+   - Prod env setup (Vercel + Supabase), env vars, seed lessons, RLS review, basic smoke tests, and offer display polish.
