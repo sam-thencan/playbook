@@ -55,10 +55,10 @@ export default function AdminOffersEditPage() {
 
     return (
         <main className="mx-auto max-w-3xl px-4 py-8">
-      <div className="mb-6 flex items-center justify-between">
-        <h1 className="text-3xl font-semibold">{id ? 'Edit Offer' : 'New Offer'}</h1>
-        <a href="/admin/offers" className="text-sm underline">Back to Offers</a>
-      </div>
+            <div className="mb-6 flex items-center justify-between">
+                <h1 className="text-3xl font-semibold">{id ? 'Edit Offer' : 'New Offer'}</h1>
+                <a href="/admin/offers" className="text-sm underline">Back to Offers</a>
+            </div>
 
             <Card>
                 <form className="grid gap-4 p-6" onSubmit={onSubmit}>
