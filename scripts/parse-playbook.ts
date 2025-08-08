@@ -28,6 +28,8 @@ async function main() {
   const lessons: Lesson[] = [];
   let current: Lesson | null = null;
   let order = 0;
+  let introSeen = false;
+  let bonusSeen = false;
 
   const pushCurrent = () => {
     if (current) {
@@ -37,7 +39,7 @@ async function main() {
 
   for (const line of lines) {
     const dayMatch = /^Day\s+(\d{1,2})\b/i.exec(line);
-    if (/^Intro\b/i.test(line)) {
+    if (/^Intro\b/i.test(line) && !introSeen) {
       pushCurrent();
       current = {
         slug: 'intro',
@@ -51,10 +53,15 @@ async function main() {
         sort_order: order++,
         published: true,
       };
+      introSeen = true;
       continue;
     }
     if (dayMatch) {
       const day = Number(dayMatch[1]);
+      if (day < 1 || day > 30) {
+        // Skip invalid day numbers; treat >30 as bonus section content
+        continue;
+      }
       pushCurrent();
       current = {
         slug: `day-${day}`,
@@ -70,7 +77,7 @@ async function main() {
       };
       continue;
     }
-    if (/^Bonus\b/i.test(line)) {
+    if (/^Bonus\b/i.test(line) && !bonusSeen) {
       pushCurrent();
       current = {
         slug: 'bonus',
@@ -84,6 +91,7 @@ async function main() {
         sort_order: order++,
         published: true,
       };
+      bonusSeen = true;
       continue;
     }
     if (current) {
@@ -91,9 +99,17 @@ async function main() {
     }
   }
   pushCurrent();
+  // Dedupe by slug: keep first occurrence to avoid TOC duplicates
+  const seen = new Set<string>();
+  const deduped: Lesson[] = [];
+  for (const l of lessons) {
+    if (seen.has(l.slug)) continue;
+    seen.add(l.slug);
+    deduped.push(l);
+  }
 
   const outPath = path.join(root, 'supabase', 'seed-lessons.json');
-  await fs.writeFile(outPath, JSON.stringify({ lessons }, null, 2), 'utf8');
+  await fs.writeFile(outPath, JSON.stringify({ lessons: deduped }, null, 2), 'utf8');
   console.log(`Wrote ${lessons.length} lessons to ${outPath}`);
 }
 
