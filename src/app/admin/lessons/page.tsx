@@ -33,7 +33,7 @@ export default async function AdminLessonsListPage() {
                                 <th className="px-4 py-3">Slug</th>
                                 <th className="px-4 py-3">Day</th>
                                 <th className="px-4 py-3">Published</th>
-                 <th className="px-4 py-3 text-right">Actions</th>
+                                <th className="px-4 py-3 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,12 +43,12 @@ export default async function AdminLessonsListPage() {
                                     <td className="px-4 py-3">{r.slug}</td>
                                     <td className="px-4 py-3">{r.day ?? '-'}</td>
                                     <td className="px-4 py-3">{r.published ? 'Yes' : 'No'}</td>
-                  <td className="px-4 py-3 text-right space-x-2">
-                    <Link href={`/admin/lessons/edit?id=${r.id}`}>
-                      <Button variant="secondary">Edit</Button>
-                    </Link>
-                    <AdminDeleteButton resource="lessons" id={r.id} />
-                  </td>
+                                    <td className="px-4 py-3 text-right space-x-2">
+                                        <Link href={`/admin/lessons/edit?id=${r.id}`}>
+                                            <Button variant="secondary">Edit</Button>
+                                        </Link>
+                                        <AdminDeleteButton resource="lessons" id={r.id} />
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

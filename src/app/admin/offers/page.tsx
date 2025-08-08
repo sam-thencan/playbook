@@ -32,7 +32,7 @@ export default async function AdminOffersListPage() {
                                 <th className="px-4 py-3">Unlock Day</th>
                                 <th className="px-4 py-3">Unlock %</th>
                                 <th className="px-4 py-3">Active</th>
-                <th className="px-4 py-3 text-right">Actions</th>
+                                <th className="px-4 py-3 text-right">Actions</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -43,12 +43,12 @@ export default async function AdminOffersListPage() {
                                     <td className="px-4 py-3">{r.unlock_day ?? '-'}</td>
                                     <td className="px-4 py-3">{r.unlock_percent ?? '-'}</td>
                                     <td className="px-4 py-3">{r.active ? 'Yes' : 'No'}</td>
-                  <td className="px-4 py-3 text-right space-x-2">
-                    <Link href={`/admin/offers/edit?id=${r.id}`}>
-                      <Button variant="secondary">Edit</Button>
-                    </Link>
-                    <AdminDeleteButton resource="offers" id={r.id} />
-                  </td>
+                                    <td className="px-4 py-3 text-right space-x-2">
+                                        <Link href={`/admin/offers/edit?id=${r.id}`}>
+                                            <Button variant="secondary">Edit</Button>
+                                        </Link>
+                                        <AdminDeleteButton resource="offers" id={r.id} />
+                                    </td>
                                 </tr>
                             ))}
                         </tbody>

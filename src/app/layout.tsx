@@ -20,10 +20,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${poppins.variable} antialiased`}
-      >
-        {children}
+      <body className={`${poppins.variable} antialiased`}>
+        <header className="sticky top-0 z-40 w-full border-b bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60">
+          <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
+            <a href="/dashboard" className="font-semibold">SEO Playbook</a>
+            <nav className="flex items-center gap-3 text-sm">
+              <a href="/dashboard" className="hover:underline">Dashboard</a>
+              <a href="/admin/lessons" className="hover:underline">Lessons</a>
+              <a href="/admin/offers" className="hover:underline">Offers</a>
+            </nav>
+          </div>
+        </header>
+        <div className="min-h-[calc(100svh-56px)]">{children}</div>
       </body>
     </html>
   );

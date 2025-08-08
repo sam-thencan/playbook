@@ -57,7 +57,10 @@ export default function AdminLessonsEditPage() {
 
     return (
         <main className="mx-auto max-w-3xl px-4 py-8">
-            <h1 className="mb-6 text-3xl font-semibold">{id ? 'Edit Lesson' : 'New Lesson'}</h1>
+      <div className="mb-6 flex items-center justify-between">
+        <h1 className="text-3xl font-semibold">{id ? 'Edit Lesson' : 'New Lesson'}</h1>
+        <a href="/admin/lessons" className="text-sm underline">Back to Lessons</a>
+      </div>
 
             <Card>
                 <form className="grid gap-4 p-6" onSubmit={onSubmit}>
