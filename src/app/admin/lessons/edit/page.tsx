@@ -15,7 +15,7 @@ export default function AdminLessonsEditPage() {
     const [form, setForm] = useState<Record<string, any>>({ published: true, body: [] });
     const [blocks, setBlocks] = useState<LessonBlock[]>([]);
     const { addBlock, removeBlock, moveBlock, updateBlock } = useBlockOps(blocks, setBlocks);
-  const { notify } = useToast();
+    const { notify } = useToast();
 
     useEffect(() => {
         if (!id) return;
@@ -54,11 +54,11 @@ export default function AdminLessonsEditPage() {
             body: JSON.stringify(payload),
         });
         setLoading(false);
-    if (!res.ok) {
-      notify('Save failed');
-      return;
-    }
-    notify('Saved');
+        if (!res.ok) {
+            notify('Save failed');
+            return;
+        }
+        notify('Saved');
         router.push('/admin/lessons');
     }
 

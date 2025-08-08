@@ -4,6 +4,7 @@ import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { getServerSupabase } from '@/lib/supabaseServer';
 import { Renderer } from '@/components/blocks/Renderer';
+import LessonSidebar, { type SidebarLesson } from '@/components/LessonSidebar';
 
 type LessonPageProps = {
     params: { slug: string };
@@ -41,10 +42,12 @@ export default async function LessonPage({ params }: LessonPageProps) {
     let prevSlug: string | null = null;
     let nextSlug: string | null = null;
     let offerUnlocked = false;
+  let sidebarLessons: SidebarLesson[] = [];
+  let completedSlugs: string[] = [];
     if (user) {
         const { data: lessons } = await supabase
             .from('lessons')
-            .select('id, slug, day, is_intro, is_bonus, published, sort_order')
+      .select('id, slug, title, day, is_intro, is_bonus, published, sort_order')
             .eq('published', true)
             .order('is_intro', { ascending: false })
             .order('day', { ascending: true, nullsFirst: true })
@@ -52,6 +55,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
         const idx = lessons?.findIndex((l) => l.slug === slug) ?? -1;
         if (idx > 0) prevSlug = lessons![idx - 1].slug;
         if (idx >= 0 && lessons && idx < lessons.length - 1) nextSlug = lessons[idx + 1].slug;
+    sidebarLessons = (lessons || []).map((l) => ({ slug: l.slug, title: l.title, day: l.day, is_intro: (l as any).is_intro, is_bonus: (l as any).is_bonus }));
         // offers
         const { data: completion } = await supabase
             .from('user_completion')
@@ -65,14 +69,21 @@ export default async function LessonPage({ params }: LessonPageProps) {
             .eq('active', true)
             .order('sort_order', { ascending: true })
             .limit(1);
-        const unlockDayOk = offers && offers[0]?.unlock_day != null && lesson?.day != null ? lesson.day >= (offers[0]!.unlock_day as number) : false;
+    const unlockDayOk = offers && offers[0]?.unlock_day != null && lesson?.day != null ? lesson.day >= (offers[0]!.unlock_day as number) : false;
         const unlockPctOk = offers && offers[0]?.unlock_percent != null ? percent >= (offers[0]!.unlock_percent as number) : false;
         offerUnlocked = Boolean(offers && offers[0] && (unlockDayOk || unlockPctOk));
+    const { data: prog } = await supabase
+      .from('progress')
+      .select('lesson_id, completed_at, lessons(slug)')
+      .eq('user_id', user.id);
+    completedSlugs = (prog || []).filter((p: any) => p.completed_at && p.lessons?.slug).map((p: any) => p.lessons.slug);
     }
 
     return (
-        <main className="mx-auto max-w-3xl px-4 py-8">
-            <header className="mb-6">
+    <main className="mx-auto flex max-w-5xl gap-6 px-4 py-8">
+      <LessonSidebar lessons={sidebarLessons} currentSlug={slug} completed={completedSlugs} />
+      <div className="mx-auto w-full max-w-3xl">
+      <header className="mb-6">
                 <h1 className="text-3xl font-semibold">{title}</h1>
                 <div className="mt-3 flex items-center gap-3">
                     <Pill variant="soft">Estimated: {estimatedMinutes} min</Pill>
@@ -138,7 +149,8 @@ export default async function LessonPage({ params }: LessonPageProps) {
                         )}
                     </div>
                 </div>
-            </article>
+      </article>
+      </div>
         </main>
     );
 }

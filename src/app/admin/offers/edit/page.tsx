@@ -9,8 +9,8 @@ import { useToast } from '@/components/Toast';
 export default function AdminOffersEditPage() {
     const router = useRouter();
     const search = useSearchParams();
-  const id = search.get('id');
-  const { notify } = useToast();
+    const id = search.get('id');
+    const { notify } = useToast();
     const [loading, setLoading] = useState(false);
     const [form, setForm] = useState<Record<string, any>>({ active: true, type: 'call' });
 
@@ -48,11 +48,11 @@ export default function AdminOffersEditPage() {
             body: JSON.stringify(payload),
         });
         setLoading(false);
-    if (!res.ok) {
-      notify('Save failed');
-      return;
-    }
-    notify('Saved');
+        if (!res.ok) {
+            notify('Save failed');
+            return;
+        }
+        notify('Saved');
         router.push('/admin/offers');
     }
 

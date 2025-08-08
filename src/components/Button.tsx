@@ -15,11 +15,11 @@ export function Button({ className, variant = 'primary', children, ...rest }: Bu
         secondary: 'bg-neutral-100 text-neutral-900 hover:bg-neutral-200 active:bg-neutral-300',
         ghost: 'bg-transparent text-neutral-900 hover:bg-neutral-100 active:bg-neutral-200',
     } as const;
-  return (
-    <button className={cn(base, variants[variant], className)} {...rest}>
-      {children}
-    </button>
-  );
+    return (
+        <button className={cn(base, variants[variant], className)} {...rest}>
+            {children}
+        </button>
+    );
 }
 
 
