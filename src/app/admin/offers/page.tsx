@@ -1,11 +1,16 @@
 import Link from 'next/link';
 import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
+import { getServerSupabase } from '@/lib/supabaseServer';
 
-export default function AdminOffersListPage() {
-    const rows = [
-        { id: '1', title: 'Free Strategy Call', type: 'call', active: true, unlock_day: 7 as number | null, unlock_percent: null as number | null },
-    ];
+type Row = { id: string; title: string; type: string; active: boolean; unlock_day: number | null; unlock_percent: number | null };
+
+export default async function AdminOffersListPage() {
+  const supabase = getServerSupabase();
+  const { data: rows } = await supabase
+    .from('offers')
+    .select('id, title, type, active, unlock_day, unlock_percent')
+    .order('sort_order', { ascending: true });
 
     return (
         <main className="mx-auto max-w-5xl px-4 py-8">
@@ -30,7 +35,7 @@ export default function AdminOffersListPage() {
                             </tr>
                         </thead>
                         <tbody>
-                            {rows.map((r) => (
+              {(rows as Row[] | null)?.map((r) => (
                                 <tr key={r.id} className="border-b last:border-0">
                                     <td className="px-4 py-3">{r.title}</td>
                                     <td className="px-4 py-3">{r.type}</td>
@@ -38,7 +43,7 @@ export default function AdminOffersListPage() {
                                     <td className="px-4 py-3">{r.unlock_percent ?? '-'}</td>
                                     <td className="px-4 py-3">{r.active ? 'Yes' : 'No'}</td>
                                     <td className="px-4 py-3 text-right">
-                                        <Link href={`/admin/offers/edit?id=${r.id}`}>
+                    <Link href={`/admin/offers/edit?id=${r.id}`}>
                                             <Button variant="secondary">Edit</Button>
                                         </Link>
                                     </td>
