@@ -1,0 +1,23 @@
+---
+description: 30-Day Local SEO Playbook architecture & biz rules
+globs:
+  - "src/**/*"
+alwaysApply: true
+---
+
+- Use Supabase Auth (email/password) for login and progress tracking.
+- Lessons: Intro + Days 1–30 + Bonus; each includes title, slug, rich body, resource links, estimated time, optional CTA.
+- Track per-user lesson completion with streaks and milestone-based rewards (e.g., after Day 7 → offer a free SEO Strategy Video).
+- Offers include: call bookings, downloads, discounts — unlockable based on lesson day or % complete.
+- Admin dashboard allows CRUD of lessons and offers.
+- UI style: minimal white cards, neutral background, orange CTA accents (#ef6a47), radius 10px.
+- Font: Poppins preferred; fallback: system-ui, sans-serif.
+- Use Tailwind for styling.
+- Component architecture should include: Card, Button, ProgressRing, Pill, Modal, Table.
+- Use the daily format: The courses are broken down by days — lessons should follow that flow.
+- Code should be split per feature folder (`/dashboard`, `/lesson`, `/admin`, etc.).
+- Prioritize accessibility: semantic HTML, focus states, keyboard nav.
+- Route structure:
+  - `/dashboard`: progress ring, next lesson, resume
+  - `/lesson/[slug]`: lesson reader view
+  - `/admin/*`: lesson/offer management

@@ -1,0 +1,10 @@
+# Ignore common noise
+.vscode/
+coverage/
+node_modules/
+**/*.svg
+**/*.png
+public/fonts/
+.next/
+out/
+.DS_Store

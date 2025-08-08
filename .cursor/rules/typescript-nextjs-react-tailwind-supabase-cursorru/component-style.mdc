@@ -1,0 +1,9 @@
+---
+description: UI components and naming
+globs:
+  - "src/components/**/*"
+---
+
+- Components should be modular and use Tailwind classes.
+- Common components include: `<Card>`, `<Button>`, `<ProgressRing>`, `<Pill>`, `<Modal>`, `<Table>`.
+- Use PascalCase for component files and exports.

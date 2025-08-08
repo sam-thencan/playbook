@@ -1,0 +1,12 @@
+---
+description: Tailwind theming system
+globs:
+  - "tailwind.config.ts"
+  - "src/**/*.css"
+alwaysApply: false
+---
+
+- Accent color is #ef6a47
+- Surface is white (#fff), muted text is #475467
+- Border radius should be 10px
+- Use Poppins as the base font
