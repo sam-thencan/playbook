@@ -28,6 +28,7 @@
     "eslint-config-next": "15.4.6",
     "@eslint/eslintrc": "^3",
     "tsx": "^4.19.1",
-    "pdf-parse": "^1.1.1"
+    "pdf-parse": "^1.1.1",
+    "dotenv": "^16.4.5"
   }
 }

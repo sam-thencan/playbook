@@ -1,6 +1,11 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
 import { createClient } from '@supabase/supabase-js';
+import dotenv from 'dotenv';
+
+// Load env from .env.local at project root
+const rootForEnv = path.resolve(__dirname, '..');
+dotenv.config({ path: path.join(rootForEnv, '.env.local') });
 
 type LessonSeed = {
   slug: string;
