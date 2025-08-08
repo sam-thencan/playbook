@@ -16,18 +16,7 @@ begin
 end;
 $$;
 
--- Helper: check if current user is admin
-create or replace function public.is_admin()
-returns boolean
-language sql
-stable
-as $$
-  select exists (
-    select 1
-    from public.profiles p
-    where p.id = auth.uid() and p.role = 'admin'
-  );
-$$;
+-- (moved is_admin() definition to after profiles table is created)
 
 -- Enums
 do $$
@@ -61,6 +50,20 @@ create table if not exists public.profiles (
   created_at timestamptz not null default timezone('utc'::text, now()),
   updated_at timestamptz not null default timezone('utc'::text, now())
 );
+
+-- Helper: check if current user is admin (defined after profiles exists)
+create or replace function public.is_admin()
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select exists (
+    select 1 from public.profiles p where p.id = auth.uid() and p.role = 'admin'
+  );
+$$;
+grant execute on function public.is_admin() to anon, authenticated;
 
 -- Keep email in sync on auth.users change (optional best-effort)
 create or replace function public.handle_email_change()
