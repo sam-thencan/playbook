@@ -16,8 +16,8 @@ export default async function AdminOffersListPage() {
     return (
         <main className="mx-auto max-w-5xl px-4 py-8">
             <div className="mb-6 flex items-center justify-between">
-                <h1 className="text-3xl font-semibold">Offers</h1>
-                <Link href="/admin/offers/edit">
+        <h1 className="text-3xl font-semibold">Perks (Admin)</h1>
+        <Link href="/admin/offers/edit">
                     <Button>New Offer</Button>
                 </Link>
             </div>

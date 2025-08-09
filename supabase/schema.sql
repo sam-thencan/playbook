@@ -396,12 +396,12 @@ overall as (
 select
   p.id as user_id,
   o.id as offer_id,
-  (case o.unlock_rule
+  (case coalesce(o.unlock_rule,'day')
      when 'day' then (cb.highest_full_day >= coalesce(o.unlock_day,0))
      when 'percent' then ((ov.percent_complete >= coalesce(o.unlock_percent,0)))
      when 'both' then ((cb.highest_full_day >= coalesce(o.unlock_day,0)) and (ov.percent_complete >= coalesce(o.unlock_percent,0)))
    end) as unlocked,
-  (case o.unlock_rule
+  (case coalesce(o.unlock_rule,'day')
      when 'day' then ('After Day ' || coalesce(o.unlock_day,0) || ' (complete all prior days)')
      when 'percent' then (coalesce(o.unlock_percent,0) || '% complete')
      when 'both' then ('After Day ' || coalesce(o.unlock_day,0) || ' and ' || coalesce(o.unlock_percent,0) || '% complete')

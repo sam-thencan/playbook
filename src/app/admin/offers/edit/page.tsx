@@ -59,15 +59,15 @@ export default function AdminOffersEditPage() {
     return (
         <main className="mx-auto max-w-3xl px-4 py-8">
             <div className="mb-6 flex items-center justify-between">
-                <h1 className="text-3xl font-semibold">{id ? 'Edit Offer' : 'New Offer'}</h1>
-                <a href="/admin/offers" className="text-sm underline">Back to Offers</a>
+                <h1 className="text-3xl font-semibold">{id ? 'Edit Perk' : 'New Perk'}</h1>
+                <a href="/admin/offers" className="text-sm underline">Back to Perks</a>
             </div>
 
             <Card>
                 <form className="grid gap-4 p-6" onSubmit={onSubmit}>
                     <label className="grid gap-1">
                         <span className="text-sm text-neutral-600">Title</span>
-                        <input className="rounded-[10px] border px-3 py-2" name="title" placeholder="Offer title" value={form.title ?? ''} onChange={(e) => update('title', e.target.value)} />
+                        <input className="rounded-[10px] border px-3 py-2" name="title" placeholder="Perk title" value={form.title ?? ''} onChange={(e) => update('title', e.target.value)} />
                     </label>
 
                     <label className="grid gap-1">
@@ -113,7 +113,7 @@ export default function AdminOffersEditPage() {
                             <input type="checkbox" name="active" checked={!!form.active} onChange={(e) => update('active', e.target.checked)} />
                             <span>Active</span>
                         </label>
-                        <Button type="submit" disabled={loading}>{loading ? 'Saving…' : id ? 'Save Changes' : 'Create Offer'}</Button>
+                        <Button type="submit" disabled={loading}>{loading ? 'Saving…' : id ? 'Save Changes' : 'Create Perk'}</Button>
                     </div>
                 </form>
             </Card>
