@@ -42,7 +42,7 @@ export default function WeekAccordion({ groups, nextFallback }: Props) {
                             </span>
                             <span className="text-sm text-neutral-600">{g.completedCount}/{g.items.length} complete</span>
                         </summary>
-                        <div className="accordion-content">
+            <div className="accordion-content">
                             <ul className="divide-y divide-neutral-200">
                                 {g.items.map((it, idx2) => (
                                     <li key={it.slug} className="flex items-center justify-between p-3">
@@ -56,11 +56,14 @@ export default function WeekAccordion({ groups, nextFallback }: Props) {
                                     </li>
                                 ))}
                             </ul>
-                            <div className="flex items-center justify-end gap-2 p-3">
-                                <Link href={`/lesson/${g.nextSlug ?? nextFallback}`}>
-                                    <Button variant="secondary">Resume Week</Button>
-                                </Link>
-                            </div>
+              <div className="flex items-center justify-between gap-2 p-3 text-sm text-neutral-600">
+                <span>
+                  {g.completedCount}/{g.items.length} complete · ~{Math.ceil(g.items.length * 12)} min left
+                </span>
+                <Link href={`/lesson/${g.nextSlug ?? nextFallback}`}>
+                  <Button variant="secondary">Resume Week</Button>
+                </Link>
+              </div>
                         </div>
                     </details>
                 </Card>

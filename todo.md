@@ -8,7 +8,7 @@ Priority order (current):
 ## 0) UI Overhaul (P0)
 - Dashboard
   - [x] Course outline ToC (Weeks 1–5 + Bonus in Week 5) with expand/collapse
-  - [ ] Week progress (X/Y lessons), ETA, Resume Week CTA
+  - [x] Week progress (X/Y lessons), ETA, Resume Week CTA
   - [x] Favorites row (top 5) + /favorites
   - [ ] ProgressRing contrast/labels polish
 - Lesson page

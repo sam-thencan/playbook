@@ -7,7 +7,7 @@ type ProgressRingProps = HTMLAttributes<HTMLDivElement> & {
     strokeWidth?: number;
 };
 
-export function ProgressRing({ value, size = 96, strokeWidth = 8, className, ...rest }: ProgressRingProps) {
+export function ProgressRing({ value, size = 96, strokeWidth = 10, className, ...rest }: ProgressRingProps) {
     const normalized = Math.max(0, Math.min(100, value));
     const radius = (size - strokeWidth) / 2;
     const circumference = 2 * Math.PI * radius;
@@ -30,7 +30,7 @@ export function ProgressRing({ value, size = 96, strokeWidth = 8, className, ...
                     transform={`rotate(-90 ${size / 2} ${size / 2})`}
                 />
             </svg>
-            <div className="absolute inset-0 flex items-center justify-center text-sm font-semibold text-neutral-900">
+            <div className="absolute inset-0 flex items-center justify-center text-base font-semibold text-neutral-900">
                 {normalized}%
             </div>
         </div>
