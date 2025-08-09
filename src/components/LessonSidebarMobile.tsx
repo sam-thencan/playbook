@@ -24,13 +24,15 @@ export default function LessonSidebarMobile({ lessons, currentSlug, completed }:
 
   return (
     <>
-      <button
-        onClick={() => setOpen(true)}
-        className="mb-4 inline-flex items-center gap-2 rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm font-medium text-neutral-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#FF6A00] lg:hidden"
-        aria-label="Open lessons"
-      >
-        ☰ Lessons
-      </button>
+      <div className="sticky top-16 z-30 mb-4 flex items-center justify-between lg:hidden">
+        <button
+          onClick={() => setOpen(true)}
+          className="inline-flex items-center gap-2 rounded-md border border-neutral-300 bg-white px-3 py-2 text-sm font-medium text-neutral-900 shadow-sm focus:outline-none focus:ring-2 focus:ring-[#FF6A00]"
+          aria-label="Open lessons"
+        >
+          ☰ Lessons
+        </button>
+      </div>
       {open && (
         <div className="fixed inset-0 z-50 lg:hidden" role="dialog" aria-modal="true">
           <div
