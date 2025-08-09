@@ -14,9 +14,9 @@ export function ProgressRing({ value, size = 96, strokeWidth = 8, className, ...
     const offset = circumference - (normalized / 100) * circumference;
 
     return (
-        <div className={cn('inline-block', className)} style={{ width: size, height: size }} {...rest}>
+    <div className={cn('relative inline-block', className)} style={{ width: size, height: size }} {...rest}>
             <svg width={size} height={size}>
-                <circle stroke="#e5e7eb" fill="transparent" strokeWidth={strokeWidth} r={radius} cx={size / 2} cy={size / 2} />
+        <circle stroke="#e5e7eb" fill="transparent" strokeWidth={strokeWidth} r={radius} cx={size / 2} cy={size / 2} />
                 <circle
                     stroke="#FF6A00"
                     fill="transparent"
@@ -30,6 +30,9 @@ export function ProgressRing({ value, size = 96, strokeWidth = 8, className, ...
                     transform={`rotate(-90 ${size / 2} ${size / 2})`}
                 />
             </svg>
+      <div className="absolute inset-0 flex items-center justify-center text-sm font-semibold text-neutral-900">
+        {normalized}%
+      </div>
         </div>
     );
 }

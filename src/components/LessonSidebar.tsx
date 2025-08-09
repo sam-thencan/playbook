@@ -37,11 +37,13 @@ export default function LessonSidebar({ lessons, currentSlug, completed }: Props
         onChange={(e) => setQuery(e.target.value)}
         className="mb-3 w-full rounded-md border border-neutral-300 px-2 py-1 text-sm text-neutral-900 placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-[#FF6A00]"
       />
-      <nav className="space-y-4">
+      <nav className="space-y-2">
         {grouped.map(({ label, items }) => (
-          <div key={label}>
-            <div className="mb-1 text-xs font-semibold uppercase text-neutral-700">{label}</div>
-            <ul className="space-y-1">
+          <details key={label} open>
+            <summary className="mb-1 cursor-pointer text-xs font-semibold uppercase text-neutral-700 focus:outline-none focus:ring-2 focus:ring-[#FF6A00]">
+              {label}
+            </summary>
+            <ul className="space-y-1 pb-2">
               {items.map((l) => {
                 const isActive = l.slug === currentSlug;
                 const isDone = completedSet.has(l.slug);
@@ -61,7 +63,7 @@ export default function LessonSidebar({ lessons, currentSlug, completed }: Props
                 );
               })}
             </ul>
-          </div>
+          </details>
         ))}
       </nav>
     </aside>

@@ -6,6 +6,7 @@ import { getServerSupabase } from '@/lib/supabaseServer';
 import { Renderer } from '@/components/blocks/Renderer';
 import LessonSidebar, { type SidebarLesson } from '@/components/LessonSidebar';
 import LessonSidebarMobile from '@/components/LessonSidebarMobile';
+import LessonStickyBar from '@/components/LessonStickyBar';
 
 type LessonPageProps = {
     params: { slug: string };
@@ -156,6 +157,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
                 </article>
             </div>
         </main>
+        <LessonStickyBar prevSlug={prevSlug} nextSlug={nextSlug} currentSlug={slug} />
     );
 }
 
