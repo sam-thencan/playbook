@@ -6,7 +6,7 @@ import { getServerSupabase } from '@/lib/supabaseServer';
 
 type NextLesson = { slug: string; title: string } | null;
 type OutlineItem = { slug: string; title: string; completed: boolean };
-type WeekGroup = { label: string; items: OutlineItem[]; completedCount: number };
+type WeekGroup = { label: string; items: OutlineItem[]; completedCount: number; nextSlug?: string | null };
 
 export default async function DashboardPage() {
     const supabase = getServerSupabase();
@@ -48,11 +48,11 @@ export default async function DashboardPage() {
 
             // Build outline groups (Weeks 1–5 + Bonus in Week 5; Intro in Week 1)
             const groups: WeekGroup[] = [
-                { label: 'Week 1 (Intro + Days 1–7)', items: [], completedCount: 0 },
-                { label: 'Week 2 (Days 8–14)', items: [], completedCount: 0 },
-                { label: 'Week 3 (Days 15–21)', items: [], completedCount: 0 },
-                { label: 'Week 4 (Days 22–28)', items: [], completedCount: 0 },
-                { label: 'Week 5 (Days 29–31 + Bonus)', items: [], completedCount: 0 },
+                { label: 'Week 1 (Intro + Days 1–7)', items: [], completedCount: 0, nextSlug: null },
+                { label: 'Week 2 (Days 8–14)', items: [], completedCount: 0, nextSlug: null },
+                { label: 'Week 3 (Days 15–21)', items: [], completedCount: 0, nextSlug: null },
+                { label: 'Week 4 (Days 22–28)', items: [], completedCount: 0, nextSlug: null },
+                { label: 'Week 5 (Days 29–31 + Bonus)', items: [], completedCount: 0, nextSlug: null },
             ];
             for (const l of lessons) {
                 const completed = completedIds.has(l.id);
@@ -69,6 +69,11 @@ export default async function DashboardPage() {
                 else idx = 4;
                 groups[idx].items.push(item);
                 if (completed) groups[idx].completedCount += 1;
+            }
+            // compute per-group next slug (first incomplete or first item)
+            for (const g of groups) {
+                const firstIncomplete = g.items.find((it) => !it.completed);
+                g.nextSlug = (firstIncomplete || g.items[0])?.slug ?? null;
             }
             outline = groups;
         }
@@ -141,7 +146,7 @@ export default async function DashboardPage() {
                                     ))}
                                 </ul>
                                 <div className="flex items-center justify-end gap-2 p-3">
-                                    <Link href={`/lesson/${nextLessonSlug}`}>
+                                    <Link href={`/lesson/${g.nextSlug ?? nextLessonSlug}`}>
                                         <Button variant="secondary">Resume Week</Button>
                                     </Link>
                                 </div>
