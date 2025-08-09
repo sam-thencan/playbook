@@ -70,7 +70,7 @@ export default function LessonSidebar({ lessons, currentSlug, completed }: Props
   );
 }
 
-function groupLessons(lessons: SidebarLesson[]): Array<{ label: string; items: SidebarLesson[] }> {
+export function groupLessons(lessons: SidebarLesson[]): Array<{ label: string; items: SidebarLesson[] }> {
   const intro = lessons.filter((l) => l.is_intro);
   const bonus = lessons.filter((l) => l.is_bonus);
   const days = lessons.filter((l) => !l.is_intro && !l.is_bonus);
