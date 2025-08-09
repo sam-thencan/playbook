@@ -7,7 +7,7 @@ import FavoriteToggle from '@/components/FavoriteToggle';
 import WeekAccordion, { WeekGroup } from '@/components/WeekAccordion';
 
 type NextLesson = { slug: string; title: string } | null;
- type OutlineItem = { slug: string; title: string; completed: boolean; id?: string; favorited?: boolean };
+type OutlineItem = { slug: string; title: string; completed: boolean; id?: string; favorited?: boolean };
 type WeekGroup = { label: string; items: OutlineItem[]; completedCount: number; nextSlug?: string | null };
 
 export default async function DashboardPage() {
@@ -43,13 +43,13 @@ export default async function DashboardPage() {
         if (lessons?.length) {
             const [{ data: progress }, { data: favs }] = await Promise.all([
                 supabase
-                .from('progress')
-                .select('lesson_id, completed_at')
-                .eq('user_id', user.id),
+                    .from('progress')
+                    .select('lesson_id, completed_at')
+                    .eq('user_id', user.id),
                 supabase
-                .from('favorites')
-                .select('lesson_id')
-                .eq('user_id', user.id)
+                    .from('favorites')
+                    .select('lesson_id')
+                    .eq('user_id', user.id)
             ]);
             const completedIds = new Set((progress ?? []).filter(p => p.completed_at).map(p => p.lesson_id));
             const favoredIds = new Set((favs ?? []).map((f: any) => f.lesson_id));
@@ -174,19 +174,19 @@ export default async function DashboardPage() {
                 <Card>
                     <ul className="flex flex-wrap gap-3 p-4">
                         {outline
-                          .flatMap((g) => g.items)
-                          .filter((it) => it.favorited)
-                          .slice(0, 5)
-                          .map((it) => (
-                            <li key={it.slug} className="flex items-center gap-2 rounded-[10px] border border-neutral-200 px-3 py-2">
-                                <FavoriteToggle lessonId={it.id!} initial={true} />
-                                <Link href={`/lesson/${it.slug}`} className="hover:underline">
-                                  {it.title}
-                                </Link>
-                            </li>
-                          ))}
-                        {outline.flatMap(g=>g.items).filter(it=>it.favorited).length === 0 && (
-                          <li className="text-sm text-neutral-600">No favorites yet. Star lessons to add them here.</li>
+                            .flatMap((g) => g.items)
+                            .filter((it) => it.favorited)
+                            .slice(0, 5)
+                            .map((it) => (
+                                <li key={it.slug} className="flex items-center gap-2 rounded-[10px] border border-neutral-200 px-3 py-2">
+                                    <FavoriteToggle lessonId={it.id!} initial={true} />
+                                    <Link href={`/lesson/${it.slug}`} className="hover:underline">
+                                        {it.title}
+                                    </Link>
+                                </li>
+                            ))}
+                        {outline.flatMap(g => g.items).filter(it => it.favorited).length === 0 && (
+                            <li className="text-sm text-neutral-600">No favorites yet. Star lessons to add them here.</li>
                         )}
                     </ul>
                 </Card>

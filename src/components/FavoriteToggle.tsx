@@ -8,15 +8,22 @@ export default function FavoriteToggle({ lessonId, initial = false, size = 18 }:
   const [isPending, startTransition] = useTransition();
 
   const toggle = () => {
+    // optimistic UI
+    setIsFav((prev) => !prev);
     startTransition(async () => {
-      const res = await fetch('/api/favorites', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ lessonId }),
-      });
-      if (res.ok) {
+      try {
+        const res = await fetch('/api/favorites', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ lessonId }),
+          credentials: 'same-origin',
+        });
+        if (!res.ok) throw new Error(await res.text());
         const data = await res.json();
         setIsFav(Boolean(data?.favorited));
+      } catch (e) {
+        // revert on failure
+        setIsFav((prev) => !prev);
       }
     });
   };
