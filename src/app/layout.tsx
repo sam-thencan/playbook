@@ -56,10 +56,11 @@ export default async function RootLayout({
               {resume && (
                 <a href={`/lesson/${resume.slug}`} className="hover:underline">Resume</a>
               )}
+              <a href="/level-ups" className="hover:underline">Level‑Ups</a>
               {isAdmin && (
                 <>
                   <a href="/admin/lessons" className="hover:underline">Lessons</a>
-                  <a href="/admin/offers" className="hover:underline">Offers</a>
+                  <a href="/admin/offers" className="hover:underline">Admin Offers</a>
                 </>
               )}
               {user ? <LogoutButton /> : <a href="/login" className="hover:underline">Login</a>}
