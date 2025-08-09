@@ -41,6 +41,14 @@ begin
   end if;
 end$$;
 
+-- Unlock rule enum
+do $$
+begin
+  if not exists (select 1 from pg_type where typname = 'unlock_rule') then
+    create type public.unlock_rule as enum ('day','percent','both');
+  end if;
+end$$;
+
 -- USERS (profiles)
 create table if not exists public.profiles (
   id uuid primary key references auth.users(id) on delete cascade,
@@ -268,6 +276,8 @@ create table if not exists public.offers (
   unlock_percent integer, -- unlock when reaching this % overall completion
   sort_order integer not null default 0,
   cta jsonb, -- optional {label, url}
+  label text, -- UI label, e.g., "Perk"
+  unlock_rule public.unlock_rule not null default 'day',
   active boolean not null default true,
   created_at timestamptz not null default timezone('utc'::text, now()),
   updated_at timestamptz not null default timezone('utc'::text, now()),
@@ -356,5 +366,50 @@ left join (
 -- Note: Do not alter view owner explicitly in Supabase migrations
 -- to avoid permission issues across environments.
 -- RLS for view isn't applicable; base tables' policies apply.
+
+-- Helper view: per-user, whether offer (perk) is unlocked
+create or replace view public.perk_unlocks as
+with lesson_days as (
+  select l.id, l.day
+  from public.lessons l
+  where l.published = true and l.is_intro = false and l.is_bonus = false and l.day is not null
+),
+completed_by_day as (
+  -- per user, highest day fully completed (all lessons up to that day)
+  select u.id as user_id,
+         coalesce(
+           (
+             select max(d1.day)
+             from generate_series(1,30) as d1(day)
+             where not exists (
+               select 1
+               from lesson_days ld
+               left join public.progress pr on pr.lesson_id = ld.id and pr.user_id = u.id and pr.completed_at is not null
+               where ld.day = d1.day and pr.lesson_id is null
+             )
+           ), 0) as highest_full_day
+  from public.profiles u
+),
+overall as (
+  select uc.user_id, uc.percent_complete from public.user_completion uc
+)
+select
+  p.id as user_id,
+  o.id as offer_id,
+  (case o.unlock_rule
+     when 'day' then (cb.highest_full_day >= coalesce(o.unlock_day,0))
+     when 'percent' then ((ov.percent_complete >= coalesce(o.unlock_percent,0)))
+     when 'both' then ((cb.highest_full_day >= coalesce(o.unlock_day,0)) and (ov.percent_complete >= coalesce(o.unlock_percent,0)))
+   end) as unlocked,
+  (case o.unlock_rule
+     when 'day' then ('After Day ' || coalesce(o.unlock_day,0) || ' (complete all prior days)')
+     when 'percent' then (coalesce(o.unlock_percent,0) || '% complete')
+     when 'both' then ('After Day ' || coalesce(o.unlock_day,0) || ' and ' || coalesce(o.unlock_percent,0) || '% complete')
+   end)::text as reason
+from public.profiles p
+cross join public.offers o
+left join completed_by_day cb on cb.user_id = p.id
+left join overall ov on ov.user_id = p.id
+where o.active = true;
 
 
