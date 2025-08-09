@@ -8,11 +8,13 @@ export async function GET() {
 
   const { data, error } = await supabase
     .from('favorites')
-    .select('lesson_id, lessons!inner(id, slug, title)')
+    .select('lesson_id, lessons!inner(id, slug, title, day)')
     .eq('user_id', user.id)
     .order('created_at', { ascending: false });
   if (error) return NextResponse.json({ error: error.message }, { status: 400 });
-  const items = (data || []).map((row: any) => ({ id: row.lessons.id, slug: row.lessons.slug, title: row.lessons.title }));
+  const items = (data || [])
+    .map((row: any) => ({ id: row.lessons.id, slug: row.lessons.slug, title: row.lessons.title, day: row.lessons.day as number | null }))
+    .sort((a, b) => (a.day ?? 999) - (b.day ?? 999) || a.title.localeCompare(b.title));
   return NextResponse.json({ items });
 }
 

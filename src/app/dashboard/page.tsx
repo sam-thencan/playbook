@@ -8,7 +8,7 @@ import ClientFavoritesRow from '@/components/ClientFavoritesRow';
 import WeekAccordion, { WeekGroup } from '@/components/WeekAccordion';
 
 type NextLesson = { slug: string; title: string } | null;
-type OutlineItem = { slug: string; title: string; completed: boolean; id?: string; favorited?: boolean };
+type OutlineItem = { slug: string; title: string; completed: boolean; id?: string; favorited?: boolean; day?: number | null };
 type WeekGroup = { label: string; items: OutlineItem[]; completedCount: number; nextSlug?: string | null };
 
 export default async function DashboardPage() {
@@ -67,7 +67,7 @@ export default async function DashboardPage() {
             ];
             for (const l of lessons) {
                 const completed = completedIds.has(l.id);
-                const item: OutlineItem = { slug: l.slug, title: l.title, completed, id: l.id, favorited: favoredIds.has(l.id) };
+                const item: OutlineItem = { slug: l.slug, title: l.title, completed, id: l.id, favorited: favoredIds.has(l.id), day: l.day ?? null };
                 const d = l.day ?? (l.is_intro ? 1 : null);
                 let idx = 0;
                 if (d == null) {
@@ -174,7 +174,10 @@ export default async function DashboardPage() {
                 <h2 id="favorites" className="mb-3 text-xl font-semibold text-neutral-100">Favorites</h2>
                 <Card>
                     <ClientFavoritesRow
-                        initial={outline.flatMap((g) => g.items).filter((it) => it.favorited).map((it) => ({ id: it.id!, slug: it.slug, title: it.title }))}
+                      initial={outline
+                        .flatMap((g) => g.items)
+                        .filter((it) => it.favorited)
+                        .map((it) => ({ id: it.id!, slug: it.slug, title: it.title, day: (it as any).day ?? undefined }))}
                     />
                 </Card>
             </section>
