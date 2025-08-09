@@ -14,30 +14,30 @@ type Props = {
 };
 
 export default function WeekAccordion({ groups, nextFallback }: Props) {
-  const defaultIndex = useMemo(() => {
-    const firstWithIncomplete = groups.findIndex(g => g.items.some(it => !it.completed));
-    return Math.max(0, firstWithIncomplete);
-  }, [groups]);
-  const [openSet, setOpenSet] = useState<Set<number>>(new Set([defaultIndex]));
+    const defaultIndex = useMemo(() => {
+        const firstWithIncomplete = groups.findIndex(g => g.items.some(it => !it.completed));
+        return Math.max(0, firstWithIncomplete);
+    }, [groups]);
+    const [openSet, setOpenSet] = useState<Set<number>>(new Set([defaultIndex]));
 
     return (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-      {groups.map((g, idx) => (
+            {groups.map((g, idx) => (
                 <Card key={g.label}>
-          <details open={openSet.has(idx)}>
+                    <details open={openSet.has(idx)}>
                         <summary
                             className="flex cursor-pointer items-center justify-between p-4 font-medium select-none"
                             onClick={(e) => {
                                 e.preventDefault();
-                setOpenSet((prev) => {
-                  const next = new Set(prev);
-                  if (next.has(idx)) next.delete(idx); else next.add(idx);
-                  return next;
-                });
+                                setOpenSet((prev) => {
+                                    const next = new Set(prev);
+                                    if (next.has(idx)) next.delete(idx); else next.add(idx);
+                                    return next;
+                                });
                             }}
                         >
                             <span className="flex items-center gap-2">
-                <Chevron isOpen={openSet.has(idx)} />
+                                <Chevron isOpen={openSet.has(idx)} />
                                 {g.label}
                             </span>
                             <span className="text-sm text-neutral-600">{g.completedCount}/{g.items.length} complete</span>
@@ -45,18 +45,9 @@ export default function WeekAccordion({ groups, nextFallback }: Props) {
                         <div className="accordion-content">
                             <ul className="divide-y divide-neutral-200">
                 {g.items.map((it, idx2) => (
-                  <li key={it.slug} className="flex items-center justify-between p-3">
-                    <div className="flex min-w-0 items-center gap-2">
-                      {it.id && (
-                        <FavoriteToggle
-                          lessonId={it.id}
-                          initial={!!it.favorited}
-                          onChange={() => {
-                            // update local state so the Favorites row in the same page reflects the change
-                            it.favorited = !it.favorited;
-                          }}
-                        />
-                      )}
+                                    <li key={it.slug} className="flex items-center justify-between p-3">
+                                        <div className="flex min-w-0 items-center gap-2">
+                      {it.id && (<FavoriteToggle lessonId={it.id} initial={!!it.favorited} />)}
                                             <Link href={`/lesson/${it.slug}`} className="truncate underline-offset-2 hover:underline">
                                                 {it.title}
                                             </Link>

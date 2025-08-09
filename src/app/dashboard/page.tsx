@@ -4,6 +4,7 @@ import { Button } from '@/components/Button';
 import { ProgressRing } from '@/components/ProgressRing';
 import { getServerSupabase } from '@/lib/supabaseServer';
 import FavoriteToggle from '@/components/FavoriteToggle';
+import ClientFavoritesRow from '@/components/ClientFavoritesRow';
 import WeekAccordion, { WeekGroup } from '@/components/WeekAccordion';
 
 type NextLesson = { slug: string; title: string } | null;
@@ -172,27 +173,9 @@ export default async function DashboardPage() {
             <section aria-labelledby="favorites" className="mt-10">
                 <h2 id="favorites" className="mb-3 text-xl font-semibold text-neutral-100">Favorites</h2>
                 <Card>
-                    <ul className="flex flex-wrap gap-3 p-4">
-                        {outline
-                            .flatMap((g) => g.items)
-                            .filter((it) => it.favorited)
-                            .slice(0, 5)
-                            .map((it) => (
-                                <li key={it.slug} className="flex items-center gap-2 rounded-[10px] border border-neutral-200 px-3 py-2">
-                                    <FavoriteToggle
-                                      lessonId={it.id!}
-                                      initial={true}
-                                      onChange={() => { /* cause soft refresh for updated list */ }}
-                                    />
-                                    <Link href={`/lesson/${it.slug}`} className="hover:underline">
-                                        {it.title}
-                                    </Link>
-                                </li>
-                            ))}
-                        {outline.flatMap(g => g.items).filter(it => it.favorited).length === 0 && (
-                            <li className="text-sm text-neutral-600">No favorites yet. Star lessons to add them here.</li>
-                        )}
-                    </ul>
+                    <ClientFavoritesRow
+                      initial={outline.flatMap((g) => g.items).filter((it) => it.favorited).map((it) => ({ id: it.id!, slug: it.slug, title: it.title }))}
+                    />
                 </Card>
             </section>
         </main>
