@@ -82,6 +82,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
     }
 
     return (
+        <>
         <main className="mx-auto flex max-w-5xl gap-6 px-4 py-8">
             <div className="w-0 lg:w-auto">
                 <LessonSidebarMobile lessons={sidebarLessons} currentSlug={slug} completed={completedSlugs} />
@@ -158,6 +159,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
             </div>
         </main>
         <LessonStickyBar prevSlug={prevSlug} nextSlug={nextSlug} currentSlug={slug} />
+        </>
     );
 }
 
