@@ -14,7 +14,6 @@ Priority order (current):
 - Lesson page
   - [x] Sidebar (search + completion ticks)
   - [x] Collapse by Week (Intro/Week 1–5/Bonus)
-  - [ ] Mobile sticky bottom bar: Previous | Mark Complete | Next
   - [x] Previous/Next nav (desktop)
   - [x] Offer/Perk card display polish (copy/states)
 - Visual tokens & components
@@ -24,7 +23,7 @@ Priority order (current):
   - [ ] Dark mode surfaces/tokens; accent `#FF6A00` audit
   - [x] Lesson sidebar responsive (mobile slide‑in)
 
-## 1) Admin (P1)
+## 1) Admin (P1) + UI carryover
 - [x] Gate `/admin/*` by `profiles.role === 'admin'`
   - [x] Middleware using SSR Supabase; redirect non-admins to `/login`
   - [x] Server-side re-check in pages to avoid client bypass
@@ -40,6 +39,9 @@ Priority order (current):
 - [x] RLS sanity checks for admin write (already in schema)
 - [x] Basic toasts/feedback (non-blocking) and empty states
 - [ ] Optional: event log view for admin (audit of create/update/delete)
+
+- UI carryover
+  - [ ] Mobile sticky bottom bar: Previous | Mark Complete | Next
 
 ## 2) Content system (P2)
  - [ ] Support mixed lesson content types
