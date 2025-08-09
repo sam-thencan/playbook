@@ -21,12 +21,12 @@ export default async function PerksPage() {
 
     return (
         <main className="mx-auto max-w-5xl px-4 py-8">
-      <h1 className="mb-6 text-3xl font-semibold">Perks</h1>
-      <p className="mb-6 text-neutral-600">Unlock helpful extras as you progress. Completed lessons: {percent}%</p>
+            <h1 className="mb-6 text-3xl font-semibold">Perks</h1>
+            <p className="mb-6 text-neutral-600">Unlock helpful extras as you progress. Completed lessons: {percent}%</p>
 
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 {(offers || []).map((o) => {
-          const unlockByDay = o.unlock_day != null ? `After Day ${o.unlock_day} (complete all prior days)` : null;
+                    const unlockByDay = o.unlock_day != null ? `After Day ${o.unlock_day} (complete all prior days)` : null;
                     const unlockByPct = o.unlock_percent != null ? `${o.unlock_percent}% complete` : null;
                     const rule = [unlockByDay, unlockByPct].filter(Boolean).join(' or ');
                     const unlocked = (o.unlock_day == null || false) ? (o.unlock_percent == null ? true : percent >= (o.unlock_percent as number)) : false;

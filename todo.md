@@ -16,7 +16,7 @@ Priority order (current):
   - [ ] Collapse by Week (Intro/Week 1–5/Bonus)
   - [ ] Mobile sticky bottom bar: Previous | Mark Complete | Next
   - [x] Previous/Next nav (desktop)
-  - [ ] Offer card display polish (copy/states)
+  - [x] Offer/Perk card display polish (copy/states)
 - Visual tokens & components
   - [ ] Card spacing/padding defaults; consistent shadow + 10–12px radius
   - [ ] Button variants (primary/secondary/ghost) sizing + focus rings
@@ -83,12 +83,12 @@ Priority order (current):
 - [ ] Dashboard Table of Contents for quick jump
 
 ## 6) Offer unlocks (P3)
-- [ ] Compute daily streak from `events`
-- [ ] Display on dashboard; increment on completion; milestone toasts
+- [x] Eligibility plumbing: `unlock_rule` enum + `perk_unlocks` view
+- [ ] Display CTA when unlocked; log `offer_unlocked` / `offer_redeemed`
 
 ## 7) Testing & DX (P2/P3)
-- [ ] Eligibility: by `unlock_day` or `unlock_percent`
-- [ ] Display CTA when unlocked; log `offer_unlocked` / `offer_redeemed`
+ - [ ] Lightweight unit tests for libs (streaks, unlocks)
+ - [ ] Lint/type checks in CI
 
 ## Next Big 3 (for tomorrow)
 1) UI Overhaul: Dashboard ToC + Week progress + ProgressRing polish
@@ -102,9 +102,6 @@ Meta
 - Commit after each completed step as a small, reviewable change.
 
 ## Next Big 3 (for tomorrow)
-1) Dashboard ToC + progress polish
-   - Build a clickable ToC of all lessons on `/dashboard` with resume state; improve `ProgressRing` contrast/labels.
-2) Media pipeline
-   - Supabase Storage bucket `lessons` (public read), admin-only uploads, drag & drop, and use Next `<Image>` in Renderer.
-3) Go-live readiness
-   - Prod env setup (Vercel + Supabase), env vars, seed lessons, RLS review, basic smoke tests, and offer display polish.
+1) UI Overhaul: Dashboard ToC + Week progress + ProgressRing polish
+2) UI Overhaul: Sidebar collapsible by Week + mobile sticky lesson bar
+3) UI Overhaul: Components polish (cards/buttons/spacing) + Perks copy
