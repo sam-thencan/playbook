@@ -32,7 +32,7 @@ export default function FavoriteToggle({ lessonId, initial = false, size = 18 }:
     <button
       aria-label={isFav ? 'Remove from favorites' : 'Add to favorites'}
       onClick={toggle}
-      className="rounded-[10px] p-1 text-neutral-500 hover:text-[#FF6A00] focus:outline-none focus:ring-2 focus:ring-[#FF6A00]"
+      className={`rounded-[10px] p-1 ${isFav ? 'text-[#FF6A00]' : 'text-neutral-500'} hover:text-[#FF6A00] focus:outline-none focus:ring-2 focus:ring-[#FF6A00]/40`}
       disabled={isPending}
     >
       <svg
