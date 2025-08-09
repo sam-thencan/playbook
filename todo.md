@@ -10,7 +10,7 @@ Priority order (current):
   - [x] Course outline ToC (Weeks 1–5 + Bonus in Week 5) with expand/collapse
   - [x] Week progress (X/Y lessons), ETA, Resume Week CTA
   - [x] Favorites row (top 5) + /favorites
-  - [ ] ProgressRing contrast/labels polish
+  - [x] ProgressRing contrast/labels polish
 - Lesson page
   - [x] Sidebar (search + completion ticks)
   - [x] Collapse by Week (Intro/Week 1–5/Bonus)
