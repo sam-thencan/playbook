@@ -56,7 +56,7 @@ export default async function RootLayout({
               {resume && (
                 <a href={`/lesson/${resume.slug}`} className="hover:underline">Resume</a>
               )}
-              <a href="/level-ups" className="hover:underline">Level‑Ups</a>
+              <a href="/perks" className="hover:underline">Perks</a>
               {isAdmin && (
                 <>
                   <a href="/admin/lessons" className="hover:underline">Lessons</a>
