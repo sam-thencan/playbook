@@ -3,9 +3,10 @@ import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import { ProgressRing } from '@/components/ProgressRing';
 import { getServerSupabase } from '@/lib/supabaseServer';
+import FavoriteToggle from '@/components/FavoriteToggle';
 
 type NextLesson = { slug: string; title: string } | null;
-type OutlineItem = { slug: string; title: string; completed: boolean };
+ type OutlineItem = { slug: string; title: string; completed: boolean; id?: string; favorited?: boolean };
 type WeekGroup = { label: string; items: OutlineItem[]; completedCount: number; nextSlug?: string | null };
 
 export default async function DashboardPage() {
@@ -39,11 +40,18 @@ export default async function DashboardPage() {
             .limit(200);
 
         if (lessons?.length) {
-            const { data: progress } = await supabase
+            const [{ data: progress }, { data: favs }] = await Promise.all([
+                supabase
                 .from('progress')
                 .select('lesson_id, completed_at')
-                .eq('user_id', user.id);
+                .eq('user_id', user.id),
+                supabase
+                .from('favorites')
+                .select('lesson_id')
+                .eq('user_id', user.id)
+            ]);
             const completedIds = new Set((progress ?? []).filter(p => p.completed_at).map(p => p.lesson_id));
+            const favoredIds = new Set((favs ?? []).map((f: any) => f.lesson_id));
             const next = lessons.find(l => !completedIds.has(l.id));
             nextLesson = next ? { slug: next.slug, title: next.title } : null;
 
@@ -57,7 +65,7 @@ export default async function DashboardPage() {
             ];
             for (const l of lessons) {
                 const completed = completedIds.has(l.id);
-                const item: OutlineItem = { slug: l.slug, title: l.title, completed };
+                const item: OutlineItem = { slug: l.slug, title: l.title, completed, id: l.id, favorited: favoredIds.has(l.id) };
                 const d = l.day ?? (l.is_intro ? 1 : null);
                 let idx = 0;
                 if (d == null) {
@@ -81,18 +89,18 @@ export default async function DashboardPage() {
 
         // Perks preview
         const [{ data: perkRows }, { data: offersMeta }] = await Promise.all([
-          supabase.from('perk_unlocks').select('offer_id, unlocked, reason').eq('user_id', user.id),
-          supabase.from('offers').select('id, title, sort_order, active').eq('active', true).order('sort_order', { ascending: true }),
+            supabase.from('perk_unlocks').select('offer_id, unlocked, reason').eq('user_id', user.id),
+            supabase.from('offers').select('id, title, sort_order, active').eq('active', true).order('sort_order', { ascending: true }),
         ]);
         if (perkRows && offersMeta) {
-          const unlockedCount = perkRows.filter((p: any) => p.unlocked).length;
-          let nextTitle: string | null = null;
-          let nextReason: string | null = null;
-          for (const o of offersMeta as any[]) {
-            const pr = (perkRows as any[]).find((p) => p.offer_id === o.id);
-            if (!pr?.unlocked) { nextTitle = o.title; nextReason = pr?.reason ?? null; break; }
-          }
-          perksInfo = { unlocked: unlockedCount, nextTitle, nextReason };
+            const unlockedCount = perkRows.filter((p: any) => p.unlocked).length;
+            let nextTitle: string | null = null;
+            let nextReason: string | null = null;
+            for (const o of offersMeta as any[]) {
+                const pr = (perkRows as any[]).find((p) => p.offer_id === o.id);
+                if (!pr?.unlocked) { nextTitle = o.title; nextReason = pr?.reason ?? null; break; }
+            }
+            perksInfo = { unlocked: unlockedCount, nextTitle, nextReason };
         }
     }
     const nextLessonSlug = nextLesson?.slug ?? 'intro';
@@ -131,9 +139,9 @@ export default async function DashboardPage() {
                         <p className="text-sm text-neutral-700">Perks</p>
                         <p className="text-2xl font-semibold text-neutral-900">{perksInfo.unlocked} available</p>
                         {perksInfo.nextTitle ? (
-                          <p className="mt-1 text-sm text-neutral-700">Next: {perksInfo.nextTitle} — {perksInfo.nextReason}</p>
+                            <p className="mt-1 text-sm text-neutral-700">Next: {perksInfo.nextTitle} — {perksInfo.nextReason}</p>
                         ) : (
-                          <p className="mt-1 text-sm text-neutral-700">All current perks unlocked</p>
+                            <p className="mt-1 text-sm text-neutral-700">All current perks unlocked</p>
                         )}
                     </div>
                 </Card>
@@ -167,9 +175,12 @@ export default async function DashboardPage() {
                                 <ul className="divide-y divide-neutral-200">
                                     {g.items.map((it) => (
                                         <li key={it.slug} className="flex items-center justify-between p-3">
-                                            <Link href={`/lesson/${it.slug}`} className="truncate underline-offset-2 hover:underline">
-                                                {it.title}
-                                            </Link>
+                                            <div className="flex min-w-0 items-center gap-2">
+                                                <FavoriteToggle lessonId={it.id!} initial={it.favorited} />
+                                                <Link href={`/lesson/${it.slug}`} className="truncate underline-offset-2 hover:underline">
+                                                    {it.title}
+                                                </Link>
+                                            </div>
                                             {it.completed && <span className="ml-2 text-[#FF6A00]">✓</span>}
                                         </li>
                                     ))}
@@ -183,6 +194,30 @@ export default async function DashboardPage() {
                         </Card>
                     ))}
                 </div>
+            </section>
+
+            {/* Favorites row */}
+            <section aria-labelledby="favorites" className="mt-10">
+                <h2 id="favorites" className="mb-3 text-xl font-semibold text-neutral-100">Favorites</h2>
+                <Card>
+                    <ul className="flex flex-wrap gap-3 p-4">
+                        {outline
+                          .flatMap((g) => g.items)
+                          .filter((it) => it.favorited)
+                          .slice(0, 5)
+                          .map((it) => (
+                            <li key={it.slug} className="flex items-center gap-2 rounded-[10px] border border-neutral-200 px-3 py-2">
+                                <FavoriteToggle lessonId={it.id!} initial={true} />
+                                <Link href={`/lesson/${it.slug}`} className="hover:underline">
+                                  {it.title}
+                                </Link>
+                            </li>
+                          ))}
+                        {outline.flatMap(g=>g.items).filter(it=>it.favorited).length === 0 && (
+                          <li className="text-sm text-neutral-600">No favorites yet. Star lessons to add them here.</li>
+                        )}
+                    </ul>
+                </Card>
             </section>
         </main>
     );

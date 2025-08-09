@@ -413,3 +413,37 @@ left join overall ov on ov.user_id = p.id
 where o.active = true;
 
 
+-- FAVORITES (per-user saved lessons)
+create table if not exists public.favorites (
+  user_id uuid not null references public.profiles(id) on delete cascade,
+  lesson_id uuid not null references public.lessons(id) on delete cascade,
+  created_at timestamptz not null default timezone('utc'::text, now()),
+  primary key (user_id, lesson_id)
+);
+
+alter table public.favorites enable row level security;
+
+drop policy if exists "Favorites: read own" on public.favorites;
+create policy "Favorites: read own"
+on public.favorites
+for select
+using (
+  user_id = auth.uid() or public.is_admin()
+);
+
+drop policy if exists "Favorites: upsert own" on public.favorites;
+create policy "Favorites: upsert own"
+on public.favorites
+for insert
+with check (
+  user_id = auth.uid() or public.is_admin()
+);
+
+drop policy if exists "Favorites: delete own" on public.favorites;
+create policy "Favorites: delete own"
+on public.favorites
+for delete
+using (
+  user_id = auth.uid() or public.is_admin()
+);
+

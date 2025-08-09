@@ -7,13 +7,13 @@ Priority order (current):
 
 ## 0) UI Overhaul (P0)
 - Dashboard
-  - [ ] Course outline ToC (Weeks 1–5 + Bonus in Week 5) with expand/collapse
+  - [x] Course outline ToC (Weeks 1–5 + Bonus in Week 5) with expand/collapse
   - [ ] Week progress (X/Y lessons), ETA, Resume Week CTA
-  - [ ] Favorites row (top 5) + /favorites
+  - [x] Favorites row (top 5) + /favorites
   - [ ] ProgressRing contrast/labels polish
 - Lesson page
   - [x] Sidebar (search + completion ticks)
-  - [ ] Collapse by Week (Intro/Week 1–5/Bonus)
+  - [x] Collapse by Week (Intro/Week 1–5/Bonus)
   - [ ] Mobile sticky bottom bar: Previous | Mark Complete | Next
   - [x] Previous/Next nav (desktop)
   - [x] Offer/Perk card display polish (copy/states)
