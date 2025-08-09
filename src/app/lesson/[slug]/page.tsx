@@ -74,6 +74,9 @@ export default async function LessonPage({ params }: LessonPageProps) {
         const unlockDayOk = offers && offers[0]?.unlock_day != null && lesson?.day != null ? lesson.day >= (offers[0]!.unlock_day as number) : false;
         const unlockPctOk = offers && offers[0]?.unlock_percent != null ? percent >= (offers[0]!.unlock_percent as number) : false;
         offerUnlocked = Boolean(offers && offers[0] && (unlockDayOk || unlockPctOk));
+        if (offerUnlocked && offers && offers[0]) {
+            await supabase.from('events').insert({ user_id: user.id, event_type: 'offer_unlocked', offer_id: offers[0].id, metadata: { slug } });
+        }
         const { data: prog } = await supabase
             .from('progress')
             .select('lesson_id, completed_at, lessons(slug)')

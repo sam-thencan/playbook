@@ -62,6 +62,7 @@ export default async function RootLayout({
                 <>
                   <a href="/admin/lessons" className="hover:underline">Lessons</a>
                   <a href="/admin/offers" className="hover:underline">Admin Offers</a>
+                  <a href="/admin/events" className="hover:underline">Events</a>
                 </>
               )}
               {user ? <LogoutButton /> : <a href="/login" className="hover:underline">Login</a>}

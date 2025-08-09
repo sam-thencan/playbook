@@ -1,5 +1,6 @@
 import { Card } from '@/components/Card';
 import { getServerSupabase } from '@/lib/supabaseServer';
+import { Button } from '@/components/Button';
 
 export default async function PerksPage() {
     const supabase = getServerSupabase();
@@ -46,6 +47,12 @@ export default async function PerksPage() {
                             <h2 className="text-lg font-medium">{o.title}</h2>
                             {o.description && <p className="mt-1 text-sm text-neutral-600">{o.description}</p>}
                             <p className="mt-2 text-sm text-neutral-600">{unlocked ? 'Available now' : `Locked · ${reason}`}</p>
+                            {unlocked && (
+                              <form action="/api/perks/redeem" method="post" className="mt-3">
+                                <input type="hidden" name="offerId" value={o.id} />
+                                <Button type="submit">Redeem</Button>
+                              </form>
+                            )}
                         </Card>
                     );
                 })}

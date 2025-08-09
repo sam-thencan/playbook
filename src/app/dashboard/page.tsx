@@ -19,7 +19,7 @@ export default async function DashboardPage() {
 
     let progressPercent = 0;
     let nextLesson: NextLesson = null;
-    const currentStreakDays = 0; // TODO: compute from events
+    let currentStreakDays = 0;
 
     let outline: WeekGroup[] = [];
     let perksInfo: { unlocked: number; nextTitle: string | null; nextReason: string | null } = { unlocked: 0, nextTitle: null, nextReason: null };
@@ -30,6 +30,37 @@ export default async function DashboardPage() {
             .eq('user_id', user.id)
             .maybeSingle();
         progressPercent = completion?.percent_complete ?? 0;
+
+        // Compute streak from lesson_completed events (unique days ending today)
+        const { data: streakEvents } = await supabase
+            .from('events')
+            .select('created_at')
+            .eq('user_id', user.id)
+            .eq('event_type', 'lesson_completed')
+            .order('created_at', { ascending: false })
+            .limit(365);
+        if (streakEvents?.length) {
+            const days = new Set<string>();
+            for (const e of streakEvents as any[]) {
+                const d = new Date(e.created_at);
+                const isoDate = d.toISOString().slice(0, 10); // UTC day
+                days.add(isoDate);
+            }
+            // Count consecutive days up to today (UTC)
+            let streak = 0;
+            let cursor = new Date();
+            cursor.setUTCHours(0, 0, 0, 0);
+            while (streak < 365) {
+                const iso = cursor.toISOString().slice(0, 10);
+                if (days.has(iso)) {
+                    streak += 1;
+                    cursor.setUTCDate(cursor.getUTCDate() - 1);
+                } else {
+                    break;
+                }
+            }
+            currentStreakDays = streak;
+        }
 
         // Find next lesson: first published lesson not completed
         const { data: lessons } = await supabase
