@@ -28,6 +28,7 @@ export default function FavoriteToggle({ lessonId, initial = false, size = 18, o
         setIsFav(nextVal);
         notify(data?.favorited ? 'Added to favorites' : 'Removed from favorites');
         onChange?.(nextVal);
+        window.dispatchEvent(new Event('favorite:changed'));
       } catch (e) {
         // revert on failure
         setIsFav((prev) => !prev);

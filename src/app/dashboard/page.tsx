@@ -174,7 +174,7 @@ export default async function DashboardPage() {
                 <h2 id="favorites" className="mb-3 text-xl font-semibold text-neutral-100">Favorites</h2>
                 <Card>
                     <ClientFavoritesRow
-                      initial={outline.flatMap((g) => g.items).filter((it) => it.favorited).map((it) => ({ id: it.id!, slug: it.slug, title: it.title }))}
+                        initial={outline.flatMap((g) => g.items).filter((it) => it.favorited).map((it) => ({ id: it.id!, slug: it.slug, title: it.title }))}
                     />
                 </Card>
             </section>

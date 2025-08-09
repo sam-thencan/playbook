@@ -44,10 +44,10 @@ export default function WeekAccordion({ groups, nextFallback }: Props) {
                         </summary>
                         <div className="accordion-content">
                             <ul className="divide-y divide-neutral-200">
-                {g.items.map((it, idx2) => (
+                                {g.items.map((it, idx2) => (
                                     <li key={it.slug} className="flex items-center justify-between p-3">
                                         <div className="flex min-w-0 items-center gap-2">
-                      {it.id && (<FavoriteToggle lessonId={it.id} initial={!!it.favorited} />)}
+                                            {it.id && (<FavoriteToggle lessonId={it.id} initial={!!it.favorited} />)}
                                             <Link href={`/lesson/${it.slug}`} className="truncate underline-offset-2 hover:underline">
                                                 {it.title}
                                             </Link>

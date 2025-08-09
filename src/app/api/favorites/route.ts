@@ -1,6 +1,21 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { getServerSupabase } from '@/lib/supabaseServer';
 
+export async function GET() {
+  const supabase = getServerSupabase();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+
+  const { data, error } = await supabase
+    .from('favorites')
+    .select('lesson_id, lessons!inner(id, slug, title)')
+    .eq('user_id', user.id)
+    .order('created_at', { ascending: false });
+  if (error) return NextResponse.json({ error: error.message }, { status: 400 });
+  const items = (data || []).map((row: any) => ({ id: row.lessons.id, slug: row.lessons.slug, title: row.lessons.title }));
+  return NextResponse.json({ items });
+}
+
 export async function POST(req: NextRequest) {
   const supabase = getServerSupabase();
   const {
