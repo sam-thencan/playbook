@@ -5,6 +5,8 @@ import { ProgressRing } from '@/components/ProgressRing';
 import { getServerSupabase } from '@/lib/supabaseServer';
 
 type NextLesson = { slug: string; title: string } | null;
+type OutlineItem = { slug: string; title: string; completed: boolean };
+type WeekGroup = { label: string; items: OutlineItem[]; completedCount: number };
 
 export default async function DashboardPage() {
     const supabase = getServerSupabase();
@@ -16,6 +18,7 @@ export default async function DashboardPage() {
     let nextLesson: NextLesson = null;
     const currentStreakDays = 0; // TODO: compute from events
 
+    let outline: WeekGroup[] = [];
     if (user) {
         const { data: completion } = await supabase
             .from('user_completion')
@@ -27,12 +30,12 @@ export default async function DashboardPage() {
         // Find next lesson: first published lesson not completed
         const { data: lessons } = await supabase
             .from('lessons')
-            .select('id, slug, title')
+            .select('id, slug, title, day, is_intro, is_bonus, published, sort_order')
             .eq('published', true)
             .order('is_intro', { ascending: false })
             .order('day', { ascending: true, nullsFirst: true })
             .order('sort_order', { ascending: true })
-            .limit(100);
+            .limit(200);
 
         if (lessons?.length) {
             const { data: progress } = await supabase
@@ -42,6 +45,32 @@ export default async function DashboardPage() {
             const completedIds = new Set((progress ?? []).filter(p => p.completed_at).map(p => p.lesson_id));
             const next = lessons.find(l => !completedIds.has(l.id));
             nextLesson = next ? { slug: next.slug, title: next.title } : null;
+
+            // Build outline groups (Weeks 1–5 + Bonus in Week 5; Intro in Week 1)
+            const groups: WeekGroup[] = [
+                { label: 'Week 1 (Intro + Days 1–7)', items: [], completedCount: 0 },
+                { label: 'Week 2 (Days 8–14)', items: [], completedCount: 0 },
+                { label: 'Week 3 (Days 15–21)', items: [], completedCount: 0 },
+                { label: 'Week 4 (Days 22–28)', items: [], completedCount: 0 },
+                { label: 'Week 5 (Days 29–31 + Bonus)', items: [], completedCount: 0 },
+            ];
+            for (const l of lessons) {
+                const completed = completedIds.has(l.id);
+                const item: OutlineItem = { slug: l.slug, title: l.title, completed };
+                const d = l.day ?? (l.is_intro ? 1 : null);
+                let idx = 0;
+                if (d == null) {
+                    // bonus → week 5
+                    idx = 4;
+                } else if (d <= 7) idx = 0;
+                else if (d <= 14) idx = 1;
+                else if (d <= 21) idx = 2;
+                else if (d <= 28) idx = 3;
+                else idx = 4;
+                groups[idx].items.push(item);
+                if (completed) groups[idx].completedCount += 1;
+            }
+            outline = groups;
         }
     }
     const nextLessonSlug = nextLesson?.slug ?? 'intro';
@@ -89,6 +118,37 @@ export default async function DashboardPage() {
                         </Link>
                     </div>
                 </Card>
+            </section>
+
+            <section aria-labelledby="outline" className="mt-10">
+                <h2 id="outline" className="mb-3 text-xl font-semibold text-neutral-100">Your Course</h2>
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+                    {outline.map((g, idx) => (
+                        <Card key={g.label}>
+                            <details open>
+                                <summary className="flex cursor-pointer items-center justify-between p-4 font-medium">
+                                    <span>{g.label}</span>
+                                    <span className="text-sm text-neutral-600">{g.completedCount}/{g.items.length} complete</span>
+                                </summary>
+                                <ul className="divide-y divide-neutral-200">
+                                    {g.items.map((it) => (
+                                        <li key={it.slug} className="flex items-center justify-between p-3">
+                                            <Link href={`/lesson/${it.slug}`} className="truncate underline-offset-2 hover:underline">
+                                                {it.title}
+                                            </Link>
+                                            {it.completed && <span className="ml-2 text-[#FF6A00]">✓</span>}
+                                        </li>
+                                    ))}
+                                </ul>
+                                <div className="flex items-center justify-end gap-2 p-3">
+                                    <Link href={`/lesson/${nextLessonSlug}`}>
+                                        <Button variant="secondary">Resume Week</Button>
+                                    </Link>
+                                </div>
+                            </details>
+                        </Card>
+                    ))}
+                </div>
             </section>
         </main>
     );
