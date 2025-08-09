@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { Card } from '@/components/Card';
 import { getServerSupabase } from '@/lib/supabaseServer';
+import FavoriteToggle from '@/components/FavoriteToggle';
 
 export default async function FavoritesPage() {
   const supabase = getServerSupabase();
@@ -26,10 +27,14 @@ export default async function FavoritesPage() {
       <Card>
         <ul className="divide-y divide-neutral-200">
           {(data || []).map((row: any) => (
-            <li key={row.lesson_id} className="p-4">
-              <Link href={`/lesson/${row.lessons.slug}`} className="hover:underline">
-                {row.lessons.title}
-              </Link>
+            <li key={row.lesson_id} className="flex items-center justify-between p-4">
+              <div className="flex items-center gap-2">
+                <FavoriteToggle lessonId={row.lessons.id} initial={true} />
+                <Link href={`/lesson/${row.lessons.slug}`} className="hover:underline">
+                  {row.lessons.title}
+                </Link>
+              </div>
+              <a href={`/lesson/${row.lessons.slug}`} className="text-sm text-[#FF6A00] hover:underline">Open</a>
             </li>
           ))}
           {(data || []).length === 0 && (

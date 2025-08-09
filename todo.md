@@ -18,8 +18,8 @@ Priority order (current):
   - [x] Previous/Next nav (desktop)
   - [x] Offer/Perk card display polish (copy/states)
 - Visual tokens & components
-  - [ ] Card spacing/padding defaults; consistent shadow + 10–12px radius
-  - [ ] Button variants (primary/secondary/ghost) sizing + focus rings
+  - [x] Card spacing/padding defaults; consistent shadow + 10–12px radius
+  - [x] Button variants (primary/secondary/ghost) sizing + focus rings
   - [ ] Typography tracking (H1/H2), spacing scale
   - [ ] Dark mode surfaces/tokens; accent `#FF6A00` audit
   - [x] Lesson sidebar responsive (mobile slide‑in)
@@ -51,7 +51,7 @@ Priority order (current):
    - [x] Resource links editor
    - [x] Preview pane
  - [ ] PDF import improvements
-   - [x] Map detected sections to blocks; detect featured YouTube when present
+   - [ ] Map detected sections to blocks; detect featured YouTube when present
    - [x] Re-parse lessons to new block spec and detect featured YouTube video per day
      - [x] Intro → Day 30 + Bonus
 
