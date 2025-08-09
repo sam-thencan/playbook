@@ -83,82 +83,82 @@ export default async function LessonPage({ params }: LessonPageProps) {
 
     return (
         <>
-        <main className="mx-auto flex max-w-5xl gap-6 px-4 py-8">
-            <div className="lg:w-auto">
-                <LessonSidebarMobile lessons={sidebarLessons} currentSlug={slug} completed={completedSlugs} />
-                <LessonSidebar lessons={sidebarLessons} currentSlug={slug} completed={completedSlugs} />
-            </div>
-            <div className="mx-auto w-full max-w-3xl">
-                <header className="mb-6">
-                    <h1 className="text-3xl font-semibold">{title}</h1>
-                    <div className="mt-3 flex items-center gap-3">
-                        <Pill variant="soft">Estimated: {estimatedMinutes} min</Pill>
-                    </div>
-                </header>
-
-                <article className="prose prose-neutral max-w-none">
-                    <Card>
-                        <div className="p-6">
-                            <h2 className="mb-2 text-xl font-semibold">Lesson</h2>
-                            <Renderer blocks={(lesson?.body as any) ?? []} />
+            <main className="mx-auto flex max-w-5xl gap-6 px-4 py-8">
+                <div className="lg:w-auto">
+                    <LessonSidebarMobile lessons={sidebarLessons} currentSlug={slug} completed={completedSlugs} />
+                    <LessonSidebar lessons={sidebarLessons} currentSlug={slug} completed={completedSlugs} />
+                </div>
+                <div className="mx-auto w-full max-w-3xl">
+                    <header className="mb-6">
+                        <h1 className="text-3xl font-semibold">{title}</h1>
+                        <div className="mt-3 flex items-center gap-3">
+                            <Pill variant="soft">Estimated: {estimatedMinutes} min</Pill>
                         </div>
-                    </Card>
+                    </header>
 
-                    <section aria-labelledby="resources" className="mt-6">
-                        <h2 id="resources" className="mb-2 text-xl font-semibold">Resources</h2>
+                    <article className="prose prose-neutral max-w-none">
                         <Card>
-                            <ul className="divide-y divide-neutral-200">
-                                {resources.map((r) => (
-                                    <li key={r.url} className="flex items-center justify-between p-4">
-                                        <a href={r.url} className="text-[#FF6A00] underline-offset-2 hover:underline focus:underline">
-                                            {r.label}
-                                        </a>
-                                    </li>
-                                ))}
-                            </ul>
+                            <div className="p-6">
+                                <h2 className="mb-2 text-xl font-semibold">Lesson</h2>
+                                <Renderer blocks={(lesson?.body as any) ?? []} />
+                            </div>
                         </Card>
-                    </section>
 
-                    <div className="mt-6 flex items-center justify-between gap-4">
-                        {/* Client action via form to avoid mixing client hooks here */}
-                        <form action="/api/progress/complete" method="post">
-                            <input type="hidden" name="lessonSlug" value={slug} />
-                            <Button type="submit">Mark Complete</Button>
-                        </form>
-                        <Button variant="secondary" type="button">Previous</Button>
-                    </div>
-
-                    {offerUnlocked && (
-                        <section aria-labelledby="offer" className="mt-8">
-                            <h2 id="offer" className="mb-2 text-xl font-semibold">Offer</h2>
+                        <section aria-labelledby="resources" className="mt-6">
+                            <h2 id="resources" className="mb-2 text-xl font-semibold">Resources</h2>
                             <Card>
-                                <div className="flex items-center justify-between p-6">
-                                    <div>
-                                        <p className="text-lg font-medium">Free SEO Strategy Video</p>
-                                        <p className="text-sm text-neutral-500">Unlocked</p>
-                                    </div>
-                                    <Button>Claim</Button>
-                                </div>
+                                <ul className="divide-y divide-neutral-200">
+                                    {resources.map((r) => (
+                                        <li key={r.url} className="flex items-center justify-between p-4">
+                                            <a href={r.url} className="text-[#FF6A00] underline-offset-2 hover:underline focus:underline">
+                                                {r.label}
+                                            </a>
+                                        </li>
+                                    ))}
+                                </ul>
                             </Card>
                         </section>
-                    )}
 
-                    <div className="mt-8 flex items-center justify-between">
-                        <div>
-                            {prevSlug && (
-                                <Link href={`/lesson/${prevSlug}`} className="text-sm underline">← Previous</Link>
-                            )}
+                        <div className="mt-6 flex items-center justify-between gap-4">
+                            {/* Client action via form to avoid mixing client hooks here */}
+                            <form action="/api/progress/complete" method="post">
+                                <input type="hidden" name="lessonSlug" value={slug} />
+                                <Button type="submit">Mark Complete</Button>
+                            </form>
+                            <Button variant="secondary" type="button">Previous</Button>
                         </div>
-                        <div>
-                            {nextSlug && (
-                                <Link href={`/lesson/${nextSlug}`} className="text-sm underline">Next →</Link>
-                            )}
+
+                        {offerUnlocked && (
+                            <section aria-labelledby="offer" className="mt-8">
+                                <h2 id="offer" className="mb-2 text-xl font-semibold">Offer</h2>
+                                <Card>
+                                    <div className="flex items-center justify-between p-6">
+                                        <div>
+                                            <p className="text-lg font-medium">Free SEO Strategy Video</p>
+                                            <p className="text-sm text-neutral-500">Unlocked</p>
+                                        </div>
+                                        <Button>Claim</Button>
+                                    </div>
+                                </Card>
+                            </section>
+                        )}
+
+                        <div className="mt-8 flex items-center justify-between">
+                            <div>
+                                {prevSlug && (
+                                    <Link href={`/lesson/${prevSlug}`} className="text-sm underline">← Previous</Link>
+                                )}
+                            </div>
+                            <div>
+                                {nextSlug && (
+                                    <Link href={`/lesson/${nextSlug}`} className="text-sm underline">Next →</Link>
+                                )}
+                            </div>
                         </div>
-                    </div>
-                </article>
-            </div>
-        </main>
-        <LessonStickyBar prevSlug={prevSlug} nextSlug={nextSlug} currentSlug={slug} />
+                    </article>
+                </div>
+            </main>
+            <LessonStickyBar prevSlug={prevSlug} nextSlug={nextSlug} currentSlug={slug} />
         </>
     );
 }

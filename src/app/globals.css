@@ -28,7 +28,8 @@ body {
 h1 {
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: #111827; /* neutral-900 on white */
+  color: #111827;
+  /* neutral-900 on white */
 }
 
 h2 {

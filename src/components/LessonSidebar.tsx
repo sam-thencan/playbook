@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 export type SidebarLesson = {
   slug: string;
@@ -27,6 +27,32 @@ export default function LessonSidebar({ lessons, currentSlug, completed }: Props
   }, [lessons, query]);
 
   const grouped = useMemo(() => groupLessons(filtered), [filtered]);
+  // Remember open groups across sessions; default open group that contains current lesson
+  const defaultOpen: Record<string, boolean> = useMemo(() => {
+    const map: Record<string, boolean> = {};
+    for (const g of grouped) {
+      map[g.label] = g.items.some((i) => i.slug === currentSlug);
+    }
+    return map;
+  }, [grouped, currentSlug]);
+  const [openMap, setOpenMap] = useState<Record<string, boolean>>({});
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('lessonSidebarOpen');
+      if (raw) setOpenMap({ ...defaultOpen, ...JSON.parse(raw) });
+      else setOpenMap(defaultOpen);
+    } catch {
+      setOpenMap(defaultOpen);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [JSON.stringify(defaultOpen)]);
+  const toggle = (label: string, open: boolean) => {
+    setOpenMap((m) => {
+      const next = { ...m, [label]: open };
+      try { localStorage.setItem('lessonSidebarOpen', JSON.stringify(next)); } catch {}
+      return next;
+    });
+  };
 
   return (
     <aside className="sticky top-20 hidden h-[calc(100vh-80px)] w-72 shrink-0 overflow-auto rounded-md bg-white p-3 ring-1 ring-neutral-300 lg:block">
@@ -39,8 +65,8 @@ export default function LessonSidebar({ lessons, currentSlug, completed }: Props
       />
       <nav className="space-y-2">
         {grouped.map(({ label, items }) => (
-          <details key={label} open>
-            <summary className="mb-1 cursor-pointer text-xs font-semibold uppercase text-neutral-700 focus:outline-none focus:ring-2 focus:ring-[#FF6A00]">
+          <details key={label} open={!!openMap[label]} onToggle={(e) => toggle(label, (e.target as HTMLDetailsElement).open)}>
+            <summary className="mb-1 list-none cursor-pointer text-xs font-semibold uppercase text-neutral-700 focus:outline-none focus:ring-2 focus:ring-[#FF6A00]">
               {label}
             </summary>
             <ul className="space-y-1 pb-2">
