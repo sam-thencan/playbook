@@ -1,11 +1,13 @@
 "use client";
 import { useState, useTransition } from 'react';
+import { useToast } from '@/components/Toast';
 
 type Props = { lessonId: string; initial?: boolean; size?: number };
 
 export default function FavoriteToggle({ lessonId, initial = false, size = 18 }: Props) {
   const [isFav, setIsFav] = useState<boolean>(initial);
   const [isPending, startTransition] = useTransition();
+  const { notify } = useToast();
 
   const toggle = () => {
     // optimistic UI
@@ -17,13 +19,17 @@ export default function FavoriteToggle({ lessonId, initial = false, size = 18 }:
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ lessonId }),
           credentials: 'same-origin',
+          cache: 'no-store',
         });
-        if (!res.ok) throw new Error(await res.text());
-        const data = await res.json();
+        const raw = await res.text();
+        const data = (() => { try { return JSON.parse(raw); } catch { return {}; } })() as any;
+        if (!res.ok) throw new Error(data?.error || raw || 'Request failed');
         setIsFav(Boolean(data?.favorited));
+        notify(data?.favorited ? 'Added to favorites' : 'Removed from favorites');
       } catch (e) {
         // revert on failure
         setIsFav((prev) => !prev);
+        notify(`Could not save favorite`);
       }
     });
   };
