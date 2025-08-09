@@ -19,6 +19,7 @@ export default async function DashboardPage() {
     const currentStreakDays = 0; // TODO: compute from events
 
     let outline: WeekGroup[] = [];
+    let perksInfo: { unlocked: number; nextTitle: string | null; nextReason: string | null } = { unlocked: 0, nextTitle: null, nextReason: null };
     if (user) {
         const { data: completion } = await supabase
             .from('user_completion')
@@ -77,6 +78,22 @@ export default async function DashboardPage() {
             }
             outline = groups;
         }
+
+        // Perks preview
+        const [{ data: perkRows }, { data: offersMeta }] = await Promise.all([
+          supabase.from('perk_unlocks').select('offer_id, unlocked, reason').eq('user_id', user.id),
+          supabase.from('offers').select('id, title, sort_order, active').eq('active', true).order('sort_order', { ascending: true }),
+        ]);
+        if (perkRows && offersMeta) {
+          const unlockedCount = perkRows.filter((p: any) => p.unlocked).length;
+          let nextTitle: string | null = null;
+          let nextReason: string | null = null;
+          for (const o of offersMeta as any[]) {
+            const pr = (perkRows as any[]).find((p) => p.offer_id === o.id);
+            if (!pr?.unlocked) { nextTitle = o.title; nextReason = pr?.reason ?? null; break; }
+          }
+          perksInfo = { unlocked: unlockedCount, nextTitle, nextReason };
+        }
     }
     const nextLessonSlug = nextLesson?.slug ?? 'intro';
 
@@ -108,6 +125,18 @@ export default async function DashboardPage() {
                         <p className="mt-1 text-sm text-neutral-700">Earn rewards as your streak grows.</p>
                     </div>
                 </Card>
+
+                <Card>
+                    <div className="p-6">
+                        <p className="text-sm text-neutral-700">Perks</p>
+                        <p className="text-2xl font-semibold text-neutral-900">{perksInfo.unlocked} available</p>
+                        {perksInfo.nextTitle ? (
+                          <p className="mt-1 text-sm text-neutral-700">Next: {perksInfo.nextTitle} — {perksInfo.nextReason}</p>
+                        ) : (
+                          <p className="mt-1 text-sm text-neutral-700">All current perks unlocked</p>
+                        )}
+                    </div>
+                </Card>
             </div>
 
             <section aria-labelledby="next-steps" className="mt-8">
@@ -116,7 +145,7 @@ export default async function DashboardPage() {
                     <div className="flex items-center justify-between p-6">
                         <div>
                             <p className="text-sm text-neutral-500">Coming up</p>
-                            <p className="text-lg font-medium">Day 1 — Local SEO Foundations</p>
+                            <p className="text-lg font-medium">{nextLesson?.title ?? 'Intro'}</p>
                         </div>
                         <Link href={`/lesson/${nextLessonSlug}`} className="shrink-0">
                             <Button variant="secondary">View Lesson</Button>
