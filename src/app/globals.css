@@ -52,7 +52,7 @@ h3 {
   from { opacity: 1; transform: translateY(0); }
   to   { opacity: 0; transform: translateY(-4px); }
 }
-details[open] > ul { animation: accordion-down 0.18s ease-out; }
+details[open] .accordion-content { animation: accordion-down 0.18s ease-out; }
 
 /* Improve contrast for text inside white cards and tables */
 .card-body,

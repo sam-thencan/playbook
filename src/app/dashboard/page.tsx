@@ -165,34 +165,39 @@ export default async function DashboardPage() {
             <section aria-labelledby="outline" className="mt-10">
                 <h2 id="outline" className="mb-3 text-xl font-semibold text-neutral-100">Your Course</h2>
                 <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-                    {outline.map((g, idx) => (
+                    {outline.map((g, idx) => {
+                        const isCurrentWeek = g.items.some((it) => it.slug === nextLessonSlug);
+                        return (
                         <Card key={g.label}>
-                            <details open>
-                                <summary className="flex cursor-pointer items-center justify-between p-4 font-medium">
+                            <details open={isCurrentWeek || idx === 0}>
+                                <summary className="flex cursor-pointer items-center justify-between p-4 font-medium select-none">
                                     <span>{g.label}</span>
                                     <span className="text-sm text-neutral-600">{g.completedCount}/{g.items.length} complete</span>
                                 </summary>
-                                <ul className="divide-y divide-neutral-200">
-                                    {g.items.map((it) => (
-                                        <li key={it.slug} className="flex items-center justify-between p-3">
-                                            <div className="flex min-w-0 items-center gap-2">
-                                                <FavoriteToggle lessonId={it.id!} initial={it.favorited} />
-                                                <Link href={`/lesson/${it.slug}`} className="truncate underline-offset-2 hover:underline">
-                                                    {it.title}
-                                                </Link>
-                                            </div>
-                                            {it.completed && <span className="ml-2 text-[#FF6A00]">✓</span>}
-                                        </li>
-                                    ))}
-                                </ul>
-                                <div className="flex items-center justify-end gap-2 p-3">
-                                    <Link href={`/lesson/${g.nextSlug ?? nextLessonSlug}`}>
-                                        <Button variant="secondary">Resume Week</Button>
-                                    </Link>
+                                <div className="accordion-content">
+                                    <ul className="divide-y divide-neutral-200">
+                                        {g.items.map((it) => (
+                                            <li key={it.slug} className="flex items-center justify-between p-3">
+                                                <div className="flex min-w-0 items-center gap-2">
+                                                    <FavoriteToggle lessonId={it.id!} initial={it.favorited} />
+                                                    <Link href={`/lesson/${it.slug}`} className="truncate underline-offset-2 hover:underline">
+                                                        {it.title}
+                                                    </Link>
+                                                </div>
+                                                {it.completed && <span className="ml-2 text-[#FF6A00]">✓</span>}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                    <div className="flex items-center justify-end gap-2 p-3">
+                                        <Link href={`/lesson/${g.nextSlug ?? nextLessonSlug}`}>
+                                            <Button variant="secondary">Resume Week</Button>
+                                        </Link>
+                                    </div>
                                 </div>
                             </details>
                         </Card>
-                    ))}
+                        );
+                    })}
                 </div>
             </section>
 
