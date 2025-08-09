@@ -6,13 +6,14 @@ import FavoriteToggle from '@/components/FavoriteToggle';
 type Item = { id: string; slug: string; title: string };
 
 export default function ClientFavoritesRow({ initial }: { initial: Item[] }) {
-    const [items, setItems] = useState<Item[]>(initial);
+  const [items, setItems] = useState<Item[]>([...initial].sort((a,b)=>a.title.localeCompare(b.title)));
 
   const refresh = useCallback(async () => {
     const res = await fetch('/api/favorites', { cache: 'no-store' });
     if (res.ok) {
       const json = await res.json();
-      setItems(json.items || []);
+      const sorted = (json.items || []).slice().sort((a: Item,b: Item)=>a.title.localeCompare(b.title));
+      setItems(sorted);
     }
   }, []);
 
