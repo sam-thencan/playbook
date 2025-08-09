@@ -43,6 +43,17 @@ h3 {
   color: #111827;
 }
 
+/* Simple accordion animations for details/summary groups */
+@keyframes accordion-down {
+  from { opacity: 0; transform: translateY(-4px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes accordion-up {
+  from { opacity: 1; transform: translateY(0); }
+  to   { opacity: 0; transform: translateY(-4px); }
+}
+details[open] > ul { animation: accordion-down 0.18s ease-out; }
+
 /* Improve contrast for text inside white cards and tables */
 .card-body,
 .card-body *,
