@@ -111,8 +111,8 @@ export default async function DashboardPage() {
         <main className="mx-auto max-w-5xl px-4 py-8">
             <h1 className="mb-6 text-3xl font-bold text-neutral-100">Your SEO Playbook</h1>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                <Card className="md:col-span-2">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
+                <Card className="md:col-span-2 md:col-span-2 md:col-start-1 md:col-end-3">
                     <div className="flex flex-col items-center justify-between gap-6 p-6 sm:flex-row">
                         <div className="flex items-center gap-6">
                             <ProgressRing value={progressPercent} size={96} />
@@ -128,7 +128,7 @@ export default async function DashboardPage() {
                     </div>
                 </Card>
 
-                <Card>
+                <Card className="md:col-span-1">
                     <div className="p-6">
                         <p className="text-sm text-neutral-700">Current Streak</p>
                         <p className="text-2xl font-semibold text-neutral-900">{currentStreakDays} day{currentStreakDays === 1 ? '' : 's'}</p>
@@ -136,17 +136,19 @@ export default async function DashboardPage() {
                     </div>
                 </Card>
 
-                <Card>
-                    <div className="p-6">
-                        <p className="text-sm text-neutral-700">Perks</p>
-                        <p className="text-2xl font-semibold text-neutral-900">{perksInfo.unlocked} available</p>
-                        {perksInfo.nextTitle ? (
-                            <p className="mt-1 text-sm text-neutral-700">Next: {perksInfo.nextTitle} — {perksInfo.nextReason}</p>
-                        ) : (
-                            <p className="mt-1 text-sm text-neutral-700">All current perks unlocked</p>
-                        )}
-                    </div>
-                </Card>
+                <Link href="/perks" className="block focus:outline-none md:col-span-1">
+                    <Card className="cursor-pointer">
+                        <div className="p-6">
+                            <p className="text-sm text-neutral-700">Perks</p>
+                            <p className="text-2xl font-semibold text-neutral-900">{perksInfo.unlocked} available</p>
+                            {perksInfo.nextTitle ? (
+                                <p className="mt-1 text-sm text-neutral-700">Next: {perksInfo.nextTitle} — {perksInfo.nextReason}</p>
+                            ) : (
+                                <p className="mt-1 text-sm text-neutral-700">All current perks unlocked</p>
+                            )}
+                        </div>
+                    </Card>
+                </Link>
             </div>
 
             <section aria-labelledby="next-steps" className="mt-8">
