@@ -46,6 +46,15 @@ export default function LoginPage() {
     }
   }
 
+  async function onGoogle() {
+    setLoading(true);
+    setError(null);
+    const dest = (process.env.NEXT_PUBLIC_SITE_URL || window.location.origin) + redirect;
+    const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: dest } });
+    if (error) setError(error.message);
+    setLoading(false);
+  }
+
   return (
     <main className="mx-auto max-w-md px-4 py-16">
       <div className="mb-6 flex items-center gap-4">
@@ -99,14 +108,7 @@ export default function LoginPage() {
             {loading ? (mode === 'login' ? 'Signing in…' : 'Creating…') : mode === 'login' ? 'Sign In' : 'Sign Up'}
           </Button>
           <div className="relative my-2 text-center text-sm text-neutral-500">or</div>
-          <Button
-            type="button"
-            variant="secondary"
-            onClick={async () => {
-              const dest = (process.env.NEXT_PUBLIC_SITE_URL || window.location.origin) + redirect;
-              await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: dest } });
-            }}
-          >
+          <Button type="button" variant="secondary" onClick={onGoogle}>
             Continue with Google
           </Button>
         </form>

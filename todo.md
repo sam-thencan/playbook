@@ -41,7 +41,7 @@ Priority order (current):
 - Deploy / liveness
   - [ ] Vercel project + env for `course.30dayseo.com`
   - [ ] Supabase Auth Site URL set to prod; Stripe webhook endpoint for prod URL
-  - [ ] `/status` health endpoint (200 OK) and minimal logging
+  - [x] `/status` health endpoint (200 OK) and minimal logging
 
 - Content polish (post-beta)
   - [ ] Lessons polish round; ensure featured videos added/rendered
