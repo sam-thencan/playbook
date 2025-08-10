@@ -28,19 +28,18 @@ body {
 h1 {
   font-weight: 700;
   letter-spacing: -0.01em;
-  color: #111827;
-  /* neutral-900 on white */
+  color: inherit;
 }
 
 h2 {
   font-weight: 600;
   letter-spacing: -0.005em;
-  color: #111827;
+  color: inherit;
 }
 
 h3 {
   font-weight: 500;
-  color: #111827;
+  color: inherit;
 }
 
 /* Simple accordion animations for details/summary groups */

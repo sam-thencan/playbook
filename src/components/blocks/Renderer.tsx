@@ -6,7 +6,7 @@ export type LessonBlock =
     | { type: 'heading'; level?: 2 | 3 | 4; content: string }
     | { type: 'list'; ordered?: boolean; items: string[] }
     | { type: 'image'; url: string; alt?: string; caption?: string }
-  | { type: 'video'; provider: 'youtube' | 'loom' | 'vimeo' | 'file'; url: string; caption?: string }
+    | { type: 'video'; provider: 'youtube' | 'loom' | 'vimeo' | 'file'; url: string; caption?: string }
     | { type: 'code'; language?: string; content: string };
 
 type Props = PropsWithChildren & {

@@ -5,11 +5,11 @@ import { ProgressRing } from '@/components/ProgressRing';
 import { getServerSupabase } from '@/lib/supabaseServer';
 import FavoriteToggle from '@/components/FavoriteToggle';
 import ClientFavoritesRow from '@/components/ClientFavoritesRow';
-import WeekAccordion, { WeekGroup } from '@/components/WeekAccordion';
+import WeekAccordion, { WeekGroup as AccordionWeekGroup } from '@/components/WeekAccordion';
 
 type NextLesson = { slug: string; title: string } | null;
 type OutlineItem = { slug: string; title: string; completed: boolean; id?: string; favorited?: boolean; day?: number | null };
-type WeekGroup = { label: string; items: OutlineItem[]; completedCount: number; nextSlug?: string | null };
+type WeekGroup = AccordionWeekGroup & { items: (AccordionWeekGroup['items'][number] & OutlineItem)[] };
 
 export default async function DashboardPage() {
     const supabase = getServerSupabase();
@@ -140,7 +140,7 @@ export default async function DashboardPage() {
 
     return (
         <main className="mx-auto max-w-5xl px-4 py-8">
-            <h1 className="mb-6 text-3xl font-bold text-neutral-100">Your SEO Playbook</h1>
+            <h1 className="mb-6 text-3xl font-bold text-neutral-900 dark:text-neutral-100">Your SEO Playbook</h1>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
                 <Card className="md:col-span-2 md:col-span-2 md:col-start-1 md:col-end-3">
