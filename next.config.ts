@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
     // We'll fix types post-deploy.
     ignoreBuildErrors: true,
   },
+  images: {
+    formats: ['image/avif', 'image/webp'],
+  },
 };
 
 export default nextConfig;
