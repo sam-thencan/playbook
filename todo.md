@@ -23,6 +23,30 @@ Priority order (current):
   - [ ] Dark mode surfaces/tokens; accent `#FF6A00` audit
   - [x] Lesson sidebar responsive (mobile slide‑in)
 
+## 0.5) Launch Prep – Payments, Google OAuth, Deploy (P0-beta)
+- Stripe payments / access control
+  - [ ] Add `profiles.has_access boolean default false`
+  - [ ] Gate `/dashboard` and `/lesson/*` when `has_access=false` → redirect to `/pay`
+  - [ ] `/pay` page with one-time purchase CTA (Stripe Checkout)
+  - [ ] Server: `/api/checkout` creates Checkout Session (price via `STRIPE_PRICE_ID`), ties `supabase_user_id`
+  - [ ] Server: `/api/stripe/webhook` verifies signature; on `checkout.session.completed` → set `has_access=true` and log event
+  - [ ] Env: `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`, `STRIPE_WEBHOOK_SECRET`
+  - [ ] E2E QA (new user → pay → instant access)
+
+- Google sign‑in
+  - [ ] Enable Google provider in Supabase; add dev/prod OAuth creds
+  - [ ] Add "Continue with Google" button on `/login` (redirect to `/dashboard`)
+  - [ ] QA: session persists SSR/CSR; works with existing email accounts
+
+- Deploy / liveness
+  - [ ] Vercel project + env for `course.30dayseo.com`
+  - [ ] Supabase Auth Site URL set to prod; Stripe webhook endpoint for prod URL
+  - [ ] `/status` health endpoint (200 OK) and minimal logging
+
+- Content polish (post-beta)
+  - [ ] Lessons polish round; ensure featured videos added/rendered
+  - [ ] Minor copy/spacing tune-ups
+
 ## 1) Admin (P1) + UI carryover
 - [x] Gate `/admin/*` by `profiles.role === 'admin'`
   - [x] Middleware using SSR Supabase; redirect non-admins to `/login`
@@ -92,18 +116,6 @@ Priority order (current):
  - [ ] Lightweight unit tests for libs (streaks, unlocks)
  - [ ] Lint/type checks in CI
 
-## Next Big 3 (for tomorrow)
-1) UI Overhaul: Dashboard ToC + Week progress + ProgressRing polish
-2) UI Overhaul: Sidebar collapsible by Week + mobile sticky lesson bar
-3) UI Overhaul: Components polish (cards/buttons/spacing) + offer card copy
-- [ ] Lightweight unit tests for libs (streaks, unlocks)
-- [ ] Lint/type checks in CI
-
 ---
 Meta
 - Commit after each completed step as a small, reviewable change.
-
-## Next Big 3 (for tomorrow)
-1) UI Overhaul: Dashboard ToC + Week progress + ProgressRing polish
-2) UI Overhaul: Sidebar collapsible by Week + mobile sticky lesson bar
-3) UI Overhaul: Components polish (cards/buttons/spacing) + Perks copy

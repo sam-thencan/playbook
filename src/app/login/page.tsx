@@ -98,6 +98,17 @@ export default function LoginPage() {
           <Button type="submit" disabled={loading}>
             {loading ? (mode === 'login' ? 'Signing in…' : 'Creating…') : mode === 'login' ? 'Sign In' : 'Sign Up'}
           </Button>
+          <div className="relative my-2 text-center text-sm text-neutral-500">or</div>
+          <Button
+            type="button"
+            variant="secondary"
+            onClick={async () => {
+              const dest = (process.env.NEXT_PUBLIC_SITE_URL || window.location.origin) + redirect;
+              await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: dest } });
+            }}
+          >
+            Continue with Google
+          </Button>
         </form>
       </Card>
     </main>

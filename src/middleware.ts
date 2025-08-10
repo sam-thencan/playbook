@@ -5,6 +5,7 @@ export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const isAdminPath = url.pathname.startsWith('/admin');
   const needsAuth = isAdminPath || url.pathname === '/dashboard' || url.pathname.startsWith('/lesson/');
+  const isPayPath = url.pathname === '/pay' || url.pathname.startsWith('/api/checkout');
   if (!needsAuth) return NextResponse.next();
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
@@ -31,6 +32,15 @@ export async function middleware(req: NextRequest) {
     const redirect = new URL('/login', req.url);
     redirect.searchParams.set('redirect', url.pathname);
     return NextResponse.redirect(redirect);
+  }
+
+  // Paywall: if user lacks access, send to /pay
+  if (!isAdminPath && !isPayPath) {
+    const { data: profile } = await supabase.from('profiles').select('has_access').eq('id', user.id).maybeSingle();
+    if (profile && profile.has_access === false) {
+      const redirect = new URL('/pay', req.url);
+      return NextResponse.redirect(redirect);
+    }
   }
 
   if (isAdminPath) {

@@ -55,6 +55,7 @@ create table if not exists public.profiles (
   email text not null unique,
   display_name text,
   role text not null default 'user' check (role in ('user','admin')),
+  has_access boolean not null default false,
   created_at timestamptz not null default timezone('utc'::text, now()),
   updated_at timestamptz not null default timezone('utc'::text, now())
 );
