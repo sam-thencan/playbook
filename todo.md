@@ -9,7 +9,7 @@
 - Steps to implement:
   1) Schema: add `category` (text, already present), `tags` (text[]), and `body_text` (generated/maintained on write) with proper indexes.
   2) Admin: add Category select + Tag chips; plumb through API.
-  3) Sidebar + dashboard: switch to category grouping with sticky headers; remove accordions.
+  3) Sidebar + dashboard: switch to category grouping.
   4) Search: endpoint + client search querying `title`/`tags`/`body_text`.
   5) Lesson page: render tag chips next to the Estimated pill.
 
@@ -69,6 +69,24 @@
 ## 7) Testing & DX (P2/P3)
  - [ ] Lightweight unit tests for libs (streaks, unlocks)
  - [ ] Lint/type checks in CI
+
+---
+P0 – Dashboard and Lesson polish (next up)
+- Dashboard
+  - [ ] Remove accordions from week cards; always expanded inside cards
+  - [ ] Group by `lessons.category` with display labels:
+    - Week 1 (Intro + Days 1–7), Week 2 (Days 8–14), Week 3 (Days 15–21), Week 4 (Days 22–28), Week 5 (Days 29–31 + Bonus)
+    - Merge `Intro` into Week 1 and `Bonus` into Week 5 for display
+  - [ ] Time left: sum `estimated_minutes` for incomplete items (fallback 12 min when null)
+- Lesson page
+  - [ ] Show tag chips next to Estimated pill
+  - [ ] Hide Resources section when empty; align bottom Prev | Mark Complete | Next in one row
+- Content model
+  - [ ] Add a dedicated `featured_video` block rendered above content; prevent duplicate videos
+  - [ ] Update Markdown import to optionally flag the first YouTube link as `featured_video`
+  - [ ] Update `lesson_md_import.md` instructions for featured video and tag usage
+- Data model tweaks
+  - [ ] Allow `day = 0` for Intro and >30 for extensions (relax check to 365); migration + backfill existing lessons
 
 ---
 Meta
