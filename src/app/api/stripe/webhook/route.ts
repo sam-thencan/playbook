@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createClient } from '@supabase/supabase-js';
 
+export const runtime = 'nodejs';
+
 export async function POST(req: NextRequest) {
   const secret = process.env.STRIPE_SECRET_KEY as string;
   const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET as string;
