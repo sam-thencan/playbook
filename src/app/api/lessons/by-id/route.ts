@@ -6,13 +6,26 @@ export async function GET(request: Request) {
   const id = searchParams.get('id');
   if (!id) return NextResponse.json({ error: 'id required' }, { status: 400 });
   const supabase = getServerSupabase();
-  const { data, error } = await supabase
+  const base = 'id, title, slug, day, is_intro, is_bonus, estimated_minutes, resources, body, sort_order, published';
+  const extended = base + ', category, tags';
+  let row: any = null;
+  let { data, error } = await supabase
     .from('lessons')
-    .select('id, title, slug, day, is_intro, is_bonus, estimated_minutes, resources, body, sort_order, published, category, tags')
+    .select(extended)
     .eq('id', id)
     .maybeSingle();
-  if (error || !data) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-  return NextResponse.json(data);
+  if (error) {
+    const fallback = await supabase
+      .from('lessons')
+      .select(base)
+      .eq('id', id)
+      .maybeSingle();
+    row = fallback.data ? { ...fallback.data, category: null, tags: [] } : null;
+  } else {
+    row = data;
+  }
+  if (!row) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+  return NextResponse.json(row);
 }
 
 
