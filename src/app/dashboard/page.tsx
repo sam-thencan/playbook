@@ -66,7 +66,7 @@ export default async function DashboardPage() {
         // Find next lesson: first published lesson not completed
         const { data: lessons } = await supabase
             .from('lessons')
-            .select('id, slug, title, day, is_intro, is_bonus, published, sort_order, category, tags')
+            .select('id, slug, title, day, is_intro, is_bonus, published, sort_order')
             .eq('published', true)
             .order('is_intro', { ascending: false })
             .order('day', { ascending: true, nullsFirst: true })

@@ -17,7 +17,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
     const supabase = getServerSupabase();
     const { data: lesson } = await supabase
         .from('lessons')
-        .select('id, title, day, estimated_minutes, resources, body, tags')
+        .select('id, title, day, estimated_minutes, resources, body')
         .eq('slug', slug)
         .maybeSingle();
 
@@ -49,7 +49,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
     if (user) {
         const { data: lessons } = await supabase
             .from('lessons')
-            .select('id, slug, title, day, is_intro, is_bonus, published, sort_order, category, tags')
+            .select('id, slug, title, day, is_intro, is_bonus, published, sort_order')
             .eq('published', true)
             .order('is_intro', { ascending: false })
             .order('day', { ascending: true, nullsFirst: true })
@@ -57,7 +57,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
         const idx = lessons?.findIndex((l) => l.slug === slug) ?? -1;
         if (idx > 0) prevSlug = lessons![idx - 1].slug;
         if (idx >= 0 && lessons && idx < lessons.length - 1) nextSlug = lessons[idx + 1].slug;
-        sidebarLessons = (lessons || []).map((l) => ({ slug: l.slug, title: l.title, day: l.day, is_intro: (l as any).is_intro, is_bonus: (l as any).is_bonus, category: (l as any).category, tags: (l as any).tags }));
+        sidebarLessons = (lessons || []).map((l) => ({ slug: l.slug, title: l.title, day: l.day, is_intro: (l as any).is_intro, is_bonus: (l as any).is_bonus }));
         // offers
         const { data: completion } = await supabase
             .from('user_completion')

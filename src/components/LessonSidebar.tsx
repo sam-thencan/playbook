@@ -9,8 +9,6 @@ export type SidebarLesson = {
   day: number | null;
   is_intro: boolean;
   is_bonus: boolean;
-  category?: string | null;
-  tags?: string[];
 };
 
 type Props = {
@@ -75,7 +73,6 @@ export default function LessonSidebar({ lessons, currentSlug, completed }: Props
 export function groupLessonsByCategory(lessons: SidebarLesson[]): Array<{ label: string; items: SidebarLesson[] }> {
   const order = ['Intro', 'Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Bonus'];
   function inferCategory(l: SidebarLesson): string {
-    if (l.category) return l.category;
     if (l.is_intro) return 'Intro';
     if (l.is_bonus) return 'Bonus';
     const d = l.day ?? 0;
