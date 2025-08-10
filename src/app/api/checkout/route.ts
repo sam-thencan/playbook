@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
   const secret = process.env.STRIPE_SECRET_KEY;
   if (!priceId || !secret) return NextResponse.json({ error: 'Stripe not configured' }, { status: 500 });
 
-  const stripe = new Stripe(secret, { apiVersion: '2024-06-20' });
+  const stripe = new Stripe(secret, { apiVersion: '2025-07-30.basil' });
   const origin = process.env.NEXT_PUBLIC_SITE_URL || new URL(req.url).origin;
 
   const customer = await stripe.customers.create({

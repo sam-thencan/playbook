@@ -25,6 +25,8 @@ export async function POST(request: Request) {
     estimated_minutes: body.estimated_minutes as number | null,
     resources: Array.isArray(body.resources) ? body.resources : [],
     body: Array.isArray(body.body) ? body.body : [],
+    category: (typeof body.category === 'string' && body.category.trim() !== '') ? (body.category as string) : null,
+    tags: Array.isArray(body.tags) ? (body.tags as any[]).map(String) : [],
     sort_order: typeof body.sort_order === 'number' ? body.sort_order : 0,
     published: !!body.published,
   };

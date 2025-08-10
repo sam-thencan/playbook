@@ -1,27 +1,22 @@
 # 30-Day Local SEO Playbook – TODO
 
-Priority order (current):
-0) UI Overhaul (first)
-1) Admin
-2) Content pipeline and remaining features
+## P0: Unified grouping, Tags, Search, Sticky Headers
+- **Unified grouping**: Add `category` to lessons backend: one of Intro, Week 1, Week 2, Week 3, Week 4, Week 5, Bonus. Server/UI will group both the sidebar and dashboard by this field (no heuristics). Fallback: if `category` is null, compute from `day` as today. Migration: expose category in the admin editor (select) to override odd cases.
+- **Tags**: Add `tags text[]` to lessons; index for search. Admin editor gets tag chips with add/remove (comma or Enter to add). Lesson page shows tag chips beside the Estimated time pill (wrapping row). Dashboard outline may preview tags subtly on hover; primary surfacing is in lesson page and search.
+- **Search**: Client search box (dashboard header and sidebar): type-to-search titles, tag array, and text blocks. Start simple: SQL ILIKE over `title`, `tags`, and a flattened `body_text` generated/stored column. To avoid heavy JSON scanning, add a generated column (or trigger) that concatenates paragraph/heading strings into `body_text` (updated on write). Results: highlight matches; allow filtering by tags via chip clicks.
+- **Sidebar/dashboard UX**: Remove accordions; render categories with sticky section headers (CSS `position: sticky; top: 0` inside the scroll container). Auto-scroll to current lesson on load. Shared grouping util uses category and sorts Intro → Week 1 → … → Week 5 → Bonus.
+
+- Steps to implement:
+  1) Schema: add `category` (text, already present), `tags` (text[]), and `body_text` (generated/maintained on write) with proper indexes.
+  2) Admin: add Category select + Tag chips; plumb through API.
+  3) Sidebar + dashboard: switch to category grouping with sticky headers; remove accordions.
+  4) Search: endpoint + client search querying `title`/`tags`/`body_text`.
+  5) Lesson page: render tag chips next to the Estimated pill.
 
 ## 0) UI Overhaul (P0)
-- Dashboard
-  - [x] Course outline ToC (Weeks 1–5 + Bonus in Week 5) with expand/collapse
-  - [x] Week progress (X/Y lessons), ETA, Resume Week CTA
-  - [x] Favorites row (top 5) + /favorites
-  - [x] ProgressRing contrast/labels polish
-- Lesson page
-  - [x] Sidebar (search + completion ticks)
-  - [x] Collapse by Week (Intro/Week 1–5/Bonus)
-  - [x] Previous/Next nav (desktop)
-  - [x] Offer/Perk card display polish (copy/states)
 - Visual tokens & components
-  - [x] Card spacing/padding defaults; consistent shadow + 10–12px radius
-  - [x] Button variants (primary/secondary/ghost) sizing + focus rings
   - [ ] Typography tracking (H1/H2), spacing scale
   - [ ] Dark mode surfaces/tokens; accent `#FF6A00` audit
-  - [x] Lesson sidebar responsive (mobile slide‑in)
 
 ## 0.5) Launch Prep – Payments, Google OAuth, Deploy (P0-beta)
 - Stripe payments / access control
@@ -30,70 +25,33 @@ Priority order (current):
   - [ ] `/pay` page with one-time purchase CTA (Stripe Checkout)
   - [ ] Server: `/api/checkout` creates Checkout Session (price via `STRIPE_PRICE_ID`), ties `supabase_user_id`
   - [ ] Server: `/api/stripe/webhook` verifies signature; on `checkout.session.completed` → set `has_access=true` and log event
-  - [X] Env: `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`, `STRIPE_WEBHOOK_SECRET`
   - [ ] E2E QA (new user → pay → instant access)
 
 - Google sign‑in
-  - [X] Enable Google provider in Supabase; add dev/prod OAuth creds
-  - [X] Add "Continue with Google" button on `/login` (redirect to `/dashboard`)
-  - [X] QA: session persists SSR/CSR; works with existing email accounts
+  - [ ] Prod OAuth configuration and QA pass
 
 - Deploy / liveness
   - [ ] Vercel project + env for `course.30dayseo.com`
   - [ ] Supabase Auth Site URL set to prod; Stripe webhook endpoint for prod URL
-  - [x] `/status` health endpoint (200 OK) and minimal logging
 
 - Content polish (post-beta)
   - [ ] Lessons polish round; ensure featured videos added/rendered
   - [ ] Minor copy/spacing tune-ups
 
 ## 1) Admin (P1) + UI carryover
-- [x] Gate `/admin/*` by `profiles.role === 'admin'`
-  - [x] Middleware using SSR Supabase; redirect non-admins to `/login`
-  - [x] Server-side re-check in pages to avoid client bypass
-- [x] Lessons CRUD (wired to Supabase)
-  - [x] List with sort (by `day`, `sort_order`, `published`)
-  - [x] Create/Edit form
-  - [x] Fields: title, slug, day (optional), is_intro, is_bonus, estimated_minutes, resources[], body (blocks), sort_order, published
-  - [x] Publish toggle, delete
-- [x] Offers CRUD (wired to Supabase)
-  - [x] List
-  - [x] Create/Edit fields: title, description, type, unlock_day, unlock_percent, sort_order, cta{label,url}, active
-  - [x] Publish toggle, delete
-- [x] RLS sanity checks for admin write (already in schema)
-- [x] Basic toasts/feedback (non-blocking) and empty states
 - [ ] Optional: event log view for admin (audit of create/update/delete)
 
 - UI carryover
   - [ ] Mobile sticky bottom bar: Previous | Mark Complete | Next
 
 ## 2) Content system (P2)
- - [ ] Support mixed lesson content types
-   - [x] Blocks: paragraph, heading, list, image{url,alt,caption}, video{provider|url,caption}, code
-   - [ ] Define JSON block schema (versioned) for `lessons.body`
-   - [x] Renderer for all block types
- - [ ] Admin lesson editor UI
-   - [x] Simple block editor (add/reorder/delete)
-   - [x] Resource links editor
-   - [x] Preview pane
+ - [ ] Define JSON block schema (versioned) for `lessons.body`
  - [ ] PDF import improvements
    - [ ] Map detected sections to blocks; detect featured YouTube when present
-   - [x] Re-parse lessons to new block spec and detect featured YouTube video per day
-     - [x] Intro → Day 30 + Bonus
 
 ## 3) Media handling (P2)
-- [ ] Support mixed lesson content types
-  - [x] Blocks: paragraph, heading, list, image{url,alt,caption}, video{provider|url,caption}, code
-  - [ ] Define JSON block schema (versioned) for `lessons.body`
-  - [x] Renderer for all block types
-- [ ] Admin lesson editor UI
-  - [x] Simple block editor (add/reorder/delete)
-  - [x] Resource links editor
-  - [x] Preview pane
-- [ ] PDF import improvements
-  - [x] Map detected sections to blocks; detect featured YouTube when present
-  - [x] Re-parse lessons to new block spec and detect featured YouTube video per day
-    - [x] Intro → Day 30 + Bonus
+ - [ ] Define JSON block schema (versioned) for `lessons.body`
+ - [ ] PDF import improvements
 
 ## 4) Lesson page rendering (P2)
 - [ ] Supabase Storage bucket `lessons` (public read)
@@ -102,14 +60,10 @@ Priority order (current):
 - [ ] Image optimization (Next `<Image>`), aspect-ratio helpers
 
 ## 5) Streaks (P3)
-- [x] Render block types with responsive, accessible markup
-- [x] Previous/Next lesson navigation
 - [ ] Show contextual Offer card when eligible (polish display)
-- [x] Lesson navigator (sidebar) with grouping and search (desktop + mobile)
 - [ ] Dashboard Table of Contents for quick jump
 
 ## 6) Offer unlocks (P3)
-- [x] Eligibility plumbing: `unlock_rule` enum + `perk_unlocks` view
 - [ ] Display CTA when unlocked; log `offer_unlocked` / `offer_redeemed`
 
 ## 7) Testing & DX (P2/P3)

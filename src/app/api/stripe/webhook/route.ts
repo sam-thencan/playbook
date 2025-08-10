@@ -11,7 +11,7 @@ export async function POST(req: NextRequest) {
   const serviceRole = process.env.SUPABASE_SERVICE_ROLE_KEY as string;
   if (!secret || !webhookSecret || !supabaseUrl || !serviceRole) return NextResponse.json({ error: 'Missing env' }, { status: 500 });
 
-  const stripe = new Stripe(secret, { apiVersion: '2024-06-20' });
+  const stripe = new Stripe(secret, { apiVersion: '2025-07-30.basil' });
   const raw = await req.text();
   const sig = req.headers.get('stripe-signature') as string;
 

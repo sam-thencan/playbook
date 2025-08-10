@@ -17,7 +17,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
     const supabase = getServerSupabase();
     const { data: lesson } = await supabase
         .from('lessons')
-        .select('id, title, day, estimated_minutes, resources, body')
+        .select('id, title, day, estimated_minutes, resources, body, tags')
         .eq('slug', slug)
         .maybeSingle();
 
@@ -49,7 +49,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
     if (user) {
         const { data: lessons } = await supabase
             .from('lessons')
-            .select('id, slug, title, day, is_intro, is_bonus, published, sort_order')
+            .select('id, slug, title, day, is_intro, is_bonus, published, sort_order, category, tags')
             .eq('published', true)
             .order('is_intro', { ascending: false })
             .order('day', { ascending: true, nullsFirst: true })
@@ -57,7 +57,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
         const idx = lessons?.findIndex((l) => l.slug === slug) ?? -1;
         if (idx > 0) prevSlug = lessons![idx - 1].slug;
         if (idx >= 0 && lessons && idx < lessons.length - 1) nextSlug = lessons[idx + 1].slug;
-        sidebarLessons = (lessons || []).map((l) => ({ slug: l.slug, title: l.title, day: l.day, is_intro: (l as any).is_intro, is_bonus: (l as any).is_bonus }));
+        sidebarLessons = (lessons || []).map((l) => ({ slug: l.slug, title: l.title, day: l.day, is_intro: (l as any).is_intro, is_bonus: (l as any).is_bonus, category: (l as any).category, tags: (l as any).tags }));
         // offers
         const { data: completion } = await supabase
             .from('user_completion')
@@ -94,8 +94,15 @@ export default async function LessonPage({ params }: LessonPageProps) {
                 <div className="mx-auto w-full max-w-3xl">
                     <header className="mb-6">
                         <h1 className="text-3xl font-semibold">{title}</h1>
-                        <div className="mt-3 flex items-center gap-3">
+                        <div className="mt-3 flex flex-wrap items-center gap-2">
                             <Pill variant="soft">Estimated: {estimatedMinutes} min</Pill>
+                            {Array.isArray(lesson?.tags) && (lesson!.tags as any[]).length > 0 && (
+                                <div className="flex flex-wrap items-center gap-1">
+                                    {(lesson!.tags as any[]).map((t: any) => (
+                                        <Pill key={String(t)} variant="soft" className="bg-neutral-50 text-neutral-700">{String(t)}</Pill>
+                                    ))}
+                                </div>
+                            )}
                         </div>
                     </header>
 

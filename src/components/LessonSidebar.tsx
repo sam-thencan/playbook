@@ -9,6 +9,8 @@ export type SidebarLesson = {
   day: number | null;
   is_intro: boolean;
   is_bonus: boolean;
+  category?: string | null;
+  tags?: string[];
 };
 
 type Props = {
@@ -26,33 +28,7 @@ export default function LessonSidebar({ lessons, currentSlug, completed }: Props
     return lessons.filter((l) => l.title.toLowerCase().includes(q) || l.slug.includes(q));
   }, [lessons, query]);
 
-  const grouped = useMemo(() => groupLessons(filtered), [filtered]);
-  // Remember open groups across sessions; default open group that contains current lesson
-  const defaultOpen: Record<string, boolean> = useMemo(() => {
-    const map: Record<string, boolean> = {};
-    for (const g of grouped) {
-      map[g.label] = g.items.some((i) => i.slug === currentSlug);
-    }
-    return map;
-  }, [grouped, currentSlug]);
-  const [openMap, setOpenMap] = useState<Record<string, boolean>>({});
-  useEffect(() => {
-    try {
-      const raw = localStorage.getItem('lessonSidebarOpen');
-      if (raw) setOpenMap({ ...defaultOpen, ...JSON.parse(raw) });
-      else setOpenMap(defaultOpen);
-    } catch {
-      setOpenMap(defaultOpen);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(defaultOpen)]);
-  const toggle = (label: string, open: boolean) => {
-    setOpenMap((m) => {
-      const next = { ...m, [label]: open };
-      try { localStorage.setItem('lessonSidebarOpen', JSON.stringify(next)); } catch {}
-      return next;
-    });
-  };
+  const grouped = useMemo(() => groupLessonsByCategory(filtered), [filtered]);
 
   return (
     <aside className="sticky top-20 hidden h-[calc(100vh-80px)] w-72 shrink-0 overflow-auto rounded-md bg-white p-3 ring-1 ring-neutral-300 lg:block">
@@ -63,12 +39,12 @@ export default function LessonSidebar({ lessons, currentSlug, completed }: Props
         onChange={(e) => setQuery(e.target.value)}
         className="mb-3 w-full rounded-md border border-neutral-300 px-2 py-1 text-sm text-neutral-900 placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-[#FF6A00]"
       />
-      <nav className="space-y-2">
+      <nav className="space-y-4">
         {grouped.map(({ label, items }) => (
-          <details key={label} open={!!openMap[label]} onToggle={(e) => toggle(label, (e.target as HTMLDetailsElement).open)}>
-            <summary className="mb-1 list-none cursor-pointer text-xs font-semibold uppercase text-neutral-700 focus:outline-none focus:ring-2 focus:ring-[#FF6A00]">
+          <div key={label}>
+            <div className="sticky top-0 z-10 mb-1 bg-white/90 px-1 py-1 text-xs font-semibold uppercase text-neutral-700 backdrop-blur">
               {label}
-            </summary>
+            </div>
             <ul className="space-y-1 pb-2">
               {items.map((l) => {
                 const isActive = l.slug === currentSlug;
@@ -89,25 +65,38 @@ export default function LessonSidebar({ lessons, currentSlug, completed }: Props
                 );
               })}
             </ul>
-          </details>
+          </div>
         ))}
       </nav>
     </aside>
   );
 }
 
-export function groupLessons(lessons: SidebarLesson[]): Array<{ label: string; items: SidebarLesson[] }> {
-  const intro = lessons.filter((l) => l.is_intro);
-  const bonus = lessons.filter((l) => l.is_bonus);
-  const days = lessons.filter((l) => !l.is_intro && !l.is_bonus);
-  const groups: Array<{ label: string; items: SidebarLesson[] }> = [];
-  if (intro.length) groups.push({ label: 'Intro', items: intro });
-  for (let start = 1; start <= 30; start += 5) {
-    const end = Math.min(30, start + 4);
-    const items = days.filter((d) => (d.day ?? 0) >= start && (d.day ?? 0) <= end);
-    if (items.length) groups.push({ label: `Days ${start}–${end}`, items });
+export function groupLessonsByCategory(lessons: SidebarLesson[]): Array<{ label: string; items: SidebarLesson[] }> {
+  const order = ['Intro', 'Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Bonus'];
+  function inferCategory(l: SidebarLesson): string {
+    if (l.category) return l.category;
+    if (l.is_intro) return 'Intro';
+    if (l.is_bonus) return 'Bonus';
+    const d = l.day ?? 0;
+    if (d <= 7) return 'Week 1';
+    if (d <= 14) return 'Week 2';
+    if (d <= 21) return 'Week 3';
+    if (d <= 28) return 'Week 4';
+    return 'Week 5';
   }
-  if (bonus.length) groups.push({ label: 'Bonus', items: bonus });
+  const map = new Map<string, SidebarLesson[]>();
+  for (const l of lessons) {
+    const c = inferCategory(l);
+    const arr = map.get(c) ?? [];
+    arr.push(l);
+    map.set(c, arr);
+  }
+  const groups: Array<{ label: string; items: SidebarLesson[] }> = [];
+  for (const label of order) {
+    const items = map.get(label);
+    if (items && items.length) groups.push({ label, items });
+  }
   return groups;
 }
 

@@ -6,6 +6,7 @@ import { getServerSupabase } from '@/lib/supabaseServer';
 import FavoriteToggle from '@/components/FavoriteToggle';
 import ClientFavoritesRow from '@/components/ClientFavoritesRow';
 import WeekAccordion, { WeekGroup as AccordionWeekGroup } from '@/components/WeekAccordion';
+import { Card as _Card } from '@/components/Card';
 
 type NextLesson = { slug: string; title: string } | null;
 type OutlineItem = { slug: string; title: string; completed: boolean; id?: string; favorited?: boolean; day?: number | null };
@@ -65,7 +66,7 @@ export default async function DashboardPage() {
         // Find next lesson: first published lesson not completed
         const { data: lessons } = await supabase
             .from('lessons')
-            .select('id, slug, title, day, is_intro, is_bonus, published, sort_order')
+            .select('id, slug, title, day, is_intro, is_bonus, published, sort_order, category, tags')
             .eq('published', true)
             .order('is_intro', { ascending: false })
             .order('day', { ascending: true, nullsFirst: true })
@@ -88,31 +89,33 @@ export default async function DashboardPage() {
             const next = lessons.find(l => !completedIds.has(l.id));
             nextLesson = next ? { slug: next.slug, title: next.title } : null;
 
-            // Build outline groups (Weeks 1–5 + Bonus in Week 5; Intro in Week 1)
-            const groups: WeekGroup[] = [
-                { label: 'Week 1 (Intro + Days 1–7)', items: [], completedCount: 0, nextSlug: null },
-                { label: 'Week 2 (Days 8–14)', items: [], completedCount: 0, nextSlug: null },
-                { label: 'Week 3 (Days 15–21)', items: [], completedCount: 0, nextSlug: null },
-                { label: 'Week 4 (Days 22–28)', items: [], completedCount: 0, nextSlug: null },
-                { label: 'Week 5 (Days 29–31 + Bonus)', items: [], completedCount: 0, nextSlug: null },
-            ];
-            for (const l of lessons) {
-                const completed = completedIds.has(l.id);
-                const item: OutlineItem = { slug: l.slug, title: l.title, completed, id: l.id, favorited: favoredIds.has(l.id), day: l.day ?? null };
-                const d = l.day ?? (l.is_intro ? 1 : null);
-                let idx = 0;
-                if (d == null) {
-                    // bonus → week 5
-                    idx = 4;
-                } else if (d <= 7) idx = 0;
-                else if (d <= 14) idx = 1;
-                else if (d <= 21) idx = 2;
-                else if (d <= 28) idx = 3;
-                else idx = 4;
-                groups[idx].items.push(item);
-                if (completed) groups[idx].completedCount += 1;
+            // Category-based outline
+            const order = ['Intro', 'Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Bonus'];
+            const groupsMap = new Map<string, WeekGroup>();
+            function inferCategory(l: any): string {
+                if (l.category) return l.category as string;
+                if (l.is_intro) return 'Intro';
+                if (l.is_bonus) return 'Bonus';
+                const d = l.day ?? 0;
+                if (d <= 7) return 'Week 1';
+                if (d <= 14) return 'Week 2';
+                if (d <= 21) return 'Week 3';
+                if (d <= 28) return 'Week 4';
+                return 'Week 5';
             }
-            // compute per-group next slug (first incomplete or first item)
+            for (const l of lessons) {
+                const cat = inferCategory(l);
+                const g = groupsMap.get(cat) ?? { label: cat, items: [], completedCount: 0, nextSlug: null };
+                const completed = completedIds.has(l.id);
+                g.items.push({ slug: l.slug, title: l.title, completed, id: l.id, favorited: favoredIds.has(l.id), day: l.day ?? null });
+                if (completed) g.completedCount += 1;
+                groupsMap.set(cat, g);
+            }
+            const groups: WeekGroup[] = [];
+            for (const k of order) {
+                const g = groupsMap.get(k);
+                if (g) groups.push(g);
+            }
             for (const g of groups) {
                 const firstIncomplete = g.items.find((it) => !it.completed);
                 g.nextSlug = (firstIncomplete || g.items[0])?.slug ?? null;

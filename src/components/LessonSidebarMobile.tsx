@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useMemo, useState } from 'react';
 import type { SidebarLesson } from './LessonSidebar';
-import { groupLessons } from './LessonSidebar';
+import { groupLessonsByCategory } from './LessonSidebar';
 
 type Props = {
   lessons: SidebarLesson[];
@@ -20,7 +20,7 @@ export default function LessonSidebarMobile({ lessons, currentSlug, completed }:
     const q = query.toLowerCase();
     return lessons.filter((l) => l.title.toLowerCase().includes(q) || l.slug.includes(q));
   }, [lessons, query]);
-  const grouped = useMemo(() => groupLessons(filtered), [filtered]);
+  const grouped = useMemo(() => groupLessonsByCategory(filtered), [filtered]);
 
   return (
     <>

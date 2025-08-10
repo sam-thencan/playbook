@@ -22,6 +22,8 @@ export async function PATCH(_req: Request, { params }: { params: { id: string } 
     estimated_minutes: (body.estimated_minutes as number | null | undefined),
     resources: (Array.isArray(body.resources) ? body.resources : undefined),
     body: (Array.isArray(body.body) ? body.body : undefined),
+    category: (typeof body.category === 'string' ? (body.category as string | null) : undefined),
+    tags: (Array.isArray(body.tags) ? (body.tags as any[]).map(String) : undefined),
     sort_order: (typeof body.sort_order === 'number' ? body.sort_order : undefined),
     published: body.published as boolean | undefined,
   };

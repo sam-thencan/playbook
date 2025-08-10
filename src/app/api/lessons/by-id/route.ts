@@ -8,7 +8,7 @@ export async function GET(request: Request) {
   const supabase = getServerSupabase();
   const { data, error } = await supabase
     .from('lessons')
-    .select('id, title, slug, day, is_intro, is_bonus, estimated_minutes, resources, body, sort_order, published')
+    .select('id, title, slug, day, is_intro, is_bonus, estimated_minutes, resources, body, sort_order, published, category, tags')
     .eq('id', id)
     .maybeSingle();
   if (error || !data) return NextResponse.json({ error: 'Not found' }, { status: 404 });

@@ -12,7 +12,7 @@ export default function AdminLessonsEditPage() {
     const search = useSearchParams();
     const id = search.get('id');
     const [loading, setLoading] = useState(false);
-    const [form, setForm] = useState<Record<string, any>>({ published: true, body: [] });
+    const [form, setForm] = useState<Record<string, any>>({ published: true, body: [], tags: [] });
     const [blocks, setBlocks] = useState<LessonBlock[]>([]);
     const { addBlock, removeBlock, moveBlock, updateBlock } = useBlockOps(blocks, setBlocks);
     const { notify } = useToast();
@@ -23,7 +23,14 @@ export default function AdminLessonsEditPage() {
             const res = await fetch(`/api/lessons/by-id?id=${id}`);
             if (res.ok) {
                 const data = await res.json();
-                setForm({ ...data, resources: data.resources ?? [], body: data.body ?? [], published: data.published ?? true });
+                setForm({
+                    ...data,
+                    resources: data.resources ?? [],
+                    body: data.body ?? [],
+                    published: data.published ?? true,
+                    category: data.category ?? '',
+                    tags: Array.isArray(data.tags) ? data.tags : [],
+                });
                 setBlocks((data.body as LessonBlock[]) ?? []);
             }
         })();
@@ -45,6 +52,8 @@ export default function AdminLessonsEditPage() {
             estimated_minutes: form.estimated_minutes ? Number(form.estimated_minutes) : null,
             resources: safeJsonArray(form.resources),
             body: blocks,
+            category: (form.category ?? '').trim() || null,
+            tags: toTagsArray(form.tags),
             published: !!form.published,
             sort_order: form.sort_order ? Number(form.sort_order) : 0,
         };
@@ -96,6 +105,31 @@ export default function AdminLessonsEditPage() {
                             <input type="checkbox" name="is_bonus" checked={!!form.is_bonus} onChange={(e) => update('is_bonus', e.target.checked)} />
                             <span>Bonus</span>
                         </label>
+                    </div>
+
+                    <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+                        <label className="grid gap-1 sm:col-span-1">
+                            <span className="text-sm text-neutral-600">Category</span>
+                            <select
+                                className="rounded-[10px] border px-3 py-2"
+                                name="category"
+                                value={form.category ?? ''}
+                                onChange={(e) => update('category', e.target.value)}
+                            >
+                                <option value="">(auto from day)</option>
+                                <option value="Intro">Intro</option>
+                                <option value="Week 1">Week 1</option>
+                                <option value="Week 2">Week 2</option>
+                                <option value="Week 3">Week 3</option>
+                                <option value="Week 4">Week 4</option>
+                                <option value="Week 5">Week 5</option>
+                                <option value="Bonus">Bonus</option>
+                            </select>
+                        </label>
+                        <div className="sm:col-span-2">
+                            <span className="mb-1 block text-sm text-neutral-600">Tags</span>
+                            <TagEditor value={form.tags ?? []} onChange={(tags) => update('tags', tags)} />
+                        </div>
                     </div>
 
                     <label className="grid gap-1">
@@ -184,6 +218,12 @@ function safeJsonArray(value: any) {
     } catch {
         return [];
     }
+}
+
+function toTagsArray(value: any): string[] {
+    if (Array.isArray(value)) return value.map(String).filter(Boolean);
+    if (typeof value === 'string') return value.split(',').map((s) => s.trim()).filter(Boolean);
+    return [];
 }
 
 function BlockAddButton({ label, onClick }: { label: string; onClick: () => void }) {
@@ -342,6 +382,44 @@ function markdownToBlocks(md: string): LessonBlock[] {
     }
     flushList();
     return out;
+}
+
+function TagEditor({ value, onChange }: { value: string[]; onChange: (tags: string[]) => void }) {
+    const [input, setInput] = useState('');
+    function addFromInput() {
+        const next = input.split(',').map((s) => s.trim()).filter(Boolean);
+        if (!next.length) return;
+        const merged = Array.from(new Set([...(value || []).map(String), ...next]));
+        onChange(merged);
+        setInput('');
+    }
+    function remove(tag: string) {
+        onChange((value || []).filter((t) => t !== tag));
+    }
+    return (
+        <div className="rounded-[10px] border p-2">
+            <div className="flex flex-wrap gap-2">
+                {(value || []).map((tag) => (
+                    <span key={tag} className="inline-flex items-center gap-1 rounded-full bg-neutral-100 px-2 py-1 text-xs">
+                        {tag}
+                        <button type="button" className="rounded px-1 hover:bg-neutral-200" onClick={() => remove(tag)} aria-label={`Remove ${tag}`}>×</button>
+                    </span>
+                ))}
+            </div>
+            <div className="mt-2 flex gap-2">
+                <input
+                    className="flex-1 rounded-[10px] border px-3 py-2 text-sm"
+                    placeholder="Add tag and press Enter or comma"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ',') { e.preventDefault(); addFromInput(); }
+                    }}
+                />
+                <Button type="button" variant="secondary" onClick={addFromInput}>Add</Button>
+            </div>
+        </div>
+    );
 }
 
 

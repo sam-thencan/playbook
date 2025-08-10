@@ -4,6 +4,7 @@
 
 -- Extensions
 create extension if not exists "pgcrypto";
+create extension if not exists "pg_trgm";
 
 -- Helper: updated_at trigger
 create or replace function public.set_updated_at()
@@ -171,6 +172,10 @@ create table if not exists public.lessons (
   body jsonb not null default '[]'::jsonb, -- rich body blocks
   resources jsonb not null default '[]'::jsonb, -- array of {label, url}
   estimated_minutes integer, -- estimated time to complete
+  category text, -- Intro | Week 1..5 | Bonus (optional; UI derives from day if null)
+  tags text[] not null default '{}'::text[], -- search/filter tags
+  tags_text text not null default '', -- denormalized tags for search
+  body_text text not null default '', -- denormalized plain text for simple search
   sort_order integer not null default 0,
   cta jsonb, -- optional {label, url}
   published boolean not null default true,
@@ -194,6 +199,57 @@ drop trigger if exists trg_lessons_updated_at on public.lessons;
 create trigger trg_lessons_updated_at
 before update on public.lessons
 for each row execute procedure public.set_updated_at();
+
+-- Compute body_text from JSON body blocks on insert/update
+create or replace function public.compute_body_text(p_body jsonb)
+returns text
+language sql
+stable
+as $$
+  with elems as (
+    select elem, ord
+    from jsonb_array_elements(coalesce(p_body, '[]'::jsonb)) with ordinality as t(elem, ord)
+  ),
+  parts as (
+    select ord, nullif(elem->>'content','') as part
+    from elems
+    where elem->>'type' in ('paragraph','heading')
+    union all
+    select e.ord,
+           nullif(string_agg(li, ' '), '') as part
+    from elems e
+    join lateral jsonb_array_elements_text(coalesce(e.elem->'items','[]'::jsonb)) as li on true
+    where e.elem->>'type' = 'list'
+    group by e.ord
+  )
+  select coalesce(trim(regexp_replace(string_agg(part, ' ' order by ord), '\\s+', ' ', 'g')), '')
+  from parts
+  where part is not null
+$$;
+
+create or replace function public.lessons_set_body_text()
+returns trigger
+language plpgsql
+as $$
+begin
+  new.body_text := public.compute_body_text(new.body);
+  new.tags_text := coalesce(array_to_string(new.tags, ' '), '');
+  return new;
+end;
+$$;
+
+drop trigger if exists trg_lessons_set_body_text on public.lessons;
+create trigger trg_lessons_set_body_text
+before insert or update of body or update of tags on public.lessons
+for each row
+execute procedure public.lessons_set_body_text();
+
+-- Search-friendly indexes
+create index if not exists idx_lessons_title_trgm on public.lessons using gin (title gin_trgm_ops);
+create index if not exists idx_lessons_body_text_trgm on public.lessons using gin (body_text gin_trgm_ops);
+create index if not exists idx_lessons_tags_text_trgm on public.lessons using gin (tags_text gin_trgm_ops);
+create index if not exists idx_lessons_tags_gin on public.lessons using gin (tags);
+create index if not exists idx_lessons_category on public.lessons (category);
 
 alter table public.lessons enable row level security;
 
