@@ -56,13 +56,15 @@ export function Renderer({ blocks }: Props) {
                                 {b.caption && <figcaption className="text-sm text-neutral-600">{b.caption}</figcaption>}
                             </figure>
                         );
-                    case 'video':
+                    case 'video': {
+                        const src = normalizeVideoUrl(b);
                         return (
                             <div key={i} className="aspect-video w-full overflow-hidden rounded-md ring-1 ring-neutral-200">
-                                <iframe className="h-full w-full" src={b.url} title={b.caption || 'Video'} allowFullScreen />
+                                <iframe className="h-full w-full" src={src} title={b.caption || 'Video'} allowFullScreen />
                                 {b.caption && <p className="mt-1 text-sm text-neutral-600">{b.caption}</p>}
                             </div>
                         );
+                    }
           case 'code':
             return (
               <pre key={i} className="overflow-x-auto rounded-md bg-neutral-900 p-4 text-neutral-100">
@@ -75,6 +77,23 @@ export function Renderer({ blocks }: Props) {
             })}
         </div>
     );
+}
+
+function normalizeVideoUrl(b: Extract<LessonBlock, { type: 'video' }>): string {
+    if (b.provider === 'youtube') {
+        const url = new URL(b.url, 'https://youtube.com');
+        // Accept share URLs like https://www.youtube.com/watch?v=VIDEOID or youtu.be/VIDEOID and produce embed
+        let id = '';
+        if (url.hostname.includes('youtu.be')) {
+            id = url.pathname.replace('/', '');
+        } else if (url.searchParams.get('v')) {
+            id = url.searchParams.get('v') as string;
+        } else if (url.pathname.includes('/embed/')) {
+            id = url.pathname.split('/embed/')[1] || '';
+        }
+        if (id) return `https://www.youtube.com/embed/${id}`;
+    }
+    return b.url;
 }
 
 

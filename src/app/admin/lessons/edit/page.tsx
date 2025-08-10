@@ -110,7 +110,7 @@ export default function AdminLessonsEditPage() {
                             <BlockAddButton label="Heading" onClick={() => addBlock({ type: 'heading', level: 2, content: 'Section title' })} />
                             <BlockAddButton label="List" onClick={() => addBlock({ type: 'list', items: ['Item'] })} />
                             <BlockAddButton label="Image" onClick={() => addBlock({ type: 'image', url: 'https://picsum.photos/800/400', caption: 'Image' })} />
-                            <BlockAddButton label="Video" onClick={() => addBlock({ type: 'video', provider: 'youtube', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ' })} />
+                            <BlockAddButton label="Video" onClick={() => addBlock({ type: 'video', provider: 'youtube', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' })} />
                             <BlockAddButton label="Code" onClick={() => addBlock({ type: 'code', language: 'ts', content: 'console.log("hello")' })} />
                         </div>
                         <div className="mt-2 flex items-center gap-2">
