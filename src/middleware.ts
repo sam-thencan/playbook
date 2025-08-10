@@ -27,7 +27,13 @@ export async function middleware(req: NextRequest) {
     },
   });
 
+  // Important: allow the OAuth callback to exchange the code for a session.
+  // When returning from Supabase (e.g., /dashboard?code=...), getUser() will
+  // set cookies on `res`. We must NOT redirect away on this first pass.
   const { data: { user } } = await supabase.auth.getUser();
+  if (url.searchParams.has('code')) {
+    return res;
+  }
   if (!user) {
     const redirect = new URL('/login', req.url);
     redirect.searchParams.set('redirect', url.pathname);
