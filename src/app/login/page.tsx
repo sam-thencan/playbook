@@ -1,6 +1,6 @@
 'use client';
 
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { supabase } from '@/lib/supabaseClient';
 import { Card } from '@/components/Card';
@@ -18,6 +18,18 @@ export default function LoginPage() {
   const [message, setMessage] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+
+  // If we already have a session, immediately continue to the redirect target.
+  useEffect(() => {
+    let active = true;
+    (async () => {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (active && user) {
+        router.replace(redirect);
+      }
+    })();
+    return () => { active = false; };
+  }, [redirect, router]);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -49,8 +61,9 @@ export default function LoginPage() {
   async function onGoogle() {
     setLoading(true);
     setError(null);
-    const dest = (process.env.NEXT_PUBLIC_SITE_URL || window.location.origin) + redirect;
-    const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: dest } });
+    const origin = process.env.NEXT_PUBLIC_SITE_URL || window.location.origin;
+    const callback = `${origin}/auth/callback?redirect=${encodeURIComponent(redirect)}`;
+    const { data, error } = await supabase.auth.signInWithOAuth({ provider: 'google', options: { redirectTo: callback } });
     if (error) setError(error.message);
     setLoading(false);
   }

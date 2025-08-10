@@ -5,7 +5,7 @@ export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const isAdminPath = url.pathname.startsWith('/admin');
   const needsAuth = isAdminPath || url.pathname === '/dashboard' || url.pathname.startsWith('/lesson/');
-  const isPayPath = url.pathname === '/pay' || url.pathname.startsWith('/api/checkout');
+  const isPayPath = url.pathname === '/pay' || url.pathname.startsWith('/api/checkout') || url.pathname.startsWith('/api/auth/callback');
   if (!needsAuth) return NextResponse.next();
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;

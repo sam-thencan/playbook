@@ -99,6 +99,41 @@ export default async function LessonPage({ params }: LessonPageProps) {
                         </div>
                     </header>
 
+                    {/* Featured video: first video block if present */}
+                    {Array.isArray(lesson?.body) && (lesson.body as any[]).some((b: any) => b.type === 'video') && (
+                        <div className="mb-6 overflow-hidden rounded-md ring-1 ring-neutral-200">
+                            <div className="aspect-video w-full">
+                                {/* eslint-disable-next-line jsx-a11y/iframe-has-title */}
+                                <iframe
+                                    className="h-full w-full"
+                                    src={(function () {
+                                        const v = (lesson!.body as any[]).find((b: any) => b.type === 'video');
+                                        if (!v) return '';
+                                        try {
+                                            const url = new URL(v.url, 'https://youtube.com');
+                                            if (v.provider === 'youtube') {
+                                                let id = '';
+                                                if (url.hostname.includes('youtu.be')) id = url.pathname.replace('/', '');
+                                                else if (url.searchParams.get('v')) id = url.searchParams.get('v') as string;
+                                                else if (url.pathname.includes('/embed/')) id = url.pathname.split('/embed/')[1] || '';
+                                                if (id) return `https://www.youtube.com/embed/${id}`;
+                                            }
+                                            if (v.provider === 'loom' && url.hostname.includes('loom.com')) {
+                                                const parts = url.pathname.split('/').filter(Boolean);
+                                                const idx = parts.indexOf('share');
+                                                if (idx >= 0 && parts[idx + 1]) return `https://www.loom.com/embed/${parts[idx + 1]}`;
+                                                const eidx = parts.indexOf('embed');
+                                                if (eidx >= 0 && parts[eidx + 1]) return `https://www.loom.com/embed/${parts[eidx + 1]}`;
+                                            }
+                                        } catch { }
+                                        return v.url ?? '';
+                                    })()}
+                                    allowFullScreen
+                                />
+                            </div>
+                        </div>
+                    )}
+
                     <article className="prose prose-neutral max-w-none">
                         <Card>
                             <div className="p-6">

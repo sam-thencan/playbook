@@ -136,6 +136,7 @@ export default function AdminLessonsEditPage() {
                                         <div className="space-x-2">
                                             <Button type="button" variant="secondary" onClick={() => moveBlock(i, -1)}>Up</Button>
                                             <Button type="button" variant="secondary" onClick={() => moveBlock(i, 1)}>Down</Button>
+                                            <Button type="button" variant="secondary" onClick={() => moveBlock(i, -i)}>Top</Button>
                                             <Button type="button" variant="secondary" onClick={() => removeBlock(i)}>Remove</Button>
                                         </div>
                                     </div>
