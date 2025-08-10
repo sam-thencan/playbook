@@ -5,7 +5,8 @@ export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const isAdminPath = url.pathname.startsWith('/admin');
   const needsAuth = isAdminPath || url.pathname === '/dashboard' || url.pathname.startsWith('/lesson/') || url.pathname === '/perks' || url.pathname === '/favorites';
-  const isPayPath = url.pathname === '/pay' || url.pathname.startsWith('/api/checkout') || url.pathname.startsWith('/api/auth/callback');
+  const isAuthCallback = url.pathname.startsWith('/api/auth/callback');
+  const isPayPath = url.pathname === '/pay' || url.pathname.startsWith('/api/checkout') || isAuthCallback;
   if (!needsAuth) return NextResponse.next();
 
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
@@ -31,7 +32,7 @@ export async function middleware(req: NextRequest) {
   // When returning from Supabase (e.g., /dashboard?code=...), getUser() will
   // set cookies on `res`. We must NOT redirect away on this first pass.
   const { data: { user } } = await supabase.auth.getUser();
-  if (url.searchParams.has('code')) {
+  if (isAuthCallback || url.searchParams.has('code')) {
     return res;
   }
   if (!user) {
