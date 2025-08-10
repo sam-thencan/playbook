@@ -90,30 +90,30 @@ export default async function DashboardPage() {
             nextLesson = next ? { slug: next.slug, title: next.title } : null;
 
             // Category-based outline
-            const order = ['Intro', 'Week 1', 'Week 2', 'Week 3', 'Week 4', 'Week 5', 'Bonus'];
+            const order = ['Week 1 (Intro + Days 1–7)', 'Week 2 (Days 8–14)', 'Week 3 (Days 15–21)', 'Week 4 (Days 22–28)', 'Week 5 (Days 29–31 + Bonus)'];
             const groupsMap = new Map<string, WeekGroup>();
-            function inferCategory(l: any): string {
-                if (l.category) return l.category as string;
-                if (l.is_intro) return 'Intro';
-                if (l.is_bonus) return 'Bonus';
-                const d = l.day ?? 0;
-                if (d <= 7) return 'Week 1';
-                if (d <= 14) return 'Week 2';
-                if (d <= 21) return 'Week 3';
-                if (d <= 28) return 'Week 4';
-                return 'Week 5';
+            function labelFor(l: any): string {
+                const d = l.day ?? (l.is_intro ? 1 : null);
+                if (l.is_bonus || (d != null && d >= 29)) return 'Week 5 (Days 29–31 + Bonus)';
+                if (d != null) {
+                    if (d <= 7) return 'Week 1 (Intro + Days 1–7)';
+                    if (d <= 14) return 'Week 2 (Days 8–14)';
+                    if (d <= 21) return 'Week 3 (Days 15–21)';
+                    if (d <= 28) return 'Week 4 (Days 22–28)';
+                }
+                return 'Week 1 (Intro + Days 1–7)';
             }
             for (const l of lessons) {
-                const cat = inferCategory(l);
-                const g = groupsMap.get(cat) ?? { label: cat, items: [], completedCount: 0, nextSlug: null };
+                const lab = labelFor(l);
+                const g = groupsMap.get(lab) ?? { label: lab, items: [], completedCount: 0, nextSlug: null };
                 const completed = completedIds.has(l.id);
                 g.items.push({ slug: l.slug, title: l.title, completed, id: l.id, favorited: favoredIds.has(l.id), day: l.day ?? null });
                 if (completed) g.completedCount += 1;
-                groupsMap.set(cat, g);
+                groupsMap.set(lab, g);
             }
             const groups: WeekGroup[] = [];
-            for (const k of order) {
-                const g = groupsMap.get(k);
+            for (const label of order) {
+                const g = groupsMap.get(label);
                 if (g) groups.push(g);
             }
             for (const g of groups) {
