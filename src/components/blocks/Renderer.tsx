@@ -7,7 +7,8 @@ export type LessonBlock =
     | { type: 'list'; ordered?: boolean; items: string[] }
     | { type: 'image'; url: string; alt?: string; caption?: string }
     | { type: 'video'; provider: 'youtube' | 'loom' | 'vimeo' | 'file'; url: string; caption?: string }
-    | { type: 'code'; language?: string; content: string };
+    | { type: 'code'; language?: string; content: string }
+    | { type: 'link'; url: string; label?: string };
 
 type Props = PropsWithChildren & {
     blocks: LessonBlock[];
@@ -31,6 +32,21 @@ export function Renderer({ blocks }: Props) {
                                 {b.content}
                             </p>
                         );
+                    case 'link': {
+                        const isExternal = /^https?:\/\//i.test(b.url);
+                        const href = b.url.startsWith('/') ? b.url : b.url;
+                        return (
+                            <p key={i}>
+                                <a
+                                    href={href}
+                                    className="text-[#FF6A00] underline-offset-2 hover:underline focus:underline"
+                                    {...(isExternal ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
+                                >
+                                    {b.label || b.url}
+                                </a>
+                            </p>
+                        );
+                    }
                     case 'heading':
                         if (b.level === 3) return <h3 key={i}>{b.content}</h3>;
                         if (b.level === 4) return <h4 key={i}>{b.content}</h4>;

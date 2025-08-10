@@ -139,13 +139,14 @@ export default function AdminLessonsEditPage() {
 
                     <fieldset className="grid gap-2 rounded-[10px] border p-3">
                         <legend className="px-1 text-sm text-neutral-600">Body Blocks</legend>
-                        <div className="flex flex-wrap gap-2">
+                         <div className="flex flex-wrap gap-2">
                             <BlockAddButton label="Paragraph" onClick={() => addBlock({ type: 'paragraph', content: 'New paragraph' })} />
                             <BlockAddButton label="Heading" onClick={() => addBlock({ type: 'heading', level: 2, content: 'Section title' })} />
                             <BlockAddButton label="List" onClick={() => addBlock({ type: 'list', items: ['Item'] })} />
                             <BlockAddButton label="Image" onClick={() => addBlock({ type: 'image', url: 'https://picsum.photos/800/400', caption: 'Image' })} />
                             <BlockAddButton label="Video (YouTube)" onClick={() => addBlock({ type: 'video', provider: 'youtube', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' })} />
                             <BlockAddButton label="Video (Loom)" onClick={() => addBlock({ type: 'video', provider: 'loom', url: 'https://www.loom.com/share/VIDEOID' })} />
+                             <BlockAddButton label="Link" onClick={() => addBlock({ type: 'link', url: '/lesson/day-2', label: 'Go to Day 2' })} />
                             <BlockAddButton label="Code" onClick={() => addBlock({ type: 'code', language: 'ts', content: 'console.log("hello")' })} />
                         </div>
                         <div className="mt-2 flex items-center gap-2">
@@ -306,6 +307,15 @@ function BlockEditor({ block, onChange }: { block: LessonBlock; onChange: (b: Le
                         value={block.url}
                         onChange={(e) => onChange({ ...block, url: e.target.value })}
                     />
+                </div>
+            );
+        case 'link':
+            return (
+                <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                    <input className="rounded-md border p-2" placeholder="URL (https://... or /lesson/slug)" value={(block as any).url}
+                        onChange={(e) => onChange({ ...(block as any), url: e.target.value })} />
+                    <input className="rounded-md border p-2" placeholder="Label (optional)" value={(block as any).label || ''}
+                        onChange={(e) => onChange({ ...(block as any), label: e.target.value })} />
                 </div>
             );
         case 'code':

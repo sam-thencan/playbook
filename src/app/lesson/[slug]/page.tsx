@@ -193,18 +193,18 @@ export default async function LessonPage({ params }: LessonPageProps) {
                             </section>
                         )}
 
-                        <div className="mt-8 hidden items-center justify-between lg:flex">
+                        <div className="mt-8 hidden items-center justify-between gap-4 lg:flex">
                             <div>
                                 {prevSlug && (
                                     <Link href={`/lesson/${prevSlug}`}>
-                                        <Button variant="secondary">← Previous</Button>
+                                        <Button variant="secondary" className="min-w-[140px] justify-center">← Previous</Button>
                                     </Link>
                                 )}
                             </div>
                             <div>
                                 {nextSlug && (
                                     <Link href={`/lesson/${nextSlug}`}>
-                                        <Button variant="secondary">Next →</Button>
+                                        <Button variant="secondary" className="min-w-[140px] justify-center">Next →</Button>
                                     </Link>
                                 )}
                             </div>
