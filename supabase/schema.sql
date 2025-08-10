@@ -184,6 +184,22 @@ create table if not exists public.lessons (
   constraint lessons_day_bounds check (day is null or (day between 0 and 30))
 );
 
+-- Ensure new columns exist when migrating older databases
+do $$ begin
+  if not exists (select 1 from information_schema.columns where table_schema='public' and table_name='lessons' and column_name='category') then
+    alter table public.lessons add column category text;
+  end if;
+  if not exists (select 1 from information_schema.columns where table_schema='public' and table_name='lessons' and column_name='tags') then
+    alter table public.lessons add column tags text[] not null default '{}'::text[];
+  end if;
+  if not exists (select 1 from information_schema.columns where table_schema='public' and table_name='lessons' and column_name='tags_text') then
+    alter table public.lessons add column tags_text text not null default '';
+  end if;
+  if not exists (select 1 from information_schema.columns where table_schema='public' and table_name='lessons' and column_name='body_text') then
+    alter table public.lessons add column body_text text not null default '';
+  end if;
+end $$;
+
 -- Only one non-bonus, non-intro lesson per day
 create unique index if not exists idx_lessons_day_unique
 on public.lessons (day)
