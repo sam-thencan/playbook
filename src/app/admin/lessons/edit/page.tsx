@@ -274,15 +274,35 @@ function BlockEditor({ block, onChange }: { block: LessonBlock; onChange: (b: Le
             );
         case 'image':
             return (
-                <div className="mt-2 grid gap-2 sm:grid-cols-2">
+                <div className="mt-2 grid gap-2 sm:grid-cols-3">
                     <input
-                        className="rounded-md border p-2"
+                        className="rounded-md border p-2 sm:col-span-2"
                         placeholder="Image URL"
                         value={block.url}
                         onChange={(e) => onChange({ ...block, url: e.target.value })}
                     />
+                    <form
+                        action="/api/lessons/image-upload"
+                        method="post"
+                        encType="multipart/form-data"
+                        onChange={async (e: any) => {
+                            const input = e.currentTarget.querySelector('input[type=file]') as HTMLInputElement;
+                            const file = input.files?.[0];
+                            if (!file) return;
+                            const fd = new FormData();
+                            fd.append('file', file);
+                            const res = await fetch('/api/lessons/image-upload', { method: 'POST', body: fd });
+                            if (res.ok) {
+                                const { url } = await res.json();
+                                onChange({ ...block, url });
+                                input.value = '';
+                            }
+                        }}
+                    >
+                        <input type="file" accept="image/*" />
+                    </form>
                     <input
-                        className="rounded-md border p-2"
+                        className="rounded-md border p-2 sm:col-span-3"
                         placeholder="Caption"
                         value={block.caption || ''}
                         onChange={(e) => onChange({ ...block, caption: e.target.value })}

@@ -8,11 +8,12 @@ This repo supports a simple Markdown subset that maps 1:1 to our lesson blocks. 
 - `- List item` (one per line, contiguous) → list block
 - Any other non-empty line → paragraph block (one paragraph per line)
 - Blank line → separates blocks (flushes lists/paragraphs)
- - A bare YouTube or Loom URL on its own line → video block (auto-detected)
+- A bare YouTube or Loom URL on its own line → featured video (rendered above content; first one only)
+- `[Label](https://example.com)` or a bare absolute URL → link block
 
 ## Not supported (imported as plain paragraphs or ignored)
 - H1 `#` headings
-- Links/formatting (bold/italic), tables
+- Rich text formatting (bold/italic), tables
 - Images `![]()` and code fences
 
 ## Authoring rules
