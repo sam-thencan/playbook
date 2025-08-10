@@ -30,13 +30,13 @@ Priority order (current):
   - [ ] `/pay` page with one-time purchase CTA (Stripe Checkout)
   - [ ] Server: `/api/checkout` creates Checkout Session (price via `STRIPE_PRICE_ID`), ties `supabase_user_id`
   - [ ] Server: `/api/stripe/webhook` verifies signature; on `checkout.session.completed` → set `has_access=true` and log event
-  - [ ] Env: `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`, `STRIPE_WEBHOOK_SECRET`
+  - [X] Env: `STRIPE_SECRET_KEY`, `STRIPE_PRICE_ID`, `STRIPE_WEBHOOK_SECRET`
   - [ ] E2E QA (new user → pay → instant access)
 
 - Google sign‑in
-  - [ ] Enable Google provider in Supabase; add dev/prod OAuth creds
-  - [ ] Add "Continue with Google" button on `/login` (redirect to `/dashboard`)
-  - [ ] QA: session persists SSR/CSR; works with existing email accounts
+  - [X] Enable Google provider in Supabase; add dev/prod OAuth creds
+  - [X] Add "Continue with Google" button on `/login` (redirect to `/dashboard`)
+  - [X] QA: session persists SSR/CSR; works with existing email accounts
 
 - Deploy / liveness
   - [ ] Vercel project + env for `course.30dayseo.com`

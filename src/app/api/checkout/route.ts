@@ -23,6 +23,7 @@ export async function POST(req: NextRequest) {
     mode: 'payment',
     customer: customer.id,
     line_items: [{ price: priceId, quantity: 1 }],
+    allow_promotion_codes: true,
     client_reference_id: user.id,
     metadata: { supabase_user_id: user.id },
     success_url: `${origin}/pay/return?session_id={CHECKOUT_SESSION_ID}`,

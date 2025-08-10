@@ -113,6 +113,20 @@ export default function AdminLessonsEditPage() {
                             <BlockAddButton label="Video" onClick={() => addBlock({ type: 'video', provider: 'youtube', url: 'https://www.youtube.com/embed/dQw4w9WgXcQ' })} />
                             <BlockAddButton label="Code" onClick={() => addBlock({ type: 'code', language: 'ts', content: 'console.log("hello")' })} />
                         </div>
+                        <div className="mt-2 flex items-center gap-2">
+                            <input
+                                type="file"
+                                accept=".md,.markdown,text/markdown,text/plain"
+                                onChange={async (e) => {
+                                    const file = e.target.files?.[0];
+                                    if (!file) return;
+                                    const text = await file.text();
+                                    const parsed = markdownToBlocks(text);
+                                    setBlocks(parsed);
+                                }}
+                            />
+                            <span className="text-sm text-neutral-600">Import Markdown</span>
+                        </div>
                         <div className="space-y-3">
                             {blocks.map((b, i) => (
                                 <div key={i} className="rounded-md border p-3">
@@ -291,6 +305,31 @@ function useBlockOps(blocks: LessonBlock[], setBlocks: (b: LessonBlock[]) => voi
         setBlocks(next);
     }
     return { addBlock, removeBlock, moveBlock, updateBlock };
+}
+
+// Very small MD → blocks converter (headings ##/###, lists -, paragraphs)
+function markdownToBlocks(md: string): LessonBlock[] {
+    const lines = md.replace(/\r\n?/g, '\n').split('\n');
+    const out: LessonBlock[] = [];
+    let list: string[] | null = null;
+    function flushList() {
+        if (list && list.length) out.push({ type: 'list', items: list });
+        list = null;
+    }
+    for (const raw of lines) {
+        const line = raw.trim();
+        if (!line) { flushList(); continue; }
+        const h2 = line.match(/^##\s+(.*)$/);
+        if (h2) { flushList(); out.push({ type: 'heading', level: 2, content: h2[1] }); continue; }
+        const h3 = line.match(/^###\s+(.*)$/);
+        if (h3) { flushList(); out.push({ type: 'heading', level: 3, content: h3[1] }); continue; }
+        const li = line.match(/^[-*]\s+(.*)$/);
+        if (li) { if (!list) list = []; list.push(li[1]); continue; }
+        flushList();
+        out.push({ type: 'paragraph', content: line });
+    }
+    flushList();
+    return out;
 }
 
 
