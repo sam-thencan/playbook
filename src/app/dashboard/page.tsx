@@ -106,6 +106,16 @@ export default async function DashboardPage() {
             const order = ['Week 1 (Intro + Days 1–7)', 'Week 2 (Days 8–14)', 'Week 3 (Days 15–21)', 'Week 4 (Days 22–28)', 'Week 5 (Days 29–31 + Bonus)'];
             const groupsMap = new Map<string, WeekGroup>();
             function labelFor(l: any): string {
+                // Prefer explicit category if present
+                const cat = (l as any).category as string | null | undefined;
+                if (cat) {
+                    if (cat === 'Intro' || cat === 'Week 1') return 'Week 1 (Intro + Days 1–7)';
+                    if (cat === 'Week 2') return 'Week 2 (Days 8–14)';
+                    if (cat === 'Week 3') return 'Week 3 (Days 15–21)';
+                    if (cat === 'Week 4') return 'Week 4 (Days 22–28)';
+                    if (cat === 'Week 5' || cat === 'Bonus') return 'Week 5 (Days 29–31 + Bonus)';
+                }
+                // Fallback by day flags
                 const d = l.day ?? (l.is_intro ? 1 : null);
                 if (l.is_bonus || (d != null && d >= 29)) return 'Week 5 (Days 29–31 + Bonus)';
                 if (d != null) {
