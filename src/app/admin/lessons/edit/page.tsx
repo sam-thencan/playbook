@@ -281,13 +281,9 @@ function BlockEditor({ block, onChange }: { block: LessonBlock; onChange: (b: Le
                         value={block.url}
                         onChange={(e) => onChange({ ...block, url: e.target.value })}
                     />
-                    <form
-                        action="/api/lessons/image-upload"
-                        method="post"
-                        encType="multipart/form-data"
-                        onChange={async (e: any) => {
-                            const input = e.currentTarget.querySelector('input[type=file]') as HTMLInputElement;
-                            const file = input.files?.[0];
+                    <div>
+                        <input type="file" accept="image/*" onChange={async (e) => {
+                            const file = (e.target as HTMLInputElement).files?.[0];
                             if (!file) return;
                             const fd = new FormData();
                             fd.append('file', file);
@@ -295,12 +291,10 @@ function BlockEditor({ block, onChange }: { block: LessonBlock; onChange: (b: Le
                             if (res.ok) {
                                 const { url } = await res.json();
                                 onChange({ ...block, url });
-                                input.value = '';
+                                (e.target as HTMLInputElement).value = '';
                             }
-                        }}
-                    >
-                        <input type="file" accept="image/*" />
-                    </form>
+                        }} />
+                    </div>
                     <input
                         className="rounded-md border p-2 sm:col-span-3"
                         placeholder="Caption"

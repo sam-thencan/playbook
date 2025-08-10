@@ -6,7 +6,7 @@ export const runtime = 'nodejs';
 export async function POST(req: NextRequest) {
     const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL as string;
     const serviceRole = process.env.SUPABASE_SERVICE_ROLE_KEY as string;
-    if (!supabaseUrl || !serviceRole) return NextResponse.json({ error: 'Missing Supabase env' }, { status: 500 });
+    if (!supabaseUrl || !serviceRole) return NextResponse.json({ error: 'Missing Supabase env (NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY)' }, { status: 500 });
 
     const supabase = createClient(supabaseUrl, serviceRole);
 
@@ -19,6 +19,8 @@ export async function POST(req: NextRequest) {
     const path = `lessons/${Date.now()}-${Math.random().toString(36).slice(2)}.${ext}`;
 
     const bytes = await file.arrayBuffer();
+    // Ensure bucket exists (ignore if exists)
+    try { await (supabase.storage as any).createBucket('lessons', { public: true }); } catch {}
     const { error } = await supabase.storage.from('lessons').upload(path, new Uint8Array(bytes), {
         cacheControl: '3600', upsert: false, contentType: file.type || 'image/jpeg'
     });
