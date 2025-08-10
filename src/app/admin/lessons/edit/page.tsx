@@ -93,7 +93,7 @@ export default function AdminLessonsEditPage() {
                     <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
                         <label className="grid gap-1">
                             <span className="text-sm text-neutral-600">Day (optional)</span>
-                            <input className="rounded-[10px] border px-3 py-2" name="day" type="number" min={0} max={30} value={form.day ?? ''} onChange={(e) => update('day', e.target.value)} />
+                            <input className="rounded-[10px] border px-3 py-2" name="day" type="number" min={0} max={365} value={form.day ?? ''} onChange={(e) => update('day', e.target.value)} />
                         </label>
 
                         <label className="flex items-center gap-2">
@@ -139,14 +139,14 @@ export default function AdminLessonsEditPage() {
 
                     <fieldset className="grid gap-2 rounded-[10px] border p-3">
                         <legend className="px-1 text-sm text-neutral-600">Body Blocks</legend>
-                         <div className="flex flex-wrap gap-2">
+                        <div className="flex flex-wrap gap-2">
                             <BlockAddButton label="Paragraph" onClick={() => addBlock({ type: 'paragraph', content: 'New paragraph' })} />
                             <BlockAddButton label="Heading" onClick={() => addBlock({ type: 'heading', level: 2, content: 'Section title' })} />
                             <BlockAddButton label="List" onClick={() => addBlock({ type: 'list', items: ['Item'] })} />
                             <BlockAddButton label="Image" onClick={() => addBlock({ type: 'image', url: 'https://picsum.photos/800/400', caption: 'Image' })} />
                             <BlockAddButton label="Video (YouTube)" onClick={() => addBlock({ type: 'video', provider: 'youtube', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' })} />
                             <BlockAddButton label="Video (Loom)" onClick={() => addBlock({ type: 'video', provider: 'loom', url: 'https://www.loom.com/share/VIDEOID' })} />
-                             <BlockAddButton label="Link" onClick={() => addBlock({ type: 'link', url: '/lesson/day-2', label: 'Go to Day 2' })} />
+                            <BlockAddButton label="Link" onClick={() => addBlock({ type: 'link', url: '/lesson/day-2', label: 'Go to Day 2' })} />
                             <BlockAddButton label="Code" onClick={() => addBlock({ type: 'code', language: 'ts', content: 'console.log("hello")' })} />
                         </div>
                         <div className="mt-2 flex items-center gap-2">

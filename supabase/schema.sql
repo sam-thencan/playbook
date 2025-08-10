@@ -181,7 +181,7 @@ create table if not exists public.lessons (
   published boolean not null default true,
   created_at timestamptz not null default timezone('utc'::text, now()),
   updated_at timestamptz not null default timezone('utc'::text, now()),
-  constraint lessons_day_bounds check (day is null or (day between 0 and 30))
+  constraint lessons_day_bounds check (day is null or (day between 0 and 365))
 );
 
 -- Ensure new columns exist when migrating older databases
