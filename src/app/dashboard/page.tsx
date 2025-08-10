@@ -65,7 +65,7 @@ export default async function DashboardPage() {
         }
 
         // Find next lesson: first published lesson not completed
-        const { data: lessons } = await supabase
+        let { data: lessons } = await supabase
             .from('lessons')
             .select('id, slug, title, day, is_intro, is_bonus, published, sort_order, estimated_minutes, category')
             .eq('published', true)
@@ -73,6 +73,17 @@ export default async function DashboardPage() {
             .order('day', { ascending: true, nullsFirst: true })
             .order('sort_order', { ascending: true })
             .limit(200);
+        // Fallback: if no lessons returned due to any filter mismatch, try without the published filter
+        if (!lessons || lessons.length === 0) {
+            const fallback = await supabase
+                .from('lessons')
+                .select('id, slug, title, day, is_intro, is_bonus, published, sort_order, estimated_minutes, category')
+                .order('is_intro', { ascending: false })
+                .order('day', { ascending: true, nullsFirst: true })
+                .order('sort_order', { ascending: true })
+                .limit(200);
+            lessons = fallback.data ?? [];
+        }
 
         if (lessons?.length) {
             const [{ data: progress }, { data: favs }] = await Promise.all([
@@ -120,6 +131,11 @@ export default async function DashboardPage() {
                 g.nextSlug = (firstIncomplete || g.items[0])?.slug ?? null;
             }
             outline = groups;
+
+            // Ensure favorites row has data even if outline is empty
+            if ((!outline || outline.length === 0) && lessons.length) {
+                outline = [{ label: 'All Lessons', completedCount: 0, items: lessons.map((l) => ({ slug: l.slug, title: l.title, completed: completedIds.has(l.id), id: l.id, favorited: false })), nextSlug: lessons[0].slug } as any];
+            }
         }
 
         // Perks preview
