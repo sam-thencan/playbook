@@ -44,14 +44,32 @@ h3 {
 
 /* Simple accordion animations for details/summary groups */
 @keyframes accordion-down {
-  from { opacity: 0; transform: translateY(-4px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
+
 @keyframes accordion-up {
-  from { opacity: 1; transform: translateY(0); }
-  to   { opacity: 0; transform: translateY(-4px); }
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  to {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
 }
-details[open] .accordion-content { animation: accordion-down 0.18s ease-out; }
+
+details[open] .accordion-content {
+  animation: accordion-down 0.18s ease-out;
+}
 
 /* Improve contrast for text inside white cards and tables */
 .card-body,
@@ -71,6 +89,7 @@ select {
 /* Dark-mode override for header logo SVG (group id="9aac4e675e").
    Use attribute selector to avoid escaping numeric id. Force override of inline fills. */
 @media (prefers-color-scheme: dark) {
+
   svg [id="9aac4e675e"],
   svg [id="9aac4e675e"] * {
     fill: #ffffff !important;
