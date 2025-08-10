@@ -37,7 +37,7 @@ export default function LessonSidebar({ lessons, currentSlug, completed }: Props
         onChange={(e) => setQuery(e.target.value)}
         className="mb-3 w-full rounded-md border border-neutral-300 px-2 py-1 text-sm text-neutral-900 placeholder:text-neutral-600 focus:outline-none focus:ring-2 focus:ring-[#FF6A00]"
       />
-      <nav className="space-y-4">
+      <nav className="space-y-4 pb-24">
         {grouped.map(({ label, items }) => (
           <div key={label}>
             <div className="sticky top-0 z-10 mb-1 bg-white/90 px-1 py-1 text-xs font-semibold uppercase text-neutral-700 backdrop-blur">

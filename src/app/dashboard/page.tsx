@@ -64,9 +64,9 @@ export default async function DashboardPage() {
         }
 
         // Find next lesson: first published lesson not completed
-        const { data: lessons } = await supabase
+            const { data: lessons } = await supabase
             .from('lessons')
-            .select('id, slug, title, day, is_intro, is_bonus, published, sort_order')
+            .select('id, slug, title, day, is_intro, is_bonus, published, sort_order, estimated_minutes, category')
             .eq('published', true)
             .order('is_intro', { ascending: false })
             .order('day', { ascending: true, nullsFirst: true })
@@ -107,7 +107,7 @@ export default async function DashboardPage() {
                 const lab = labelFor(l);
                 const g = groupsMap.get(lab) ?? { label: lab, items: [], completedCount: 0, nextSlug: null };
                 const completed = completedIds.has(l.id);
-                g.items.push({ slug: l.slug, title: l.title, completed, id: l.id, favorited: favoredIds.has(l.id), day: l.day ?? null });
+                g.items.push({ slug: l.slug, title: l.title, completed, id: l.id, favorited: favoredIds.has(l.id), day: l.day ?? null, estimated_minutes: (l as any).estimated_minutes ?? null });
                 if (completed) g.completedCount += 1;
                 groupsMap.set(lab, g);
             }

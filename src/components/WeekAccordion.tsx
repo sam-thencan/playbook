@@ -5,7 +5,7 @@ import { Card } from '@/components/Card';
 import { Button } from '@/components/Button';
 import FavoriteToggle from '@/components/FavoriteToggle';
 
-export type OutlineItem = { slug: string; title: string; completed: boolean; id?: string; favorited?: boolean };
+export type OutlineItem = { slug: string; title: string; completed: boolean; id?: string; favorited?: boolean; estimated_minutes?: number | null };
 export type WeekGroup = { label: string; items: OutlineItem[]; completedCount: number; nextSlug?: string | null };
 
 type Props = {
@@ -14,58 +14,43 @@ type Props = {
 };
 
 export default function WeekAccordion({ groups, nextFallback }: Props) {
-    const defaultIndex = useMemo(() => {
-        const firstWithIncomplete = groups.findIndex(g => g.items.some(it => !it.completed));
-        return Math.max(0, firstWithIncomplete);
-    }, [groups]);
-    const [openSet, setOpenSet] = useState<Set<number>>(new Set([defaultIndex]));
+    function minutesLeft(g: WeekGroup): number {
+        let total = 0;
+        for (const it of g.items) {
+            if (!it.completed) total += Math.max(1, Number(it.estimated_minutes ?? 12));
+        }
+        return total;
+    }
 
     return (
         <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            {groups.map((g, idx) => (
+            {groups.map((g) => (
                 <Card key={g.label}>
-                    <details open={openSet.has(idx)}>
-                        <summary
-                            className="flex cursor-pointer select-none items-center justify-between p-4 font-medium"
-                            onClick={(e) => {
-                                e.preventDefault();
-                                setOpenSet((prev) => {
-                                    const next = new Set(prev);
-                                    if (next.has(idx)) next.delete(idx); else next.add(idx);
-                                    return next;
-                                });
-                            }}
-                        >
-                            <span className="flex items-center gap-2">
-                                <Chevron isOpen={openSet.has(idx)} />
-                                {g.label}
-                            </span>
-                            <span className="text-sm text-neutral-600">{g.completedCount}/{g.items.length} complete</span>
-                        </summary>
-                        <div>
-                            <ul className="divide-y divide-neutral-200">
-                                {g.items.map((it) => (
-                                    <li key={it.slug} className="flex items-center justify-between p-3">
-                                        <div className="flex min-w-0 items-center gap-2">
-                                            {it.id && (<FavoriteToggle lessonId={it.id} initial={!!it.favorited} />)}
-                                            <Link href={`/lesson/${it.slug}`} className="truncate underline-offset-2 hover:underline">
-                                                {it.title}
-                                            </Link>
-                                        </div>
-                                        {it.completed && <span className="ml-2 text-[#FF6A00]">✓</span>}
-                                    </li>
-                                ))}
-                            </ul>
-                            <div className="flex items-center justify-between gap-2 p-3 text-sm text-neutral-600">
-                                <span>
-                                    {g.completedCount}/{g.items.length} complete · ~{Math.ceil(g.items.length * 12)} min left
-                                </span>
-                                <Link href={`/lesson/${g.nextSlug ?? nextFallback}`}>
-                                    <Button variant="secondary">Resume Week</Button>
-                                </Link>
-                            </div>
-                        </div>
-                    </details>
+                    <div className="flex items-center justify-between p-4 font-medium">
+                        <span>{g.label}</span>
+                        <span className="text-sm text-neutral-600">{g.completedCount}/{g.items.length} complete</span>
+                    </div>
+                    <ul className="divide-y divide-neutral-200">
+                        {g.items.map((it) => (
+                            <li key={it.slug} className="flex items-center justify-between p-3">
+                                <div className="flex min-w-0 items-center gap-2">
+                                    {it.id && (<FavoriteToggle lessonId={it.id} initial={!!it.favorited} />)}
+                                    <Link href={`/lesson/${it.slug}`} className="truncate underline-offset-2 hover:underline">
+                                        {it.title}
+                                    </Link>
+                                </div>
+                                {it.completed && <span className="ml-2 text-[#FF6A00]">✓</span>}
+                            </li>
+                        ))}
+                    </ul>
+                    <div className="flex items-center justify-between gap-2 p-3 text-sm text-neutral-600">
+                        <span>
+                            {g.completedCount}/{g.items.length} complete · ~{minutesLeft(g)} min left
+                        </span>
+                        <Link href={`/lesson/${g.nextSlug ?? nextFallback}`}>
+                            <Button variant="secondary">Resume Week</Button>
+                        </Link>
+                    </div>
                 </Card>
             ))}
         </div>

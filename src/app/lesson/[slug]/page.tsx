@@ -96,17 +96,10 @@ export default async function LessonPage({ params }: LessonPageProps) {
                         <h1 className="text-3xl font-semibold">{title}</h1>
                         <div className="mt-3 flex flex-wrap items-center gap-2">
                             <Pill variant="soft">Estimated: {estimatedMinutes} min</Pill>
-                            {Array.isArray(lesson?.tags) && (lesson!.tags as any[]).length > 0 && (
-                                <div className="flex flex-wrap items-center gap-1">
-                                    {(lesson!.tags as any[]).map((t: any) => (
-                                        <Pill key={String(t)} variant="soft" className="bg-neutral-50 text-neutral-700">{String(t)}</Pill>
-                                    ))}
-                                </div>
-                            )}
                         </div>
                     </header>
 
-                    {/* Featured video: first video block if present */}
+                    {/* Featured video: first video block if present; hide duplicate by filtering it out below */}
                     {Array.isArray(lesson?.body) && (lesson.body as any[]).some((b: any) => b.type === 'video') && (
                         <div className="mb-6 overflow-hidden rounded-md ring-1 ring-neutral-200">
                             <div className="aspect-video w-full">
@@ -145,24 +138,30 @@ export default async function LessonPage({ params }: LessonPageProps) {
                         <Card>
                             <div className="p-6">
                                 <h2 className="mb-2 text-xl font-semibold">Lesson</h2>
-                                <Renderer blocks={(lesson?.body as any) ?? []} />
+                                <Renderer blocks={(() => {
+                                    const arr = Array.isArray(lesson?.body) ? (lesson!.body as any[]) : [];
+                                    const idx = arr.findIndex((b: any) => b.type === 'video');
+                                    return idx >= 0 ? [...arr.slice(1)] : arr;
+                                })()} />
                             </div>
                         </Card>
 
-                        <section aria-labelledby="resources" className="mt-6">
-                            <h2 id="resources" className="mb-2 text-xl font-semibold">Resources</h2>
-                            <Card>
-                                <ul className="divide-y divide-neutral-200">
-                                    {resources.map((r) => (
-                                        <li key={r.url} className="flex items-center justify-between p-4">
-                                            <a href={r.url} className="text-[#FF6A00] underline-offset-2 hover:underline focus:underline">
-                                                {r.label}
-                                            </a>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </Card>
-                        </section>
+                        {resources.length > 0 && (
+                            <section aria-labelledby="resources" className="mt-6">
+                                <h2 id="resources" className="mb-2 text-xl font-semibold">Resources</h2>
+                                <Card>
+                                    <ul className="divide-y divide-neutral-200">
+                                        {resources.map((r) => (
+                                            <li key={r.url} className="flex items-center justify-between p-4">
+                                                <a href={r.url} className="text-[#FF6A00] underline-offset-2 hover:underline focus:underline">
+                                                    {r.label}
+                                                </a>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                </Card>
+                            </section>
+                        )}
 
                         <div className="mt-6 flex items-center justify-center">
                             {/* Client action via form to avoid mixing client hooks here */}
@@ -187,7 +186,7 @@ export default async function LessonPage({ params }: LessonPageProps) {
                             </section>
                         )}
 
-                        <div className="mt-8 flex items-center justify-between">
+                        <div className="mt-8 hidden items-center justify-between lg:flex">
                             <div>
                                 {prevSlug && (
                                     <Link href={`/lesson/${prevSlug}`}>
