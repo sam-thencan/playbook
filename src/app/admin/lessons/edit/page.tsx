@@ -110,7 +110,8 @@ export default function AdminLessonsEditPage() {
                             <BlockAddButton label="Heading" onClick={() => addBlock({ type: 'heading', level: 2, content: 'Section title' })} />
                             <BlockAddButton label="List" onClick={() => addBlock({ type: 'list', items: ['Item'] })} />
                             <BlockAddButton label="Image" onClick={() => addBlock({ type: 'image', url: 'https://picsum.photos/800/400', caption: 'Image' })} />
-                            <BlockAddButton label="Video" onClick={() => addBlock({ type: 'video', provider: 'youtube', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' })} />
+                            <BlockAddButton label="Video (YouTube)" onClick={() => addBlock({ type: 'video', provider: 'youtube', url: 'https://www.youtube.com/watch?v=dQw4w9WgXcQ' })} />
+                            <BlockAddButton label="Video (Loom)" onClick={() => addBlock({ type: 'video', provider: 'loom', url: 'https://www.loom.com/share/VIDEOID' })} />
                             <BlockAddButton label="Code" onClick={() => addBlock({ type: 'code', language: 'ts', content: 'console.log("hello")' })} />
                         </div>
                         <div className="mt-2 flex items-center gap-2">
@@ -319,6 +320,16 @@ function markdownToBlocks(md: string): LessonBlock[] {
     for (const raw of lines) {
         const line = raw.trim();
         if (!line) { flushList(); continue; }
+        // YouTube or Loom bare URLs → video blocks
+        if (/^https?:\/\/[^\s]+$/.test(line)) {
+            const url = line;
+            if (url.includes('youtube.com') || url.includes('youtu.be')) {
+                flushList(); out.push({ type: 'video', provider: 'youtube', url }); continue;
+            }
+            if (url.includes('loom.com')) {
+                flushList(); out.push({ type: 'video', provider: 'loom', url }); continue;
+            }
+        }
         const h2 = line.match(/^##\s+(.*)$/);
         if (h2) { flushList(); out.push({ type: 'heading', level: 2, content: h2[1] }); continue; }
         const h3 = line.match(/^###\s+(.*)$/);

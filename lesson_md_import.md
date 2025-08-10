@@ -8,6 +8,7 @@ This repo supports a simple Markdown subset that maps 1:1 to our lesson blocks. 
 - `- List item` (one per line, contiguous) → list block
 - Any other non-empty line → paragraph block (one paragraph per line)
 - Blank line → separates blocks (flushes lists/paragraphs)
+ - A bare YouTube or Loom URL on its own line → video block (auto-detected)
 
 ## Not supported (imported as plain paragraphs or ignored)
 - H1 `#` headings
@@ -48,4 +49,4 @@ Tips
 ## Notes for AI agents
 - Output ONLY the supported subset above—no frontmatter/HTML.
 - Keep lines under ~120 chars when possible.
-- YouTube links may be placed on their own line to hint at a video; they’ll be curated into a video block manually.
+- YouTube or Loom share links on their own line will become video blocks automatically. If you prefer, provide the embed-ready URL.

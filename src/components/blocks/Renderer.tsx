@@ -6,8 +6,8 @@ export type LessonBlock =
     | { type: 'heading'; level?: 2 | 3 | 4; content: string }
     | { type: 'list'; ordered?: boolean; items: string[] }
     | { type: 'image'; url: string; alt?: string; caption?: string }
-  | { type: 'video'; provider: 'youtube' | 'vimeo' | 'file'; url: string; caption?: string }
-  | { type: 'code'; language?: string; content: string };
+  | { type: 'video'; provider: 'youtube' | 'loom' | 'vimeo' | 'file'; url: string; caption?: string }
+    | { type: 'code'; language?: string; content: string };
 
 type Props = PropsWithChildren & {
     blocks: LessonBlock[];
@@ -65,12 +65,12 @@ export function Renderer({ blocks }: Props) {
                             </div>
                         );
                     }
-          case 'code':
-            return (
-              <pre key={i} className="overflow-x-auto rounded-md bg-neutral-900 p-4 text-neutral-100">
-                <code>{b.content}</code>
-              </pre>
-            );
+                    case 'code':
+                        return (
+                            <pre key={i} className="overflow-x-auto rounded-md bg-neutral-900 p-4 text-neutral-100">
+                                <code>{b.content}</code>
+                            </pre>
+                        );
                     default:
                         return null;
                 }
@@ -92,6 +92,21 @@ function normalizeVideoUrl(b: Extract<LessonBlock, { type: 'video' }>): string {
             id = url.pathname.split('/embed/')[1] || '';
         }
         if (id) return `https://www.youtube.com/embed/${id}`;
+    }
+    if (b.provider === 'loom') {
+        // Share: https://www.loom.com/share/VIDEOID (or loom.com/share/) → Embed: https://www.loom.com/embed/VIDEOID
+        try {
+            const url = new URL(b.url);
+            if (url.hostname.includes('loom.com')) {
+                const parts = url.pathname.split('/').filter(Boolean);
+                const idx = parts.indexOf('share');
+                if (idx >= 0 && parts[idx + 1]) return `https://www.loom.com/embed/${parts[idx + 1]}`;
+                const eidx = parts.indexOf('embed');
+                if (eidx >= 0 && parts[eidx + 1]) return `https://www.loom.com/embed/${parts[eidx + 1]}`;
+            }
+        } catch {
+            // fall through
+        }
     }
     return b.url;
 }
