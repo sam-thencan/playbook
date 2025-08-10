@@ -67,3 +67,13 @@ textarea,
 select {
   color: #111827;
 }
+
+/* Dark-mode override for header logo SVG (group id="9aac4e675e").
+   Use attribute selector to avoid escaping numeric id. Force override of inline fills. */
+@media (prefers-color-scheme: dark) {
+  svg [id="9aac4e675e"],
+  svg [id="9aac4e675e"] * {
+    fill: #ffffff !important;
+    stroke: #ffffff !important;
+  }
+}
