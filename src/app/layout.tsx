@@ -51,8 +51,7 @@ export default async function RootLayout({
         <header className="sticky top-0 z-40 w-full border-b border-neutral-200 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:border-neutral-800 dark:bg-neutral-950/70 dark:supports-[backdrop-filter]:bg-neutral-950/50">
           <div className="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
             <a href="/dashboard" className="flex items-center gap-2 font-semibold text-neutral-900 dark:text-neutral-100">
-              <img src="/30day.svg" alt="30 Day SEO" className="h-6 w-6" />
-              <span>SEO Playbook</span>
+              <img src="/30day.svg" alt="30 Day SEO" className="h-6" />
             </a>
             <nav className="flex items-center gap-3 text-sm text-neutral-700 dark:text-neutral-300">
               <a href="/dashboard" className="hover:underline">Dashboard</a>

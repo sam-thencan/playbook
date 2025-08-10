@@ -166,9 +166,16 @@ export default async function DashboardPage() {
     }
     const nextLessonSlug = nextLesson?.slug ?? fallbackFirstLesson?.slug ?? 'welcome';
 
+    // Greeting
+    let greeting = 'Welcome back to your Local SEO Playbook!';
+    if (user?.email) {
+        const first = user.user_metadata?.name?.split?.(' ')?.[0] || user.user_metadata?.full_name?.split?.(' ')?.[0] || null;
+        if (first) greeting = `Hey, ${first}! Welcome back to your Local SEO Playbook!`;
+    }
+
     return (
         <main className="mx-auto max-w-5xl px-4 py-8">
-            <h1 className="mb-6 text-3xl font-bold text-neutral-900 dark:text-neutral-100">Your SEO Playbook</h1>
+            <h1 className="mb-6 text-3xl font-bold text-neutral-900 dark:text-neutral-100">{greeting}</h1>
 
             <div className="grid grid-cols-1 gap-6 md:grid-cols-4">
                 <Card className="md:col-span-2 md:col-span-2 md:col-start-1 md:col-end-3">
