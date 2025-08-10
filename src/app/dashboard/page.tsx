@@ -23,6 +23,7 @@ export default async function DashboardPage() {
     let currentStreakDays = 0;
 
     let outline: WeekGroup[] = [];
+    let fallbackFirstLesson: { slug: string; title: string } | null = null;
     let perksInfo: { unlocked: number; nextTitle: string | null; nextReason: string | null } = { unlocked: 0, nextTitle: null, nextReason: null };
     if (user) {
         const { data: completion } = await supabase
@@ -64,7 +65,7 @@ export default async function DashboardPage() {
         }
 
         // Find next lesson: first published lesson not completed
-            const { data: lessons } = await supabase
+        const { data: lessons } = await supabase
             .from('lessons')
             .select('id, slug, title, day, is_intro, is_bonus, published, sort_order, estimated_minutes, category')
             .eq('published', true)
@@ -88,6 +89,7 @@ export default async function DashboardPage() {
             const favoredIds = new Set((favs ?? []).map((f: any) => f.lesson_id));
             const next = lessons.find(l => !completedIds.has(l.id));
             nextLesson = next ? { slug: next.slug, title: next.title } : null;
+            if (lessons.length) fallbackFirstLesson = { slug: lessons[0].slug, title: lessons[0].title };
 
             // Category-based outline
             const order = ['Week 1 (Intro + Days 1–7)', 'Week 2 (Days 8–14)', 'Week 3 (Days 15–21)', 'Week 4 (Days 22–28)', 'Week 5 (Days 29–31 + Bonus)'];
@@ -111,11 +113,8 @@ export default async function DashboardPage() {
                 if (completed) g.completedCount += 1;
                 groupsMap.set(lab, g);
             }
-            const groups: WeekGroup[] = [];
-            for (const label of order) {
-                const g = groupsMap.get(label);
-                if (g) groups.push(g);
-            }
+            const indexOf = (label: string) => order.findIndex((l) => l === label);
+            const groups: WeekGroup[] = Array.from(groupsMap.values()).sort((a, b) => indexOf(a.label) - indexOf(b.label));
             for (const g of groups) {
                 const firstIncomplete = g.items.find((it) => !it.completed);
                 g.nextSlug = (firstIncomplete || g.items[0])?.slug ?? null;
@@ -139,7 +138,7 @@ export default async function DashboardPage() {
             perksInfo = { unlocked: unlockedCount, nextTitle, nextReason };
         }
     }
-    const nextLessonSlug = nextLesson?.slug ?? 'intro';
+    const nextLessonSlug = nextLesson?.slug ?? fallbackFirstLesson?.slug ?? 'welcome';
 
     return (
         <main className="mx-auto max-w-5xl px-4 py-8">
