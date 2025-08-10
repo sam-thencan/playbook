@@ -4,7 +4,7 @@ import { createServerClient, type CookieOptions } from '@supabase/ssr';
 export async function middleware(req: NextRequest) {
   const url = req.nextUrl;
   const isAdminPath = url.pathname.startsWith('/admin');
-  const needsAuth = isAdminPath || url.pathname === '/dashboard' || url.pathname.startsWith('/lesson/');
+  const needsAuth = isAdminPath || url.pathname === '/dashboard' || url.pathname.startsWith('/lesson/') || url.pathname === '/perks' || url.pathname === '/favorites';
   const isPayPath = url.pathname === '/pay' || url.pathname.startsWith('/api/checkout') || url.pathname.startsWith('/api/auth/callback');
   if (!needsAuth) return NextResponse.next();
 
