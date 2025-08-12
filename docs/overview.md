@@ -12,11 +12,12 @@ This repository implements the 30‑Day Local SEO Playbook as a modern, gated le
 
 ### Quick links
 - Architecture: [stack-and-architecture.md](./stack-and-architecture.md)
+- App routes map: [app-routes.md](./app-routes.md)
 - Data model: [data-model/schema.md](./data-model/schema.md), [RLS](./data-model/rls-policies.md), [Events](./data-model/events.md)
 - API surface: [api/index.md](./api/index.md)
 - Flows: [Auth](./app-flows/auth-flow.md), [Paywall](./app-flows/paywall-flow.md), [Lesson](./app-flows/lesson-consumption.md), [Progress](./app-flows/progress-tracking.md), [Perks](./app-flows/offers-perks.md), [Favorites](./app-flows/favorites-flow.md)
 - UI: [components.md](./ui/components.md)
-- Setup/Ops: [Local setup](./setup-and-ops/local-setup.md), [Env vars](./setup-and-ops/env-vars.md), [Seeding](./setup-and-ops/seeding-and-parsing.md)
+- Setup/Ops: [Local setup](./setup-and-ops/local-setup.md), [Env vars](./setup-and-ops/env-vars.md), [Seeding](./setup-and-ops/seeding-and-parsing.md), [Deployment](./setup-and-ops/deployment.md), [Monitoring](./setup-and-ops/monitoring-and-status.md)
 - Decisions (ADRs): [SSRs + cookies](./decisions/adr-0001-supabase-ssr-cookies.md), [Paywall in middleware](./decisions/adr-0002-paywall-in-middleware.md), [RLS + service role](./decisions/adr-0003-rls-and-service-role-usage.md)
 
 ### High-level architecture
