@@ -1,5 +1,16 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Documentation
+
+See `docs/overview.md` for a complete architecture and feature overview. Deep‑dives are organized under `docs/`:
+
+- Architecture: `docs/stack-and-architecture.md`
+- Data model and RLS: `docs/data-model/*`
+- API: `docs/api/index.md`
+- Flows (auth, paywall, lessons, progress, perks, favorites): `docs/app-flows/*`
+- Setup/Ops and environment: `docs/setup-and-ops/*`
+- Decisions (ADRs): `docs/decisions/*`
+
 ## Getting Started
 
 First, run the development server:
