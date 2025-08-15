@@ -1,10 +1,10 @@
 import { NextResponse } from 'next/server';
-import { getServerSupabase } from '@/lib/supabaseServer';
+import { getRouteHandlerSupabase } from '@/lib/supabaseServer';
 
 export const runtime = 'nodejs';
 
 export async function GET() {
-  const supabase = getServerSupabase();
+  const supabase = getRouteHandlerSupabase();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ ok: false, error: 'unauthenticated' }, { status: 401 });
 

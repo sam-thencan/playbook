@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
-import { getServerSupabase } from '@/lib/supabaseServer';
+import { getRouteHandlerSupabase } from '@/lib/supabaseServer';
 
 async function ensureAdmin() {
-  const supabase = getServerSupabase();
+  const supabase = getRouteHandlerSupabase();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { supabase, ok: false } as const;
   const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).maybeSingle();

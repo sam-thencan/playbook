@@ -1,8 +1,8 @@
 import { NextResponse } from 'next/server';
-import { getServerSupabase } from '@/lib/supabaseServer';
+import { getRouteHandlerSupabase } from '@/lib/supabaseServer';
 
 async function ensureAdmin() {
-  const supabase = getServerSupabase();
+  const supabase = getRouteHandlerSupabase();
   const {
     data: { user },
     error,

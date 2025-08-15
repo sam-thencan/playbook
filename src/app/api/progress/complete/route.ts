@@ -1,9 +1,9 @@
 import { NextResponse } from 'next/server';
-import { getServerSupabase } from '@/lib/supabaseServer';
+import { getRouteHandlerSupabase } from '@/lib/supabaseServer';
 
 export async function POST(request: Request) {
     try {
-        const supabase = getServerSupabase();
+        const supabase = getRouteHandlerSupabase();
         const {
             data: { user },
             error: userError,

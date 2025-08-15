@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
-import { getServerSupabase } from '@/lib/supabaseServer';
+import { getRouteHandlerSupabase } from '@/lib/supabaseServer';
 
 export const runtime = 'nodejs';
 
 export async function POST(req: NextRequest) {
-  const supabase = getServerSupabase();
+  const supabase = getRouteHandlerSupabase();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.redirect(new URL('/login', req.url));
 

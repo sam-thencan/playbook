@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { getServerSupabase } from '@/lib/supabaseServer';
+import { getRouteHandlerSupabase } from '@/lib/supabaseServer';
 
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   const tags = searchParams.getAll('tag').filter(Boolean);
   const limit = Math.min(Number(searchParams.get('limit') || '50'), 100);
 
-  const supabase = getServerSupabase();
+      const supabase = getRouteHandlerSupabase();
   let query = supabase
     .from('lessons')
     .select('id, slug, title, day, is_intro, is_bonus, category, tags, published, sort_order')
