@@ -14,7 +14,7 @@ type LessonPageProps = {
 
 export default async function LessonPage({ params }: LessonPageProps) {
     const { slug } = params;
-    const supabase = getServerSupabase();
+    const supabase = await getServerSupabase();
     const { data: lesson } = await supabase
         .from('lessons')
         .select('id, title, day, estimated_minutes, resources, body, tags')

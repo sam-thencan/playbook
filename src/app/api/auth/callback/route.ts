@@ -9,7 +9,7 @@ export async function GET(req: NextRequest) {
   const code = url.searchParams.get('code');
 
   if (code) {
-    const supabase = getRouteHandlerSupabase();
+    const supabase = await getRouteHandlerSupabase();
     await supabase.auth.exchangeCodeForSession(code);
   }
 

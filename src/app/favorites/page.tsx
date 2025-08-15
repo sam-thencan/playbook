@@ -4,7 +4,7 @@ import { getServerSupabase } from '@/lib/supabaseServer';
 import FavoriteToggle from '@/components/FavoriteToggle';
 
 export default async function FavoritesPage() {
-  const supabase = getServerSupabase();
+  const supabase = await getServerSupabase();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return (null);
 

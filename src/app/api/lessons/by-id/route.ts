@@ -5,7 +5,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get('id');
   if (!id) return NextResponse.json({ error: 'id required' }, { status: 400 });
-  const supabase = getRouteHandlerSupabase();
+  const supabase = await getRouteHandlerSupabase();
   const base = 'id, title, slug, day, is_intro, is_bonus, estimated_minutes, resources, body, sort_order, published';
   const extended = base + ', category, tags';
   let row: any = null;

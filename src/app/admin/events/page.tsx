@@ -2,7 +2,7 @@ import { Card } from '@/components/Card';
 import { getServerSupabase } from '@/lib/supabaseServer';
 
 export default async function AdminEventsPage() {
-    const supabase = getServerSupabase();
+    const supabase = await getServerSupabase();
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return <main className="mx-auto max-w-5xl px-4 py-8">Sign in</main>;
 

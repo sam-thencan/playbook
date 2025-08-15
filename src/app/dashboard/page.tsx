@@ -13,7 +13,7 @@ type OutlineItem = { slug: string; title: string; completed: boolean; id?: strin
 type WeekGroup = AccordionWeekGroup & { items: (AccordionWeekGroup['items'][number] & OutlineItem)[] };
 
 export default async function DashboardPage() {
-    const supabase = getServerSupabase();
+    const supabase = await getServerSupabase();
     const {
         data: { user },
     } = await supabase.auth.getUser();

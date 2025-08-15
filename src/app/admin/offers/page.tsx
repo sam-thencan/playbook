@@ -7,7 +7,7 @@ import { AdminDeleteButton } from '@/components/AdminDeleteButton';
 type Row = { id: string; title: string; type: string; active: boolean; unlock_day: number | null; unlock_percent: number | null };
 
 export default async function AdminOffersListPage() {
-    const supabase = getServerSupabase();
+    const supabase = await getServerSupabase();
     const { data: rows } = await supabase
         .from('offers')
         .select('id, title, type, active, unlock_day, unlock_percent')

@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { getRouteHandlerSupabase } from '@/lib/supabaseServer';
 
 export async function GET() {
-  const supabase = getRouteHandlerSupabase();
+  const supabase = await getRouteHandlerSupabase();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
 
@@ -19,7 +19,7 @@ export async function GET() {
 }
 
 export async function POST(req: NextRequest) {
-  const supabase = getRouteHandlerSupabase();
+  const supabase = await getRouteHandlerSupabase();
   const {
     data: { user },
   } = await supabase.auth.getUser();

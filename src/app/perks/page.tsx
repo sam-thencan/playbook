@@ -3,7 +3,7 @@ import { getServerSupabase } from '@/lib/supabaseServer';
 import { Button } from '@/components/Button';
 
 export default async function PerksPage() {
-    const supabase = getServerSupabase();
+    const supabase = await getServerSupabase();
     const {
         data: { user },
     } = await supabase.auth.getUser();

@@ -7,7 +7,7 @@ import { AdminDeleteButton } from '@/components/AdminDeleteButton';
 type Row = { id: string; title: string; slug: string; day: number | null; published: boolean };
 
 export default async function AdminLessonsListPage() {
-    const supabase = getServerSupabase();
+    const supabase = await getServerSupabase();
     const { data: rows } = await supabase
         .from('lessons')
         .select('id, title, slug, day, published')

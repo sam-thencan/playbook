@@ -2,7 +2,7 @@ import { Card } from '@/components/Card';
 import { getServerSupabase } from '@/lib/supabaseServer';
 
 export default async function PerksPage() {
-    const supabase = getServerSupabase();
+    const supabase = await getServerSupabase();
     const {
         data: { user },
     } = await supabase.auth.getUser();

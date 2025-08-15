@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getRouteHandlerSupabase } from '@/lib/supabaseServer';
 
 async function ensureAdmin() {
-  const supabase = getRouteHandlerSupabase();
+  const supabase = await getRouteHandlerSupabase();
   const {
     data: { user },
     error,

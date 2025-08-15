@@ -7,7 +7,7 @@ export async function GET(request: Request) {
   const tags = searchParams.getAll('tag').filter(Boolean);
   const limit = Math.min(Number(searchParams.get('limit') || '50'), 100);
 
-      const supabase = getRouteHandlerSupabase();
+      const supabase = await getRouteHandlerSupabase();
   let query = supabase
     .from('lessons')
     .select('id, slug, title, day, is_intro, is_bonus, category, tags, published, sort_order')

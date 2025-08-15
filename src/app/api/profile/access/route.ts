@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getRouteHandlerSupabase } from '@/lib/supabaseServer';
 
 export async function GET() {
-    const supabase = getRouteHandlerSupabase();
+    const supabase = await getRouteHandlerSupabase();
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) return NextResponse.json({ hasAccess: false });
     const { data: profile } = await supabase.from('profiles').select('has_access').eq('id', user.id).maybeSingle();

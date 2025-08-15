@@ -4,7 +4,7 @@ import { getRouteHandlerSupabase } from '@/lib/supabaseServer';
 export const runtime = 'nodejs';
 
 export async function GET() {
-  const supabase = getRouteHandlerSupabase();
+  const supabase = await getRouteHandlerSupabase();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ ok: false, error: 'unauthenticated' }, { status: 401 });
 

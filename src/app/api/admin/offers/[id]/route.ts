@@ -2,7 +2,7 @@ import { NextResponse } from 'next/server';
 import { getRouteHandlerSupabase } from '@/lib/supabaseServer';
 
 async function ensureAdmin() {
-  const supabase = getRouteHandlerSupabase();
+  const supabase = await getRouteHandlerSupabase();
   const { data: { user } } = await supabase.auth.getUser();
   if (!user) return { supabase, ok: false } as const;
   const { data: profile } = await supabase.from('profiles').select('role').eq('id', user.id).maybeSingle();

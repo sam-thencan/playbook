@@ -3,7 +3,7 @@ import { getRouteHandlerSupabase } from '@/lib/supabaseServer';
 
 export async function POST(request: Request) {
     try {
-        const supabase = getRouteHandlerSupabase();
+        const supabase = await getRouteHandlerSupabase();
         const {
             data: { user },
             error: userError,
